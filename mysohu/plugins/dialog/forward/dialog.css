@@ -1,0 +1,169 @@
+/* jquery dialog */
+.jquery-dialog-mask-color,
+.jquery-dialog-mask-transparent {
+	position: fixed;
+	text-align: left;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.jquery-dialog-mask-color,
+.jquery-dialog-mask-transparent {
+	background: url("mask.png");
+}
+.forward-dialog-mask {
+/*
+	background: #999;
+	#background: url("mask.png");
+	opacity: 0.5;
+*/
+}
+.forward-dialog {
+	text-align: left;
+}
+
+.dialog-outer-fixed {
+	position: fixed;
+}
+
+.dialog-outer-absolute {
+	position: absolute;
+}
+
+.jquery-dialog-mask,
+.forward-dialog {
+	z-index: 212122000;
+}
+
+.forward-dialog .dialog-top-container,
+.forward-dialog .dialog-bottom-container {
+	height: 5px;
+}
+
+.forward-dialog .dialog-top-border,
+.forward-dialog .dialog-bottom-border,
+.forward-dialog .dialog-left-border,
+.forward-dialog .dialog-right-border,
+.forward-dialog .dialog-top-left-corner,
+.forward-dialog .dialog-top-right-corner,
+.forward-dialog .dialog-bottom-left-corner,
+.forward-dialog .dialog-bottom-right-corner {
+	opacity: 0.20;
+	filter: alpha(opacity=20);
+	font-size: 0;
+	line-height: 0;
+	float: inherit;
+	float: left;
+}
+
+.forward-dialog .dialog-top-border,
+.forward-dialog .dialog-bottom-border {
+	height: 5px;
+	background-color: #000;
+}
+
+.forward-dialog .dialog-left-border,
+.forward-dialog .dialog-right-border {
+	width: 5px;
+	background-color: #000;
+}
+
+.forward-dialog .dialog-top-left-corner,
+.forward-dialog .dialog-top-right-corner,
+.forward-dialog .dialog-bottom-left-corner,
+.forward-dialog .dialog-bottom-right-corner {
+	width: 5px;
+	height: 5px;
+	background: url("dialog.gif");
+}
+
+.forward-dialog .dialog-top-left-corner {
+	background-position: -30px 0;
+}
+
+.forward-dialog .dialog-top-right-corner {
+	background-position: -35px 0;
+}
+
+.forward-dialog .dialog-bottom-left-corner {
+	background-position: -30px -5px;
+}
+
+.forward-dialog .dialog-bottom-right-corner {
+	background-position: -35px -5px;
+}
+
+.forward-dialog .dialog-inner-container {
+	float: left;
+	background: #fff;
+}
+
+.forward-dialog .dialog-title-container {
+	padding: 0;
+	border-top: 1px solid #025EA9;
+	border-left: 1px solid #025EA9;
+	border-right: 1px solid #025EA9;
+	height: 30px;
+	background-color: #1A6EB4;
+	overflow: hidden;
+}
+
+.forward-dialog .dialog-title {
+	float: left;
+	height: 21px;
+	line-height: 15px;
+	font-weight: bold;
+	padding: 8px 8px 0 8px;
+	color: #fff;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.forward-dialog .dialog-button-close {
+	float: inherit;
+	float: right;
+	font-size: 0;
+	line-height: 0;
+	margin: 7px 8px 0 0;
+	width: 13px;
+	height: 13px;
+	overflow: hidden;
+	background-image: url("dialog.gif");
+	background-position: 0 0;
+	cursor: pointer;
+}
+
+.forward-dialog .dialog-button-close-hover {
+	background-position: -13px 0;
+}
+
+.forward-dialog .dialog-button-container {
+	text-align: right;
+	padding: 12px 12px 12px 0;
+	border-top: 1px solid #DFDFDF;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+	background: #F2F2F2;
+}
+
+.forward-dialog .dialog-button-container .dialog-button-accept,
+.forward-dialog .dialog-button-container .dialog-button-cancel {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+/* below two style rules are very important */
+/* they can grow with children, and they can be restricted by another "width" style also */
+.forward-dialog .dialog-content-container {
+	overflow: hidden;
+	display: inline-block;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+}
+
+.forward-dialog .dialog-content-container {
+	*display: inline;
+}

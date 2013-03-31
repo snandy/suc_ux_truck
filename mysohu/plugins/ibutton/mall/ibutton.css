@@ -1,0 +1,76 @@
+/* begin i-button layout define */
+.i-button {
+	cursor: default;
+	outline: none;
+	display: inline-block;
+	text-align: left;
+	-moz-user-select: none;
+}
+
+/* fix IE6/7 unsupport inline-block issue */
+.i-button {
+	*display: inline;
+}
+
+.i-button .i-button-left,
+.i-button .i-button-right {
+	float: inherit;
+	float: left;
+	overflow: hidden;
+}
+
+.i-button .i-button-icon {
+	float: left;
+}
+/* end i-button layout define */
+
+
+/* 
+ * CAUTION: IF EXSIT BELOW DEFINITIONS, BE KEEP IN ORDER
+ * hover, focus, active, disabled
+ *
+ * "i-button-default" style class must be defined.
+ * It is used for iButton className binding and dialog button binding by default.
+ */
+.i-button-default {
+	cursor: pointer;
+}
+
+.i-button-default .i-button-left,
+.i-button-default .i-button-right {
+	height: 25px;
+	background-image: url("ibutton.gif");
+}
+
+.i-button-default .i-button-left {
+	padding-left: 20px;
+	background-position: 0 0;
+}
+
+.i-button-default .i-button-right {
+	padding-right: 20px;
+	background-position: -180px 0;
+}
+
+.i-button-default.hover .i-button-left {
+	background-position: -200px 0;
+}
+
+.i-button-default.hover .i-button-right {
+	background-position: -380px 0;
+}
+
+.i-button-default.active .i-button-left {
+	background-position: -400px 0;
+}
+
+.i-button-default.active .i-button-right {
+	background-position: -580px 0;
+}
+
+.i-button-default .i-button-text {
+	color: #d84600;
+	font-size: 12px;
+	line-height: 17px;
+	padding-top: 5px;
+}

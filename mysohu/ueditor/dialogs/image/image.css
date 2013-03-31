@@ -1,0 +1,386 @@
+@charset "utf-8";
+*{ padding: 0;margin: 0}
+body{font-size: 12px;color: #888;overflow: hidden;}
+.wrapper{ width: 640px;margin: 0 auto; overflow: auto; zoom:1;position: relative;padding: 10px 0}
+#tabHeads{position: relative; width:610px;height:32px;padding-left:9px;z-index: 10;margin-bottom: -4px;}
+#tabHeads span {
+    display:inline-block;
+    width: 85px;
+    height:28px;
+	overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    line-height: 28px;
+    *margin-bottom:4px;
+   
+}
+#tabHeads span.focus{ border-bottom: none; height: 28px; *margin-bottom:4px;background:url("http://s3.suc.itc.cn/mysohu/ueditor/themes/default/images/toolbar_bg.gif") no-repeat;}
+#tabBodys{ border: 1px solid #ccc; width:620px;height:325px;_height:328px;margin: 0 auto;position: relative;top:-1px;}
+.panel { position: absolute; width: 620px;height:325px;background: #fff;}
+#remote{ z-index: 200;}
+#remote table{border-collapse: collapse;width: 620px; height: 300px; margin-top: 5px;}
+#remote td.label{text-align: center;width: 80px; }
+#remote td{height: 20px;}
+td input {
+    width: 150px;
+    height: 21px;
+    line-height: 21px;
+    background: #FFF;
+    border: 1px solid #d7d7d7;
+}
+#url {width: 520px;margin-bottom: 2px;}
+#preview{width: 260px; height: 240px; position: absolute;top:75px; left: 341px; z-index: 9999;background-color: #eee}
+.lock{
+    position: absolute;
+    width: 45px;
+    height: 40px;
+    top: 92px;
+    left: 260px;
+    background: url("http://s3.suc.itc.cn/mysohu/ueditor/themes/default/images/lock.gif") -2px -3px no-repeat;
+    line-height: 40px;
+    padding-top:13px;
+}
+.duiqi{background: url("http://s3.suc.itc.cn/mysohu/ueditor/themes/default/images/imgLable.png") -12px 2px no-repeat; width: 62px; height: 38px;float: left}
+#remoteFloat div,#localFloat div{cursor:pointer;opacity: 0.5;filter: alpha(opacity = 50);margin-left:1px;width:38px;height:36px;float:left;}
+#remoteFloat .focus,#localFloat .focus{opacity: 1;filter: alpha(opacity = 100)}
+#maskIframe{ width: 620px; height: 325px; position: absolute;z-index: 100; }
+#flashContainer { margin: 6px;}
+#upload{width: 100px;height: 28px;float: right; overflow: hidden;background: url("http://s3.suc.itc.cn/mysohu/ueditor/themes/default/images/upload.png");margin:3px 6px 0 0;cursor: pointer;}
+#imageList{width: 620px;height: 315px; margin-top: 10px;overflow:hidden;overflow-y: auto;}
+#imageList img{cursor: pointer ;border: 2px solid #fff}
+#imgManager #imageList div{float: left;width: 100px;height: 100px;margin: 5px 10px;}
+#imgSearchTxt{padding-left:2px;margin-left:15px;background: #FFF;width:200px;height:21px;line-height:21px;border: 1px solid #d7d7d7;}
+#searchList{width: 620px;overflow: auto;zoom:1;height: 270px;}
+#searchList div{float: left;width: 116px;height: 135px;margin: 5px 15px;_margin:5px 10px;}
+#searchList img{margin: 2px 8px;cursor: pointer;border: 2px solid #fff} /*不用缩略图*/
+#searchList p{margin-left: 10px;_margin-left:8px;}
+#imgType{
+    width: 65px;
+    height: 23px;
+    line-height: 22px;
+    border: 1px solid #d7d7d7;
+}
+#imgSearchBtn,#imgSearchReset{
+    width: 80px;
+    height: 25px;
+    line-height: 25px;
+    background: #eee;
+    border: 1px solid #d7d7d7;
+    cursor: pointer
+}
+.msg{margin-left: 5px;}
+
+
+
+#myalbum{
+		height: 425px;
+}
+
+#myalbum .myalbum-tip {
+		width: 100%;
+		height: 36px;
+		line-height: 36px;
+		padding-top: 10px;
+		color: #333;
+}
+#myalbum .myalbum-tip .t-left{
+		width: 150px;
+		float:left;
+		text-indent: 25px;
+}
+#myalbum .myalbum-tip .t-center{
+		width: 332px;
+		float:left;
+		text-indent: 25px;
+}
+#myalbum .myalbum-tip .t-center .select{
+		float:right;
+		padding-right: 30px;
+		_padding-top: 7px;
+}
+#myalbum .myalbum-tip .t-center .select input{
+		margin-right: 3px;
+}
+#myalbum .myalbum-tip .t-center .select *{
+		vertical-align: middle;
+}
+#myalbum .myalbum-tip .t-right{
+		width: 230px;
+		float:left;
+		text-indent: 25px;
+}
+
+#myalbum .myalbum-con{
+		width: 100%;
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+		height: 375px;
+}
+#myalbum .myalbum-con .c-left{
+		width: 150px;
+		height: 375px;
+		float:left;
+		position:relative;
+}
+#myalbum .myalbum-con .c-left .left-pagination{
+		width: 130px;
+		height: 23px;
+		padding: 8px 0;
+		background-color:#fff;
+		position: absolute;
+		bottom:0;
+		left:0;
+		text-indent: 25px;
+		display: none;
+}
+#myalbum .myalbum-con .c-left .left-pagination a{
+		color: #808080;
+		text-decoration: none;
+}
+#myalbum .myalbum-con .c-left-wrapper{
+		width: 150px;
+		height: 375px;
+		overflow-y:auto;
+}
+#myalbum .myalbum-con .c-left-wrapper ul{ 
+		margin-bottom: 40px;
+}
+#myalbum .myalbum-con .c-left ul li{
+		width: 98px;
+		height: 115px;
+		padding: 3px;
+		background: url('bg_myalbum_left.gif') no-repeat center 3px;
+		border: 1px solid #fff;
+		text-align: center;
+		margin: 10px 0 0 12px;
+		list-style: none;
+}
+#myalbum .myalbum-con .c-left ul li{
+		cursor: pointer;
+}
+#myalbum .myalbum-con .c-left ul li.click{
+		background-color: #e1f3fc;
+		border: 1px solid #92bdd7;
+		cursor: pointer;
+}
+#myalbum .myalbum-con .c-left ul li .img{
+		padding-top:6px;
+		padding-bottom:2px;
+		*padding-bottom:4px;
+		padding-bottom:4px\0;
+}
+#myalbum .myalbum-con .c-left ul li .tt{
+		color:#333;
+		width: 100%;
+		text-align: center;
+}
+#myalbum .myalbum-con .c-left ul li .tt a{
+		color:#333;
+}
+
+#myalbum .myalbum-con .c-center{
+		width: 332px;
+		height: 375px;
+		float:left;
+		position: relative;
+}
+#myalbum .myalbum-con .c-center-wrapper{
+		width: 332px;
+		height: 375px;
+		overflow-y:auto;
+		position: relative;
+}
+#myalbum .myalbum-con .c-center .list-pagination{
+		position: absolute;
+		bottom: 0;
+		_bottom: -1px;
+		left:0;
+		width: 282px;
+		background-color: #fff;
+		padding: 8px 0 8px 30px;
+		z-index:10;
+		display: none;
+}
+#myalbum .myalbum-con .c-center .list-pagination a, #myalbum .myalbum-con .c-center .list-pagination .page-break, #myalbum .myalbum-con .c-center .list-pagination .forbid-prev, #myalbum .myalbum-con .c-center .list-pagination .forbid-next, #myalbum .myalbum-con .c-center .list-pagination .page-cur {
+    float: left;
+    font-family: Arial,SimSun;
+    font-size: 12px;
+    height: 21px;
+    line-height: 21px;
+    margin-left: 5px;
+    overflow: hidden;
+    padding: 0 6px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+#myalbum .myalbum-con .c-center .list-pagination span.total {
+    float: left;
+    height: 23px;
+    line-height: 23px;
+    margin-right: 5px;
+}
+#myalbum .myalbum-con .c-center .list-pagination a {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+	text-decoration:none;
+}
+#myalbum .myalbum-con .c-center .list-pagination a:hover {
+    border: 1px solid #0B60AF;
+    text-decoration: none;
+}
+#myalbum .myalbum-con .c-center .list-pagination .page-prev, #myalbum .myalbum-con .c-center .list-pagination .page-next {
+    background-color: #FFFFFF;
+    font-size: 12px;
+    width: auto;
+}
+#myalbum .myalbum-con .c-center .list-pagination .page-prev, #myalbum .myalbum-con .c-center .list-pagination .page-next, #myalbum .myalbum-con .c-center .list-pagination span.forbid-prev, #myalbum .myalbum-con .c-center .list-pagination span.forbid-next {
+    background: url("http://s2.suc.itc.cn/i/mall/default/img/bg_kj_pagination.gif") no-repeat scroll 0 0 transparent;
+    line-height: 21px;
+}
+#myalbum .myalbum-con .c-center .list-pagination a.page-prev {
+    background-position: 6px 7px;
+    border: 1px solid #CCCCCC;
+    color: #808080;
+    padding-left: 14px;
+    padding-right: 6px;
+}
+#myalbum .myalbum-con .c-center .list-pagination a.page-prev:hover {
+    background-position: 6px -74px;
+    border: 1px solid #0B60AF;
+    color: #0B60AF;
+    padding-left: 14px;
+    padding-right: 6px;
+}
+#myalbum .myalbum-con .c-center .list-pagination a.page-next {
+    background-position: 46px -20px;
+    border: 1px solid #CCCCCC;
+    color: #808080;
+    margin-right: 0;
+    padding-left: 6px;
+    padding-right: 14px;
+}
+#myalbum .myalbum-con .c-center .list-pagination a.page-next:hover {
+    background-position: 46px -47px;
+    border: 1px solid #0B60AF;
+    color: #0B60AF;
+    margin-right: 0;
+    padding-left: 6px;
+    padding-right: 14px;
+}
+#myalbum .myalbum-con .c-center .list-pagination a.page-first,#myalbum .myalbum-con .c-center .list-pagination a.page-last {
+    color: #808080;
+}
+#myalbum .myalbum-con .c-center .list-pagination a.page-first:hover,#myalbum .myalbum-con .c-center .list-pagination a.page-last:hover {
+    border: 1px solid #0B60AF;
+    color: #0B60AF;
+}
+
+#myalbum .myalbum-con .c-center-wrapper p{
+	padding: 15px 0 0 20px;
+}
+
+#myalbum .myalbum-con .c-center ul{
+		margin: 15px 0 0 8px;
+		overflow: hidden;
+		zoom: 1;
+		padding-bottom: 40px;
+}
+#myalbum .myalbum-con .c-center ul li{
+		width: 84px;
+		height: 108px;
+		float:left;
+		padding: 0 8px;
+		list-style: none;
+		cursor: pointer;
+
+}
+#myalbum .myalbum-con .c-center ul li .img{
+		position: relative;
+		width: 84px;
+		height: 84px;
+		padding-bottom:2px;
+		*padding-bottom:4px;
+		padding-bottom:4px\0;
+}
+#myalbum .myalbum-con .c-center ul li .img i.icon-click{
+		position: absolute;
+		top: 3px;
+		right: 3px;
+		width: 20px;
+		height: 19px;
+		background: url('icon_click.png') no-repeat 0 0;
+		_background: url('icon_click.gif') no-repeat 0 0;
+}
+#myalbum .myalbum-con .c-center ul li .tt{
+		color:#999;
+		width: 100%;
+		text-align: center;
+
+}
+#myalbum .myalbum-con .c-center ul li .tt a{
+		color:#999;
+}
+
+
+#myalbum .myalbum-con .c-right{
+		width:268px;
+		height: 375px;
+		background-color: #f0f9fe;
+		float:left;
+		overflow-y:auto;
+}
+#myalbum .myalbum-con .c-right ul{
+		margin: 15px 0 0 20px;
+		overflow: hidden;
+}
+#myalbum .myalbum-con .c-right ul li{
+		width: 98px;
+		height: 119px;
+		float:left;
+		margin: 0 15px 10px 0;
+		list-style: none;
+		background-color: #e1f3fc;
+		display: inline;
+		cursor: pointer;
+}
+#myalbum .myalbum-con .c-right ul li.checked{
+		background: url('bg_myalbum_right.gif') no-repeat 0 0;
+		list-style: none;
+		background-color: #e1f3fc;
+		text-align: center;
+}
+#myalbum .myalbum-con .c-right ul li .img{
+		padding-top: 7px;
+}
+#myalbum .myalbum-con .c-right ul li input{
+		width:70px;
+		border:0;
+		margin-top:7px;
+		background:transparent;
+		display:none;
+}
+
+#myalbum .myalbum-con .c-right ul li .tt{
+		color:#c0c7cb;
+		height: 24px;
+		line-height: 24px;
+		width: 100%;
+		text-align: center;
+}
+#myalbum .myalbum-con .c-right ul li .tt a{
+		color:#c0c7cb;
+}
+
+#myalbum .select-all{
+		color:#333;
+		padding: 10px 0 0 20px;
+}
+#myalbum .select-all input{
+		margin: 0 5px 0 0;
+}
+#myalbum .select-all *{
+		vertical-align: middle;
+}
+
+

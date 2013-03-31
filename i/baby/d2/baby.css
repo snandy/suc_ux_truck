@@ -1,0 +1,2498 @@
+#canvas{
+	width:810px;
+	line-height: 20px;
+	color:#333;
+	overflow: visible;
+}
+#innerCanvas{
+}
+#canvas .content,#main .content {
+    padding: 5px;
+    width: 800px;
+    position: relative;
+}
+.panel-box .panel-box-area{
+	background: #fff;
+	border-radius:0 0 8px 8px;
+}
+a:link, a:active, a:visited,body a:visited{
+	color:#ef3976;
+}
+.baby-mask{
+	background: url(baby_mk.gif);
+	width:100%;
+	height:2000px;
+	position: fixed;
+	_position: absolute;
+	top: 0;
+	_top: expression(documentElement.scrollTop + 0 + "px");
+	left:0;
+	z-index: 10001;
+}
+.app-wrapper{
+	border:1px solid #9DBECD;
+	background:#fff;
+	border-radius:8px;
+	font-family:simsun;
+	position:relative;
+}
+.app-box{
+	margin:0 19px;
+	padding:0 0 120px 0;
+	background:url(baby_bottom_bg.gif) no-repeat bottom;
+	_position:relative;
+}
+.global-app-head-backhome{
+	float:right;
+	width:64px;
+	height:23px;
+	margin-top:7px;
+	border:#dfac63 1px solid;
+	-webkit-border-radius:4px; 
+	-moz-border-radius:4px; 
+	border-radius:4px;
+}
+.global-app-head-backhome a,.global-app-head-backhome a:visited{
+	line-height:21px;
+	line-height:23px\9;
+	height:22px;
+	text-align:center;
+	color:#000;
+	display:block;
+	border:#fdf7dd 1px solid;
+	background:#f8e888;
+	border-bottom:0;
+	-webkit-border-radius:4px; 
+	-moz-border-radius:4px; 
+	border-radius:4px;
+}
+.app-box-head{
+	overflow:hidden;
+	zoom:1;
+}
+.app-box-head h2{
+   color: #333;
+   font-size: 14px;
+   margin: 0px 0 12px 0px;
+   *margin-bottom:8px;
+   padding:15px 0 0 0px;
+}
+.profile-updata-head{ 
+	width:738px;
+	margin:0 auto;
+}
+.app-box-head h2 .title-icon{
+	background: url("baby_foster_icon.gif") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 34px;
+    overflow: hidden;
+    width: 131px;
+	margin:-15px 0 5px 0;
+}
+/**/
+.upload-loading{
+	padding:25px 0 10px 0;
+}
+.progressWrapper{
+	overflow: hidden;
+}
+.progressContainer{
+	margin: 5px;
+    overflow: hidden;
+    padding: 4px;
+}
+.progressBarWrapper{
+	border: 1px solid #D3DFEB;
+    padding: 1px;
+}
+.progressBarComplete{
+	background: url("insert_picture_loading.gif") repeat-x;
+    font-size: 0;
+    height: 7px;
+}
+.progressBarStatus{
+	color: #999999;
+    font-family: Arial;
+    font-size: 9px;
+    margin-top: 5px;
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
+}
+.progressCancel{
+	margin-top: 15px;
+    text-align: center;
+}
+/**/
+span.red{
+	color:#ff0000;
+	font-weight:normal;
+	margin:0 5px;
+}
+em,i{
+	font-style:normal;
+}
+.baby-tips{
+	font-size:12px;
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	height:26px;
+	background:url(baby_info_clew_bg2.gif) right no-repeat;
+	vertical-align:middle;
+}
+.baby-tips em{
+	background:url(baby_info_clew_bg1.gif) no-repeat left;
+	line-height:26px;
+	color:#888;
+	display:block;
+	padding:0 10px 0 15px;
+}
+.baby-tips-err em{
+	color:#d62d06;
+}
+/*button*/
+.baby-btn{
+	height:40px;
+	background:url(baby_info_button_bg.gif) no-repeat;
+	color:#910031;
+	text-shadow:#fff 1px 1px 0px;
+	font:600 14px/40px simsun;
+	cursor:pointer;
+	float:left;
+	margin:0 10px 0 0;
+}
+.baby-btn-114,.baby-btn-114-hover{
+	width:96px;
+	background-position:-30px -80px;
+	text-align:center;
+	padding-right:18px;
+}
+.baby-btn-114-hover{
+	background-position:-274px -80px;
+}
+.baby-btn-196,.baby-btn-196-hover{
+	width:178px;
+	background-position:0 0;
+	text-align:center;
+	padding-right:18px;
+}
+.baby-btn-196-hover{
+	background-position:-232px -0px;
+}
+.baby-btn-99,.baby-btn-99-hover,.baby-btn-99-disabled{
+	width:99px;
+	height:34px;
+	line-height:34px;
+	background-position:-38px -43px;
+	text-align:center;
+}
+.baby-btn-99-hover{
+	background-position:-282px -43px;
+}
+.baby-btn-99-disabled{
+	background-position:-740px -43px;
+	color:#6E6F6F;
+}
+/**/
+.data-star-icon,.data-star-icon2{
+	background: url("calendar_data_star_icon.gif");
+    float: left;
+    height: 13px;
+    margin: 1px 3px 0 0px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 13px;
+}
+.data-star-icon2{
+	background-position: -13px 0;
+}
+.data-pic-icon{
+	background: url("calendar_data_pic.jpg");
+    float: left;
+    height: 11px;
+    margin: 2px 3px 0 0px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 14px;
+}
+/*Activation*/
+.act-top{
+	height:107px;
+	background:url(baby_top_bg.gif) no-repeat;
+	padding:1px  0 0 0;
+}
+.act-top .tab-s1,.act-top .tab-s2{
+	width:414px;
+	height:27px;
+	background:url(baby_top_tab_bg.gif) no-repeat;
+	margin:73px 0 0 10px;
+}
+.act-top .tab-s1{
+	background-position:0 0;
+}
+.act-top .tab-s2{
+	background-position:0 -27px;
+}
+.act-con{
+	padding:1px 0 0 0;
+	min-height:490px;
+	position: relative;
+	width:760px;
+	overflow: hidden;
+}
+.act-con .title{
+	margin:35px 0 30px 0;
+	font-weight:bold;
+	font-size:12px;
+}
+.act-con .title span{
+	font-weight:normal;
+	color:#666;
+}
+.act-con .title span.red{
+	color:#ff0000;
+}
+.act-con .title .icon{
+	width:4px;
+	height:14px;
+	background:url(baby_info_title_icon.gif) no-repeat;
+	float:left;
+	margin:0 10px 0 0;
+	overflow:hidden;
+}
+.act-con .act-select{
+	padding:0 0 0 90px;
+	height:250px;
+}
+.act-con .act-select li{
+	width:153px;
+	background:url(baby_info_tab_bg.gif) no-repeat;
+	float:left;
+	margin:0 55px 0 0;
+	cursor:pointer;
+}
+.act-con .act-select li.hover{
+	background-position: -306px 0;
+}
+.act-con .act-select li.selected{
+	background-position: -153px 0;
+}
+.act-con .act-select li .tips{
+	background: none repeat scroll 0 0 #FFF9D7;
+    border: 1px solid #FCEB8F;
+    color: #333333;
+    padding: 5px 9px;
+    width: 133px;
+	margin:10px 0 0 0;
+	line-height:18px;
+	position:relative;
+	display:none;
+}
+.act-con .act-select li .tips i{
+	display:block;
+	width:14px;
+	height:8px;
+	background:url(baby_info_tab_jt.gif) no-repeat;
+	overflow:hidden;
+	top:-8px;
+	left:65px;
+	position:absolute;
+}
+.act-con .act-select li.hover .tips{
+	display:block;
+}
+.act-con .act-select li .con-s1,.act-con .act-select li .con-s2,.act-con .act-select li .con-s3{
+	width:153px;
+	height:153px;
+	background:url(baby_info_tab_icon.gif) no-repeat;
+	position: relative;
+}
+.act-con .act-select li .con-s1 span,.act-con .act-select li .con-s2 span,.act-con .act-select li .con-s3 span{
+	display: none;
+}
+.act-con .act-select li .con-s2{
+	background-position:-153px 0;
+}
+.act-con .act-select li .con-s3{
+	background-position:-306px 0;
+}
+.act-con .act-select li.selected .con-s1 span,.act-con .act-select li.selected .con-s2 span,.act-con .act-select li.selected .con-s3 span{
+	display: block;
+	width: 22px;
+	height:24px;
+	background: url(baby_info_tab_ok_icon.gif);
+	position:absolute;
+	top:127px;
+	left:2px;
+}
+.act-confirm-button{
+    margin: 30px auto 0;
+    padding-left: 280px;
+    text-align: left;
+}
+.act-back{
+	float:left;
+	font-size:12px;
+	margin:14px 0 0 0;
+	width:260px;
+}
+.act-back a{
+	color:#e44077;
+}
+.act-table{
+}
+.act-table table{
+	width:100%;
+}
+.act-table table select{
+	padding:3px 5px;
+	vertical-align:middle;
+	color:#666;
+}
+.act-table table th,.act-table table td{
+	vertical-align:middle;
+	font-size:14px;
+	line-height:16px;
+	padding:7px 0;
+	height:40px;
+}
+.act-table table th{
+	width:145px;
+	text-align:right;
+	font-weight:normal;
+}
+.act-table table th.vertical-top,.act-table table td.vertical-top{
+	vertical-align:top;
+	height:auto;
+}
+.act-table table td .item{
+	margin:0 0 15px 0;
+}
+.act-table table td .item input{
+	vertical-align:middle;
+}
+.act-add-title{
+	margin:0 0 10px 0;
+}
+.act-add-title span{
+	float:right;
+	margin-right:10px;
+}
+.act-add-title span input{
+	vertical-align:middle;
+}
+.act-add-list-wrapper{
+	width:768px;
+	overflow:hidden;
+	margin:0 0 30px 0;
+}
+.act-add-list{
+	width:800px;	
+}
+.act-add-list li{
+	width:80px;
+	height:105px;
+	border:#e2e2e2 1px solid;
+	overflow:hidden;
+	float:left;
+	margin:0 15px 0 0;
+}
+.act-add-list li .photo{
+	width:50px;
+	height:50px;
+	margin:12px 0 0 15px;
+}
+.act-add-list li .photo img{
+	width:50px;
+	height:50px;
+	display:block;
+}
+.act-add-list li .name{
+	height:23px;
+	line-height:23px;
+	margin:0 auto;
+	display:block;
+	overflow:hidden;
+	text-align:center;
+	color:#e44077;
+}
+.act-add-list li .change{
+	text-align:right;
+	padding-right:2px;
+}
+/*page-top*/
+.baby-page-top{
+	height:127px;
+	background:url(baby_top_date_st1.gif) no-repeat 100px bottom;
+	padding:30px 0 0 0;
+}
+.baby-s1{
+	background:url(baby_s1.jpg) no-repeat 20px bottom;
+}
+.baby-s2{
+	background:url(baby_s2.jpg) no-repeat 20px bottom;
+}
+.baby-s3{
+	background:url(baby_s3.jpg) no-repeat 20px bottom;
+}
+.baby-page-top .user-photo{
+	width:53px;
+	height:53px;
+	float:left;
+	margin:0 10px 0 0;
+}
+.baby-page-top .user-photo img{
+	display:block;
+	width:53px;
+	height:53px;
+}
+.baby-page-top .user-right{
+	float:left;
+}
+.baby-page-top .user-right-text{
+	color:#808080;
+}
+.baby-page-top .user-right-text span{
+	color:#ef3976;
+}
+.baby-page-top .baby-sign{
+	width:169px;
+	height:31px;
+	background: url(baby_sign_btn.jpg) no-repeat;
+	margin:5px 0 0 0;
+	margin-left:22px;
+	position: relative;
+	z-index: 500;
+}
+.baby-page-top .over{
+	background: url(baby_sign_btn.jpg) no-repeat 0 -31px;
+}
+.baby-page-top .baby-sign p{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	height:31px;
+	color:#fff;
+	vertical-align: middle;
+	line-height: 31px;
+	text-align:center;
+}
+.baby-page-top .baby-sign p.week{
+	width:38px;
+	font-weight:bold;
+}
+.baby-page-top .baby-sign p.sign a{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	width:90px;
+	height:31px;
+}
+/*dl*/
+.baby-dl-wrapper,.baby-dl-box{
+	border-radius: 4px;
+}
+.baby-dl-wrapper{
+	background: url(dl_bg.png);
+	_background:none;
+	padding:4px;
+	position: absolute;
+	width:283px;
+	top:40px;
+	left:0;
+}
+.baby-dl-wrapper .dl-arrow{
+	width:15px;
+	height:13px;
+	background: url(bg_dl_arrow.png);
+	_background: url(bg_dl_arrow.gif);
+	overflow: hidden;
+	position:absolute;
+	top:-8px;
+	left:65px;
+}
+.baby-dl-box{
+	border: #ff9900 1px solid;
+	background:#fff;
+	padding-bottom:8px;
+}
+.baby-dl-box .select-photo-title{
+	height:29px;
+	background: url(bg_select_photo_title.jpg);
+	border-bottom: #ff9900 1px solid;
+	border-radius: 4px 4px 0 0;
+}
+.select-photo-title .text{
+	color:#ef3976;
+	line-height:29px;
+	padding:0 0 0 10px;
+}
+.baby-dl-box .dl-close{
+	width:10px;
+	height:11px;
+	background: url(bg_dl_close.png);
+	_background: url(bg_dl_close.gif);
+	overflow: hidden;
+	float:right;
+	margin:11px 11px 0 0;
+	_margin-right:5px;
+	cursor: pointer;
+}
+.baby-dl-box .facebox{
+	background:#fff7eb;
+	box-shadow:0px 0 10px #eee inset
+}
+.baby-dl-box .facebox ul{
+	padding:13px 0 0 5px;
+}
+.baby-dl-box .facebox ul li{
+	width:49px;
+	height:49px;
+	cursor:pointer;
+	float:left;
+	margin:0 3px 10px 0;
+	overflow: hidden;
+	border:#fff7eb 1px solid;
+}
+.baby-dl-box .facebox ul li img{
+	width:49px;
+	height:49px;
+	display:block;
+}
+.baby-dl-box .facebox ul li span{
+	width:49px;
+	height:49px;
+	display:block;
+}
+.baby-dl-box .facebox ul li.selected{
+	width:49px;
+	height:49px;
+	border:#ff9900 1px solid;
+	background: #fff;
+}
+.baby-dl-box .facebox ul li.hover{
+	width:49px;
+	height:49px;
+	border:#c9c9c9 1px solid;
+	background: #fff;
+}
+.baby-dl-box .facebox-button{
+	height:48px;
+	padding:10px 10px 0 0;
+	text-align:right;
+}
+.baby-dl-box .facebox-button .button{
+	width:67px;
+	height:28px;
+	background:url(btn_face_button.jpg);
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+}
+.baby_dl_msg{
+	line-height:16px;
+	padding:6px 5px 5px 40px;
+	border:#ff9900 1px solid;
+	border-radius:3px;
+	background:url(icon_dl_msg.jpg) no-repeat 3px 0 #fff;
+	margin:0 6px 0 6px;
+	color:#888;
+	zoom:1;
+}
+.baby-dl-box .dl_calendar_title{
+	height:50px;
+	background:url(bg_dl_calendar_title_repeat.jpg);
+	border-bottom: #ff9900 1px solid;
+	border-radius: 4px 4px 0 0;
+}
+.baby-dl-box .dl_calendar_title .text{
+	width:157px;
+	height:50px;
+	background:url(bg_dl_calendar_title.jpg) no-repeat right;
+}
+.baby-dl-box .dl_calendar_title .face{
+	width:42px;
+	height:42px;
+	padding:4px 0 0 9px;
+}
+.baby-dl-box .dl_calendar_title .face img{
+	width:42px;
+	height:42px;
+}
+.baby-dl-box .dl_calendar_title .face span{
+	width:42px;
+	height:42px;
+	display:block;
+}
+.baby-dl-box .dl_calendar_title .con{
+	padding:5px 0 0 10px;
+	overflow:hidden;
+	zoom:1;
+	color:#888;
+}
+.baby-dl-box .dl_calendar_title .con .photo{
+	width:40px;
+	height:40px;
+	float:left;
+	margin:0 5px 0 0;
+}
+.baby-dl-box .dl_calendar_title .con .photo img{
+	width:40px;
+	height:40px;
+	display:block;
+}
+.baby-dl-box .dl_calendar_title .con .intro{
+	float:left;
+	width:200px;
+}
+.baby-dl-box .dl_calendar_title .con .intro .title{
+}
+.baby-dl-box .dl_calendar_title .con .intro .title .return{
+	float: right;
+}
+.baby-dl-box .dl_calendar_title .con .data{
+}
+.baby-dl-box .calendar-wrapper{
+	background:#fff7eb;
+	box-shadow:0px 0 10px #eee inset;
+	margin:0 0 10px 0;
+	width:281px;
+	overflow:hidden;
+	padding:0 0 20px 0;
+}
+.baby-dl-box .calendar-wrapper .calendar-tab{
+	padding:4px 0 0 9px;
+}
+.baby-dl-box .calendar-wrapper .calendar-tab li{
+	height:19px;
+	padding:3px 4px 0 4px;
+	text-align:center;
+	color:#fff;
+	float:left;
+	margin:0 5px 0 0;
+}
+.baby-dl-box .calendar-wrapper .calendar-tab li a{
+	color:#ff9900;
+}
+.baby-dl-box .calendar-wrapper .calendar-tab li.curr{
+	background:#ff9900;
+	overflow: hidden;
+	zoom:1;
+}
+.baby-dl-box .calendar-wrapper .calendar-tab li .calendar-select-l,.baby-dl-box .calendar-wrapper .calendar-tab li .calendar-select-r{
+	width:4px;
+	height:7px;
+	overflow:hidden;
+	background:url(btn_dl_calendar_tab.jpg);
+	float:left;
+	margin:6px 4px 0 0;
+	display:block;
+}
+.baby-dl-box .calendar-wrapper .calendar-tab li.curr span{
+	float:left;
+}
+.baby-dl-box .calendar-wrapper .calendar-tab li .calendar-select-l{
+}
+.baby-dl-box .calendar-wrapper .calendar-tab li .calendar-select-r{
+	background-position:-16px 0;
+	margin:6px 0 0 4px;
+}
+.baby-dl-box .calendar-wrapper .calendar-week{
+	height:23px;
+	background:#ff9900;
+	line-height:23px;
+}
+.baby-dl-box .calendar-wrapper .calendar-week li{
+	width:40px;
+	float:left;
+	cursor:pointer;
+	color:#fff;
+	text-align:center;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list{
+	width:290px;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list li{
+	width:40px;
+	height:51px;
+	background: url(bg_dl_calendar_item.jpg) no-repeat;
+	float:left;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list li .num,.baby-dl-box .calendar-wrapper .calendar-item-list li .img{
+	margin:0 auto;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list li .num{
+	font-weight:bold;
+	color:#ff9900;
+	line-height:24px;
+	text-align:center;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list li .img,.baby-dl-box .calendar-wrapper .calendar-item-list li .img .con,.baby-dl-box .calendar-wrapper .calendar-item-list li .img img{
+	width:23px;
+	height:23px;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list li .img{
+	cursor:pointer;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list li .img .con{
+	background:url(bg_calendar_con.jpg) no-repeat;
+}
+.baby-dl-box .calendar-wrapper .calendar-item-list li .img img{
+	display:block;
+}
+.baby-dl-box .frd-calendar-wrapper{
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar{
+	width:100%;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar th{
+	height:23px;
+	background:#ff9900;
+	line-height:23px;
+	font-weight:normal;
+	color:#fff;
+	text-align:left;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar th.num{
+	width:35px;
+	text-align:center;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar th.month{
+	width:30px;
+	text-align:center;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar th.total{
+	width:55px;
+	text-align:center;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar th.open{
+	width:40px;
+	text-align:center;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar td{
+	text-align:center;
+	color:#888;
+	vertical-align:middle;
+	padding:9px 0;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar td .top{
+	display:block;
+	margin:0 auto;
+	width:20px;
+	height:19px;
+	background:url(bg_frd_calendar_top.jpg) no-repeat;
+	text-align:center;
+	line-height:20px;
+	color:#fff;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar td .photo{
+	float:left;
+	width:30px;
+	height:30px;
+	margin:0 5px 0 0;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar td .photo img{
+	width:30px;
+	height:30px;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar td .name{
+	width:80px;
+	height:30px;
+	line-height:30px;
+	float:left;
+	overflow:hidden;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar td .open{
+	width:16px;
+	height:16px;
+	background:url(icon_dl_frd_calendar_open.jpg) no-repeat;
+	display:block;
+	margin:0 auto;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar-page{
+	color:#888;
+	text-align:right;
+	padding: 0 11px 0 0;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar-page .up,.baby-dl-box .frd-calendar-wrapper .frd-calendar-page .down{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	width:7px;
+	height:9px;
+	background:url(bg_frd_calendar_page.jpg) no-repeat;
+	overflow:hidden;
+	margin:0 10px 0 0;
+}
+.baby-dl-box .frd-calendar-wrapper .frd-calendar-page .down{
+	background-position:-7px 0;
+	margin:0 0 0 10px;
+}
+/*calendar*/
+.baby-calendar-con{
+	border:1px solid #FED9A2;
+	position:relative;
+	font-family:simsun;
+}
+.baby-calendar-tabs-wrapper{
+	clear:both;
+	height:32px;
+	position:absolute;
+	top:-32px;
+	_top:-31px;
+	left:-1px;
+}
+.baby-calendar-top-tab{
+	
+}
+.baby-calendar-top-tab li{
+	float:left;
+	margin-right:3px;
+}
+.baby-calendar-top-tab li a{
+	display:block;
+	width:90px;
+	height:32px;
+	background:url(bg_top_nav.gif);
+	line-height:32px;
+	text-align:center;
+	font-size:14px;
+}
+.baby-calendar-top-tab li a:hover{
+	background-position:-180px 0;
+	text-decoration:none;
+}
+.baby-calendar-top-tab li.now a{
+	background-position:-90px 0;
+	color:#333;
+}
+.baby-calendar-top-tab li.now a:hover{
+	background-position:-90px 0;
+	text-decoration:none;
+}
+.baby-calendar-con .calendar-btn{
+	background: url("baby_calendar_tab_bg.gif");
+    height: 33px;
+    margin: 0 auto;
+    padding: 12px 13px 0 16px;
+    position: relative;
+    z-index: 2;
+}
+.calendar-btn .calendar-today{
+    float: left;
+    height: 23px;
+    text-align: center;
+    width: 71px;
+    font-weight: bold;
+    margin:0 5px 0 0;
+}
+.calendar-btn .calendar-today a{
+	background: url("baby_calendar_today_bg.gif");
+    display: block;
+    height: 18px;
+    line-height:14px;
+    padding-top: 5px;
+    width: 100%;
+}
+.calendar-btn .calendar-today a:hover{
+	background-position: -71px 0;
+	text-decoration:none;
+}
+.calendar-btn .calendar-manipulation{
+	float: left;
+    height: 23px;
+    position:relative;
+}
+.calendar-btn .calendar-manipulation-item{
+	float: left;
+    height: 23px;
+}
+.calendar-btn .calendar-manipulation-item a{
+	display:block;
+	background: url(calendar_btn_icon.gif);
+	width: 28px;
+	height:23px;
+	float: left;
+	margin:0 5px 0 0;
+}
+.calendar-btn .calendar-manipulation-item a.calendar{
+	background-position: 0 0;
+}
+.calendar-btn .calendar-manipulation-item a.calendar:hover{
+	background-position: -99px 0;
+}
+.calendar-btn .calendar-manipulation-item a.prev-btn{
+	background-position: -33px 0;
+}
+.calendar-btn .calendar-manipulation-item a.prev-btn-over{
+	background-position: -297px 0;
+}
+.calendar-btn .calendar-manipulation-item a.prev-btn:hover{
+	background-position: -132px 0;
+}
+.calendar-btn .calendar-manipulation-item a.next-btn{
+	background-position: -66px 0;
+}
+.calendar-btn .calendar-manipulation-item a.next-btn-over{
+	background-position: -330px 0;
+}
+.calendar-btn .calendar-manipulation-item a.next-btn:hover{
+	background-position: -165px 0;
+}
+.calendar-btn .calendar-window{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    left: 0px;
+    padding-top: 6px;
+    position: absolute;
+    top: 26px;
+    display:none;
+}
+.calendar-btn .calendar-window .calendar-switch{
+	display: inline;
+    float: left;
+    margin: 0 auto 4px 11px;
+    width: 200px;
+}
+.calendar-btn .calendar-window .calendar-switch a{
+	display:block;
+	float:left;
+	background: url("calendar_window_jt.gif");
+    height: 17px;
+    margin: 1px 2px 0 0;
+    width: 12px;
+}
+.calendar-btn .calendar-window .calendar-switch a.left{
+	 background-position: 0 0;
+}
+.calendar-btn .calendar-window .calendar-switch a.left-over{
+	background-position: -24px 0;
+}
+.calendar-btn .calendar-window .calendar-switch a.left:hover{
+	background-position: -48px 0;
+}
+.calendar-btn .calendar-window .calendar-switch a.right{
+	 background-position: -12px 0;
+}
+.calendar-btn .calendar-window .calendar-switch a.right-over{
+	 background-position: -36px 0;
+}
+.calendar-btn .calendar-window .calendar-switch a.right:hover{
+	 background-position: -60px 0;
+}
+.calendar-btn .calendar-window .calendar-switch select{
+	border: 1px solid #CCCCCC;
+    color: #333333;
+    display: inline;
+    float: left;
+    font-size:12px;
+    height: 19px;
+    margin-right: 5px;
+    padding: 2px;
+    width: 78px;
+}
+.calendar-btn .calendar-window .calendar-week-title{
+	background: none repeat scroll 0 0 #FCF4B7;
+    color: #808080;
+    line-height:24px;
+    height: 25px;
+    width: 210px;
+}
+.calendar-btn .calendar-window .calendar-week-title li{
+	float: left;
+    text-align: center;
+    width: 30px;
+}
+.calendar-btn .calendar-window .calendar-data{
+	border-bottom: 1px solid #FFFFFF;
+    border-right: 1px solid #FFFFFF;
+    width: 210px;
+}
+.calendar-btn .calendar-window .calendar-data li{
+	background: none repeat scroll 0 0 #F4F4F4;
+    border:#ffffff 1px solid;
+    border-bottom:0;
+    border-right:0;
+    color: #E44077;
+    float: left;
+    line-height:20px;
+    height: 20px;
+    text-align: center;
+    width: 29px;
+}
+.calendar-btn .calendar-window .calendar-data li.week{
+	background: #FFCEDF;
+}
+.calendar-btn .calendar-window .calendar-data li.today{
+	background: #E44077;
+}
+.calendar-btn .calendar-window .calendar-data li.today a{
+	color:#fff;
+}
+.calendar-btn .calendar-today-date{
+	color: #333333;
+    float: left;
+    font: 14px/22px 'simsun';
+    margin-left: 13px;
+}
+/**/
+.baby-calendar-tab{
+	float:right;
+	width:150px;
+}
+.baby-calendar-tab li{
+	float:left;
+}
+.baby-calendar-tab li a{
+	height:23px;
+	line-height:23px;
+	background:url(btn_day.gif) no-repeat;
+	display:block;
+	font-weight:bold;
+	text-align:center;
+}
+.baby-calendar-tab li a:hover{
+	text-decoration:none;
+}
+.baby-calendar-tab li.day a{
+	background-position:0 -23px;
+	width:49px;
+}
+.baby-calendar-tab li.day-now a{
+	background-position: 0 0;
+	width:49px;
+	color:#333;
+}
+.baby-calendar-tab li.month a{
+	background-position:-50px 0px;
+	width:49px;
+}
+.baby-calendar-tab li.month-now a{
+	background-position: -50px -23px;
+	width:49px;
+	color:#333;
+}
+.baby-calendar-tab li.week a{
+	background-position:-99px 0px;
+	width:50px;
+}
+.baby-calendar-tab li.week-now a{
+	background-position: -99px -23px;
+	width:50px;
+	color:#333;
+}
+.baby-calendar-con .calendar-data-day{
+	background: #FFFFF3;
+	border-top:#FED9A2 1px solid;
+}
+.baby-calendar-con .calendar-data-day .day-tab{
+	height: 29px;
+    margin: 0 auto 3px;
+    overflow: hidden;
+}
+.baby-calendar-con .calendar-data-day .day-tab span{
+	background: url("calendar_data_day_tab_bg.gif");
+    color: #333333;
+    cursor: pointer;
+    float: left;
+    line-height:29px;
+    height: 29px;
+    text-align: center;
+    width: 108px;
+}
+.baby-calendar-con .calendar-data-day .day-tab span.now{
+	background: url("calendar_data_day_tab_bg2.gif") no-repeat right top;
+    cursor: auto;
+}
+.baby-calendar-con .calendar-data-day .day-tab span.end{
+	background-position: -108px 0;
+	width:110px;
+}
+.baby-calendar-con .calendar-data-day .day-tab span:hover{
+	background: url("calendar_data_day_tab_bg3.gif") no-repeat left top;
+}
+.baby-calendar-con .calendar-data-day .day-tab span.end:hover{
+	background: url("calendar_data_day_tab_bg3.gif") no-repeat right top;
+}
+.baby-calendar-con .calendar-data-day .day-tab span.now:hover{
+	background: url("calendar_data_day_tab_bg2.gif") no-repeat right top;
+    cursor: auto;
+}
+.baby-calendar-con .calendar-data-day .day-con{
+	background: url("calendar_data_day_con_bg.gif") no-repeat right top ;
+    height: 183px;
+    margin: 0 auto 10px;
+    overflow: hidden;
+    zoom:1;
+    width: 716px;
+}
+.baby-calendar-con .calendar-data-day .day-con .input-title{
+	height: 35px;
+	width: 706px;
+    padding-top: 11px;
+}
+.baby-calendar-con .calendar-data-day .day-con .input-title .input-title-icon{
+	background: url("calendar_input_title_icon.gif");
+    display: block;
+    height: 19px;
+    overflow: hidden;
+    text-align: left;
+    width: 241px;
+}
+.baby-calendar-con .calendar-data-day .day-con textarea{
+	background: #FFFFFF;
+    border: 1px solid #D8D8D8;
+    color: #333333;
+    line-height:20px;
+    font-size:12px;
+    height: 80px;
+    margin: 0 0 11px 0;
+    *margin-left:-18px;
+    padding: 4px;
+    text-align: left;
+    width: 700px;
+    resize:none;
+}
+.baby-calendar-con .calendar-data-day .day-con .emit-box{
+}
+.baby-calendar-con .calendar-data-day .day-con .emit-box .emit-text{
+	color: #666666;
+    display: inline;
+    float: right;
+    margin: 10px 14px 0 auto;
+}
+.baby-calendar-con .calendar-data-day .day-con .emit-box .emit-text .error-clew{
+	background: url("calendar_data_day_error_icon.gif") no-repeat;
+    color: #CC0000;
+    display: inline;
+    line-height:14px;
+    margin-right: 12px;
+    padding: 1px 0 0 17px;
+    text-align: left;
+}
+.baby-calendar-con .calendar-data-day .day-con .emit-box .button{
+	display: inline;
+    float: right;
+    height: 34px;
+    margin-right: 10px;
+    width: 99px;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #FED9A2;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team{
+	background: url("day_data_list_line_bg.gif") repeat-x center bottom;
+    margin: 0 auto;
+    padding: 12px 0;
+    width: 713px;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team-end{
+	background: #fff;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .day-text{
+	color: #333333;
+	line-height:20px;
+    text-align: left;
+    word-wrap: break-word;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .day-text-note{
+	overflow: hidden;
+	zoom:1;
+	color: #999999;
+    text-align: left;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .day-text-note .comment{
+	float: right;
+    padding: 0;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .day-text-note .comment a{
+	margin-right: 10px;
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .pic-view{
+	clear:both;
+	padding:10px 0;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .pic-view .pic-view-small,{
+	width:150px;
+	overflow: hidden;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .pic-view .pic-view-small img{
+	cursor: url("http://s2.suc.itc.cn/i/default/my/img/big.cur") 6 8, pointer;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .pic-view .pic-view-big,{
+	width:450px;
+	overflow: hidden;
+}
+.baby-calendar-con .calendar-data-day  .day-data-list .list-team .pic-view .pic-view-big img{
+	cursor: url("http://s2.suc.itc.cn/i/default/my/img/small.cur") 6 8, pointer;
+}
+/**/
+.baby-calendar-con .calendar-data-month,.baby-calendar-con .calendar-data-week{
+	border-top:1px solid #FED8A2;
+}
+.calendar-data-month .calendar-data-month-title,.calendar-data-week .calendar-data-week-title{
+	
+}
+.calendar-data-month .calendar-data-month-title ul,.calendar-data-week .calendar-data-week-title ul{
+	_position:relative;
+}
+.calendar-data-month .calendar-data-month-title ul li,.calendar-data-week .calendar-data-week-title ul li{
+	border-right: 1px solid #eee;
+    color: #808080;
+    float: left;
+    line-height:28px;
+    text-align: center;
+    width: 107px;
+}
+.calendar-data-month .calendar-data-month-title ul li.end,.calendar-data-week .calendar-data-week-title ul li.end{
+	border-right: 0;
+}
+.calendar-data-month .month-data-list,.calendar-data-week .week-data-list{
+	
+}
+.calendar-data-month .month-data-list ul,.calendar-data-week .week-data-list ul{
+	_position:relative;
+}
+.calendar-data-month .month-data-list ul li,.calendar-data-week .week-data-list ul li{
+	border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+    float: left;
+    position: relative;
+    width: 107px;
+}
+.calendar-data-week .week-data-list ul li{
+	width:251px;
+}
+.calendar-data-month .month-data-list ul li .month-data-list-title,.calendar-data-week .week-data-list ul li .week-data-list-title{
+	background: #fafafa;
+    border-bottom: 1px solid #eee;
+    color: #333333;
+    line-height:24px;
+    height: 24px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    font-size:12px;
+    font-weight:normal;
+}
+.calendar-data-month .month-data-list ul li .month-data-list-con,.calendar-data-week .week-data-list ul li .week-data-list-con{
+	height: 123px;
+	overflow: hidden;
+}
+.calendar-data-month .month-data-list ul li .month-data-list-con .month-data-list-con-text,.calendar-data-week .week-data-list ul li .week-data-list-con .week-data-list-con-text{
+	line-height:18px;
+    margin: 0 auto;
+    padding: 7px 0 0 5px;
+    text-align: left;
+}
+.calendar-data-month .month-data-list ul li .month-data-list-con .month-data-list-con-text img,.calendar-data-week .week-data-list ul li .week-data-list-con .week-data-list-con-text img{
+	width:12px;
+	height:12px;
+}
+.calendar-data-month .month-data-list ul li .month-data-list-con .babyapp-sohu,.calendar-data-week .week-data-list ul li .week-data-list-con .babyapp-sohu{
+	font-weight:bold;
+}
+.calendar-data-month .month-data-list ul li .calendar-data-append-btn,.calendar-data-week .week-data-list ul li .calendar-data-append-btn{
+	bottom: 6px;
+    display: none;
+    height: 16px;
+    padding:3px 0 0 0;
+    left: 9px;
+    position: absolute;
+    width: 45px;
+    display:none;
+}
+.calendar-data-month .month-data-list ul li .calendar-data-append-btn a,.calendar-data-week .week-data-list ul li .calendar-data-append-btn a{
+	background: url("month_data_append_btn.gif") repeat scroll 0 0 transparent;
+    display: block;
+    line-height:14px;
+    height: 17px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 2px 0 0 17px;
+    text-align: left;
+    width: 28px;
+}
+.calendar-data-month .month-data-list ul li .calendar-data-append-btn a:hover,.calendar-data-week .week-data-list ul li .calendar-data-append-btn a:hover{
+	text-decoration:none;
+	background-position: 0 -19px;
+}
+.calendar-data-month .month-data-list ul li.hover .month-data-list-title,.calendar-data-week .week-data-list ul li.hover .week-data-list-title{
+	background:#FCF4B7;
+}
+.calendar-data-month .month-data-list ul li.hover .month-data-list-con,.calendar-data-week .week-data-list ul li.hover .week-data-list-con{
+	background: #FFFFF3;
+}
+.calendar-data-month .month-data-list ul li.hover .calendar-data-append-btn,.calendar-data-week .week-data-list ul li.hover .calendar-data-append-btn{
+	 display: block;
+}
+.calendar-data-month .month-data-list ul li.end,.calendar-data-week .week-data-list ul li.end{
+	border-right: 0 none;
+    width: 109px;
+}
+.calendar-data-week .week-data-list ul li.end{
+	width:253px;
+}
+.calendar-data-more{
+	bottom: 2px;
+    display: block;
+    position: absolute;
+    right: 9px;
+}
+/*win*/
+.baby-win-bg{
+	background: url("dl_bg.png") repeat;
+	_background: none;
+    padding: 4px;
+    position: absolute;
+    width: 522px;
+    z-index: 500;
+}
+.baby-win-wrapper{
+	background: url("calendar_win_bg.gif") no-repeat  right top #FFFFF3;
+    border: 1px solid #FED8A2;
+    height: 210px;
+    padding-top: 20px;
+    position: relative;
+    text-align: center;
+    width: 520px;
+}
+.baby-win-wrapper .calendar-data-input-win-con-title{
+	background: url("calendar_input_title_icon.gif") no-repeat left top;
+    display: block;
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    height: 19px;
+    text-align: left;
+    width: 391px;
+}
+.baby-win-wrapper .close-icon{
+	height: 14px;
+    position: absolute;
+    right: 14px;
+    top: 15px;
+    width: 14px;
+}
+.baby-win-wrapper .close-icon a{
+	background: url("close_icon.gif") no-repeat ;
+    display: block;
+    height: 100%;
+    text-align: left;
+    width: 100%;
+}
+.baby-win-wrapper .close-icon a:hover{
+	background-position: -14px 0;
+}
+.baby-win-wrapper textarea{
+	background: #FFFFFF;
+    border: 1px solid #D8D8D8;
+    color: #333333;
+    font-size:12px;
+    line-height:20px;
+    height: 100px;
+    overflow: hidden;
+    padding: 4px;
+    text-align: left;
+    width: 460px;
+    left: 21px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 54px;
+    resize:none;
+}
+.baby-win-wrapper .post-action{
+	position:absolute;
+	top:170px;
+	left:21px;
+	width:480px;
+}
+.baby-win-wrapper .post-options{
+	width:150px;
+	float:left;
+	margin:5px 0 0 0;
+}
+.baby-win-wrapper .post-options .pub-faces,.baby-win-wrapper .post-options .insert-picture{
+	float: left;
+    padding: 10px 0 2px 5px;
+    position: relative;
+    margin:0 15px 0 0;
+    _width:50px;
+}
+.swfupload{
+	position: absolute;
+	left:5px;
+	top:10px;
+}
+.baby-win-wrapper .post-options .pub-faces .btn-emot,.baby-win-wrapper .post-options .insert-picture .btn-insert-picture{
+	 background: url("icon_share.gif") no-repeat 0 0;
+}
+.baby-win-wrapper .post-options .pub-faces .btn-emot{
+	background-position: 0 0;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 16px;
+    margin: 1px 0 0;
+    width: 16px;
+    overflow: hidden;
+}
+.baby-win-wrapper .post-options .pub-faces a:hover span{
+	background-position: -16px 0;
+}
+.baby-win-wrapper .post-options .insert-picture .btn-insert-picture{
+	background-position: -32px 0;
+    display: block;
+    float: left;
+    height: 16px;
+    margin: 1px 0 0;
+    width: 16px;
+    overflow: hidden;
+}
+.baby-win-wrapper .post-options .insert-picture a:hover span{
+	background-position: -48px 0;
+}
+.baby-win-wrapper .post-options .insert-picture{
+	 z-index: 400;
+}
+.baby-win-wrapper .post-options a{
+	color:#666;
+}
+.baby-win-wrapper .post-options a:hover{
+	text-decoration:none;
+}
+.baby-win-wrapper .post-btns{
+	display: inline;
+    float: right;
+    padding: 5px 1px 0 0;
+    width: 320px;
+    z-index: 5;
+}
+.baby-win-wrapper .post-btns .button{
+	float:right;
+}
+.baby-win-wrapper .post-btns .emit-text{
+	color: #666666;
+    display: inline;
+    float: right;
+    margin: 10px 14px 0 auto;
+}
+.baby-win-wrapper .post-btns .emit-text .error-clew{
+	background: url("calendar_data_day_error_icon.gif") no-repeat scroll 0 0 transparent;
+    color: #CC0000;
+    display: inline;
+    line-height: 14px;
+    margin-right: 12px;
+    padding: 1px 0 0 17px;
+    text-align: left;
+}
+.baby-win-wrapper .post-btns .emit-text .babyapp-text-counter{
+}
+
+.baby-face-dl-wrapper,.baby-face-dl-box{
+	border-radius: 4px;
+}
+.baby-face-dl-wrapper{
+	background: url(dl_bg.png);
+	_background: none;
+	padding:4px;
+	position: absolute;
+	width:230px;
+	z-index: 600;
+}
+.baby-face-dl-wrapper .dl-arrow{
+	width:15px;
+	height:13px;
+	background: url(bg_dl_arrow.png);
+	_background: url(bg_dl_arrow.gif);
+	overflow: hidden;
+	position:absolute;
+	top:-8px;
+	left:65px;
+}
+.baby-face-dl-box{
+	border: #ff9900 1px solid;
+	background:#fff;
+}
+.baby-face-dl-box .emot{
+	overflow: hidden;
+	zoom:1;
+	padding:2px 1px 0 2px;
+}
+.baby-face-dl-box .emot li{
+	float: left;
+    height: 28px;
+    width: 28px;
+}
+.baby-face-dl-box .emot li a{
+	border: 1px solid #FFFFFF;
+    display: block;
+    height: 20px;
+    padding: 3px;
+    text-decoration: none;
+    width: 20px;
+}
+.baby-face-dl-box .emot li a:hover{
+	border: 1px solid #ff9900;
+}
+.baby-face-dl-box .confirm-function-text{
+	line-height: 35px;
+    text-align: right;
+    padding:0 10px 0 0;
+}
+.baby-face-dl-box .confirm-picture-preview{
+	width:150px;
+	margin:0 auto;
+	padding:0 0 20px 0;
+}
+.baby-face-dl-box .confirm-picture-preview img{
+	width:150px;
+}
+.baby-face-dl-box .confirm-picture-readme{
+	color: #666;
+	line-height:38px;
+    text-align: center;
+    width:228px;
+    overflow: hidden;
+}
+.baby-calendar-open-wrapper,.baby-calendar-open{
+	border-radius: 4px 4px 4px 4px;
+}
+.baby-calendar-open-wrapper{
+	background: url("dl_bg.png");
+	_background: none;
+    padding: 4px;
+    position: absolute;
+    width: 502px;
+    z-index: 500;
+}
+.baby-calendar-open{
+	background: url("calendar_win_bg.gif") no-repeat right bottom #FFFFF3;
+    border: 1px solid #FED8A2;
+    position: relative;
+    width: 500px;
+    padding: 0 0 65px 0;
+}
+.baby-calendar-open .calendar-title{
+	height:51px;
+	background: url(bg_open_title.jpg);
+	color:#ef3976;
+	font-size:16px;
+	font-weight:bold;
+	line-height: 51px;
+	padding:0 0 0 15px;
+}
+.baby-calendar-open .calendar-title h1{
+	float:left;
+}
+.baby-calendar-open .calendar-title .score{
+	float:right;
+	display: inline;
+	margin:7px 50px 0 0;
+}
+.baby-calendar-open .calendar-title .score a,.baby-calendar-open .calendar-title .score span{
+	display:block;
+	float:left;
+}
+.baby-calendar-open .calendar-title .score a{
+	width:41px;
+	height:36px;
+	background: url(icon_open_icon.gif) no-repeat 0 -60px;
+	margin:0 10px 0 0;
+}
+.baby-calendar-open .calendar-title .score a:hover{
+	background-position: -100px -60px;
+}
+.baby-calendar-open .calendar-title .score a.end{
+	background-position: -50px -60px;
+}
+.baby-calendar-open .calendar-title .score span{
+	line-height: 35px;
+	font-size:14px;
+	font-weight:normal;
+	color:#333;
+}
+.baby-calendar-open .close-icon{
+	height: 10px;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    width: 14px;
+}
+.baby-calendar-open .close-icon a{
+	background: url("bg_open_close.gif") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 100%;
+    text-align: left;
+    width: 100%;
+}
+.baby-calendar-open .calendar-con{
+	background: #fff8d9;
+	margin:7px 7px 0 7px;
+	border-bottom:#fed9a2 1px solid;
+}
+.baby-calendar-open .calendar-con .text{
+	color:#666;
+	overflow: hidden;
+	line-height: 180%;
+	min-height: 100px;
+	padding:15px;
+	word-wrap: break-word;
+}
+.baby-calendar-open .calendar-con .pic{
+	width:480px;
+	margin:10px auto 10px auto;
+	overflow: hidden;
+	text-align:center;
+}
+.baby-calendar-open .calendar-con .pic img{
+	
+}
+.baby-calendar-open .bottom{
+	padding:0 15px 5px 15px;
+}
+.baby-calendar-open .bottom .time{
+	background: url(icon_open_icon.gif) no-repeat 0px 3px;
+	color:#999;
+	padding:0 0 0 18px;
+	zoom:1;
+}
+.baby-calendar-open .bottom .comment,.baby-calendar-open .bottom .del{
+	background: url(icon_open_icon.gif) no-repeat 0px -25px;
+	padding:0 0 0 20px;
+	float:right;
+	margin:0 0 0 10px;
+}
+.baby-calendar-open .bottom .del{
+	background-position: 0 -116px;
+	padding:0 0 0 25px;
+}
+.baby-calendar-open .baby-calendar-apprise{
+	padding:20px;
+	min-height: 120px;
+	_height:120px;
+}
+.baby-calendar-open .baby-calendar-apprise .babyapp-title{
+	color: #333333;
+    font: 600 14px/16px 'simsun';
+    height: 19px;
+    margin: 0 auto 8px;
+    padding-top: 5px;
+    text-align: left;
+}
+.baby-calendar-open .baby-calendar-apprise .babyapp-title .sohu-baby-icon{
+	background: url("sohu_baby_icon.gif");
+    display: block;
+    float: left;
+    height: 24px;
+    margin: -5px 9px 0 0;
+    width: 73px;
+}
+.baby-calendar-open .baby-calendar-apprise .babyapp-content{
+	color: #333333;
+    font: 12px/22px 'simsun';
+    text-align: left;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.baby-calendar-open .baby-calendar-apprise .babyapp-content-time{
+	 color: #999999;
+	 line-height: 22px;
+}
+/**/
+.baby-data-box{
+	margin: 15px auto 0;
+}
+.baby-data-box .data-info-list{
+	float: left;
+    width: 520px;
+}
+.baby-data-box .data-info-list .data-info-list-fun{
+	background: url("data_info_list_fun_bg.gif") repeat-x scroll center bottom transparent;
+    height: 28px;
+    margin: 0 auto 5px;
+    padding-top: 17px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data-info-list-tab{
+	float: left;
+    height: 17px;
+    width: 361px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data-info-list-tab span.friend-baby{
+	background-position: -124px -55px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data-info-list-tab span.everybody-say{
+	background-position: -124px -4px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data-info-list-tab span{
+	background: url("data_info_list_fun_tab_icon.gif") no-repeat scroll 0 0 transparent;
+    display: inline;
+    float: left;
+    height: 17px;
+    margin-right: 9px;
+    text-align: left;
+    width: 111px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data-info-list-tab span.everybody-say-now{
+	background-position: -3px -4px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data-info-list-tab span.friend-baby-now{
+	 background-position: -3px -55px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data-info-list-tab span a{
+	display: block;
+    height: 100%;
+    width: 100%;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data_info_list_update{
+	display: block;
+    float: right;
+    height: 14px;
+    margin-top: 5px;
+    overflow: hidden;
+    text-align: left;
+    width: 40px;
+}
+.baby-data-box .data-info-list .data-info-list-fun .data_info_list_update a{
+	background: url("data_info_list_fun_update_icon.gif") no-repeat scroll left top transparent;
+    display: block;
+    font: 12px/14px 'simsun';
+    height: 14px;
+    padding-left: 15px;
+    width: 25px;
+}
+.data-info-list-data{
+	
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item{
+	background: url("data_info_list_data_bg.gif") repeat-x  bottom;
+    padding-bottom: 5px;
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item .data-info-list-data-item-avatar{
+	display: inline;
+    float: left;
+    margin: 10px 5px 0 0;
+    width: 48px;
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item .data-info-list-data-item-avatar img{
+	height: 48px;
+    width: 48px;
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item .data-info-list-data-item-text{
+	float: right;
+    font: 12px/20px 'simsun';
+    margin-top: 5px;
+    text-align: left;
+    width: 465px;
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item .data-info-list-data-item-text p{
+	height: auto;
+    min-height: 40px;
+    color: #464646;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item .data-info-list-data-item-text p .pic-icon{
+	background: url("calendar_data_pic.jpg");
+    height: 11px;
+    margin: 0 3px 0 0px;
+    overflow: hidden;
+    width: 14px;
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+    cursor: pointer;
+    *vertical-align: middle;
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item .data-info-list-data-item-text .day-text-note{
+	color: #999999;
+}
+.baby-data-box .data-info-list .data-info-list-data .data-info-list-data-item .data-info-list-data-item-text .comment{
+	float: right;
+    padding: 0;
+}
+/**/
+.list-pagination{
+	clear: both;
+    float: right;
+    padding: 10px 0;
+}
+.list-pagination a, .list-pagination .page-break, .list-pagination .forbid-prev, .list-pagination .forbid-next, .list-pagination .page-cur{
+	float: left;
+    font-family: Arial,SimSun;
+    font-size: 12px;
+    height: 21px;
+    line-height: 21px;
+    margin-left: 5px;
+    overflow: hidden;
+    padding: 0 6px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.list-pagination span.total{
+	color: #333333;
+    float: left;
+    height: 23px;
+    line-height: 23px;
+    margin-right: 10px;
+}
+.list-pagination a.page-prev{
+	background-position: 6px 7px;
+    border: 1px solid #CCCCCC;
+    color: #666666;
+    padding-left: 14px;
+    padding-right: 6px;
+}
+.list-pagination a{
+	background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+}
+.list-pagination .page-cur{
+	background-color: #FCF4F7;
+    border: 1px solid #E44077;
+    color: #E44077;
+    font-weight: 800;
+}
+.list-pagination a.page-next{
+	background-position: 46px -20px;
+    border: 1px solid #CCCCCC;
+    color: #808080;
+    margin-right: 0;
+    padding-left: 6px;
+    padding-right: 14px;
+}
+/**/
+.baby-data-box .data-baby-list{
+	float: right;
+    width: 210px;
+}
+.baby-data-box .data-baby-list .baby-list-title{
+	background: url("baby_list_title_bg.gif") repeat scroll 0 0 transparent;
+    height: 25px;
+    margin: 0 auto 13px;
+    padding-top: 20px;
+    text-align: left;
+    width: 210px;
+}
+.baby-data-box .data-baby-list .baby-list-title .list-title-text{
+	background: url("baby_list_title.gif") repeat scroll 0 0 transparent;
+    height: 15px;
+    overflow: hidden;
+    text-align: left;
+    width: 151px;
+}
+.baby-data-box .data-baby-list .data-list-con{
+	margin: 0 auto;
+    overflow: hidden;
+    width: 198px;
+}
+.baby-data-box .data-baby-list .data-list-con ul{
+	width:220px;
+}
+.baby-data-box .data-baby-list .data-list-con li{
+	display: inline;
+    float: left;
+    font: 12px/14px 'simsun';
+    margin-right: 10px;
+    padding-bottom: 15px;
+    text-align: center;
+    width: 60px;
+}
+.baby-data-box .data-baby-list .data-list-con li img{
+	display: block;
+    height: 48px;
+    margin: 0 auto 5px;
+    width: 48px;
+}
+.baby-data-box .data-baby-list .data-list-con li .button{
+	padding: 5px 0 0;
+}
+.baby-data-box .data-baby-list .data-list-con li .button a{
+	background: url("btn_flw.gif") no-repeat scroll 0 0 transparent;
+    color: #D64160;
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-left: 22px;
+    width: 38px;
+    text-align:left;
+}
+.baby-data-box .data-baby-list .data-list-con li .button a:hover{
+	background-position: 0 -22px;
+	text-decoration:none;
+}
+.baby-data-box .data-baby-list .data-list-con li .button a.already-attention{
+	background:url(bg_invite_fl.gif);
+	color:#ccc;
+	width:60px;
+	height:22px;
+	padding:0;
+	text-align:center;
+}
+/**/
+.baby-photo-warpper{
+	background: url(baby_calendar_tab_bg.gif) repeat-x top;
+	padding:15px 0 0 20px;
+}
+.baby-photo-nav-wrapper{
+	width:720px;
+	height:47px;
+	background: url(bg_baby_photo_nav_bg.jpg);
+	overflow: hidden;
+}
+.baby-photo-nav-wrapper ul{
+	padding:0 0 0 20px;
+}
+.baby-photo-nav-wrapper ul li,.baby-photo-nav-wrapper ul li a{
+	display:block;
+}
+.baby-photo-nav-wrapper ul li{
+	float:left;
+	width:140px;
+	height:47px;
+	margin:0 30px 0 0;
+}
+.baby-photo-nav-wrapper ul li a{
+	background: url(bg_baby_photo_nav_pt.gif) no-repeat 10px 11px;
+	padding:0 0 0 33px;
+	color:#eb6900;
+	font-size: 16px;
+	font-weight:bold;
+	line-height: 40px;
+}
+.baby-photo-nav-wrapper ul li a:visited{
+	color:#eb6900;
+}
+.baby-photo-nav-wrapper ul li.curr{
+	background: url(bg_baby_photo_nav.jpg) no-repeat;
+}
+.baby-photo-nav-wrapper ul li.curr a{
+	background-position: 10px -40px;
+	color:#ef3976;
+}
+.baby-photo-nav-wrapper ul li.curr a:visited{
+	color:#ef3976;
+}
+.baby-photo-list-wrapper{
+	overflow: hidden;
+}
+.baby-photo-list-wrapper .data-info-list-load{
+	margin:10px auto 20px auto;
+}
+.baby-photo-list-wrapper ul{
+	padding:15px 0 0px 0;
+	*padding-bottom:20px;
+	position: relative;
+}
+.baby-photo-list-wrapper ul li{
+	width:151px;
+	height:151px;
+	float:left;
+	background: url(bg_baby_photo_list.jpg);
+	overflow: hidden;
+	position: relative;
+	padding:10px;
+	margin:0 10px 30px 0;
+	cursor: pointer;
+}
+.baby-photo-list-wrapper ul li .img,.baby-photo-list-wrapper ul li .img img{
+	width:150px;
+	height:150px;
+	overflow: hidden;
+}
+.baby-photo-list-wrapper ul li .bottom{
+	width:169px;
+	height:40px;
+	background: url(bg_baby_photo_list_bottom.png);
+	position: absolute;
+	bottom:1px;
+	left:1px;
+}
+.baby-photo-list-wrapper ul li .bottom .text{
+	color:#fff;
+	padding:6px 0 0 10px;
+	line-height: 12px;
+}
+.baby-photo-list-wrapper ul li .bottom .score-1,.baby-photo-list-wrapper ul li .bottom .score-2{
+	width:29px;
+	height:25px;
+	position: absolute;
+	right:10px;
+	top:10px;
+	background: url(bg_baby_photo_sc.gif);
+}
+.baby-photo-list-wrapper ul li .bottom .score-2{
+	background-position: 0 -25px;
+}
+.baby-photo-list-wrapper ul li .bottom .score-1:hover{
+	background-position: 0-50px;
+}
+.baby-photo-list-page{
+	padding:0 20px 15px 0;
+}
+/*loading*/
+.data-info-list-load{
+	width:100%;
+	text-align:center;
+	padding-top:45px;
+	color:#999;
+	font:14px/16px 'simsun';
+}
+.data-info-list-load .icon-load{
+	margin:-5px 12px 0 auto;
+	*margin:-3px 12px 0 auto;
+	width:16px;
+	height:16px;
+	background:url(data_load.gif);
+	overflow:hidden;
+	display:inline-block;
+	vertical-align:middle;
+}
+/**/
+.day-con .post-options{
+	width:150px;
+	float:left;
+	margin:0 0 0 0;
+}
+.day-con .post-options .pub-faces,.day-con .post-options .insert-picture{
+	float: left;
+    padding: 10px 0 2px 5px;
+    position: relative;
+    margin:0 15px 0 0;
+    width:55px;
+}
+.day-con .post-options .pub-faces .btn-emot,.day-con .post-options .insert-picture .btn-insert-picture{
+	 background: url("icon_share.gif") no-repeat 0 0;
+}
+.day-con .post-options .pub-faces .btn-emot{
+	background-position: 0 0;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 16px;
+    margin: 1px 0 0;
+    width: 16px;
+}
+.day-con .post-options .pub-faces a:hover span{
+	background-position: -16px 0;
+}
+.day-con .post-options .insert-picture .btn-insert-picture{
+	background-position: -32px 0;
+    display: block;
+    float: left;
+    height: 16px;
+    margin: 1px 0 0;
+    width: 16px;
+}
+.day-con .post-options .insert-picture a:hover span{
+	background-position: -48px 0;
+}
+.day-con .post-options .insert-picture{
+	 z-index: 400;
+}
+.day-con .post-options a{
+	color:#666;
+}
+.day-con .post-options a:hover{
+	text-decoration:none;
+}
+/**/
+.baby-calendar-con-hall{
+	background:url(bg_baby_hall.jpg) no-repeat top;
+	padding:10px;
+	line-height: 14px;
+}
+
+.baby-hall-tip-wrapper{
+	height:33px;
+	background:url(bg_baby_hall-tip.gif) no-repeat left;
+	margin:10px 0 0 0;
+}
+.baby-hall-tip{
+	margin-left:25px;
+	background:url(bg_baby_hall-tip.gif) no-repeat right;
+	height:33px;
+	line-height:33px;
+}
+.baby-hall-tip h3{
+	display: inline;
+	color:#d74061;
+	font-size:12px;
+	margin-right:15px;
+}
+.baby-hall-tip-list,.baby-hall-tip-list li{
+	display: inline;
+}
+.baby-hall-tip-list li{
+	padding-left:10px;
+	background:url(pt_baby_tips.gif) no-repeat left;
+	margin-right:15px;
+}
+.baby-hall-tip-list li a,.baby-hall-tip-list li a:visited{
+	color:#808080;
+}
+.baby-hall-filter-wrapper{
+	margin:15px 0 0 0;
+	zoom:1;
+	position:relative;
+}
+.baby-hall-filter{
+	background:url(bg_baby_box.gif);
+	float:left;
+	margin-right:10px;
+}
+.baby-hall-filter h4{
+	height:27px;
+	line-height:27px;
+	text-align:center;
+	font-size:14px;
+}
+.baby-hall-filter-select-title{
+	font-weight:bold;
+}
+.baby-hall-filter-age{
+	width:270px;
+	height:87px;
+	color:#5f89bb;
+}
+.baby-hall-filter-age a{
+	color:#5f89bb;
+}
+.baby-hall-filter-city{
+	width:250px;
+	height:87px;
+	color:#778d04;
+	background-position: 0 -87px;
+}
+.baby-hall-filter-city a{
+	color:#778d04;
+}
+.baby-hall-filter-nav{
+	padding:6px 0 0 20px;
+	overflow:hidden;
+	zoom:1;
+}
+.baby-hall-filter-nav li{
+	float:left;
+	margin-right:10px;
+}
+.baby-hall-filter-nav li a{
+	display: block;
+	width:54px;
+	height:24px;
+	background:url(bg_baby-hall-filter-nav.jpg) no-repeat 0 -24px;
+	line-height:22px;
+	text-align:center;
+	color:#608aba;
+}
+.baby-hall-filter-nav li a:visited{
+	color:#608aba;
+}
+.baby-hall-filter-nav li.now a{
+	background-position:0 0;
+	text-decoration:none;
+}
+.baby-hall-filter-nav li.now a:visited{
+	color:#608aba;
+}
+.baby-hall-filter-select-wrapper{
+	padding:3px 0 0 10px;
+}
+.baby-hall-filter-select-wrapper select{
+	margin:0 3px;
+}
+.baby-hall-filter-select-wrapper select.max-width{
+	width:50px;
+}
+
+.baby-hall-filter-select-city{
+	width:64px;
+	margin:0 0 0 10px;
+}
+.baby-hall-filter-select-city ul{
+	width:70px;
+}
+.baby-hall-filter-city .baby-hall-filter-select-title{
+	padding:10px 0 5px 12px;
+}
+.baby-hall-follow-wrapper{
+	float:right;
+	padding:0px 15px 0 0;
+}
+.baby-hall-follow-wrapper a.change{
+	display:block;
+	background:url(icon_reload.gif) left no-repeat;
+	padding-left:16px;
+	font-size:12px;
+	font-weight:normal;
+}
+.baby-hall-follow-wrapper a.change:visited{
+	color:#EF3976;
+}
+/**/
+.baby-hall-follow-list-wrapper{
+	overflow:hidden;
+	zoom:1;
+	padding:0px 0 0 0;
+	width:738px;
+}
+.baby-hall-follow-list{
+	overflow:hidden;
+	zoom:1;
+	width:750px;
+	height:108px;
+}
+.baby-hall-follow-text{
+	text-align:center;
+	height:50px;
+	line-height: 50px;
+}
+/**/
+.baby-hall-follow-list li{
+	width:78px;
+	height:108px;
+	float:left;
+	margin-right:15px;
+}
+.baby-hall-follow-list li .photo{
+	margin:10px auto 3px auto;
+	width:48px;
+	height:48px;
+}
+.baby-hall-follow-list li .photo img{
+	width:48px;
+	height:48px;
+}
+.baby-hall-follow-list li h4{
+	font-weight:normal;
+	height:14px;
+	line-height:14px;
+	_line-height:13px;
+	overflow:hidden;
+	padding:5px 0px 0 0px;
+	text-align:center;
+}
+.baby-hall-follow-list li h4 a{
+	font-family:simsun;
+	color: #EF3976;
+}
+.baby-hall-follow-button{
+	padding:3px 0 0 0;
+}
+.baby-hall-follow-button a{
+	display:block;
+	width:38px;
+	padding-left:22px;
+	height:22px;
+	background:url(btn_flw.gif) no-repeat 0 0;
+	color:#d64160;
+	line-height:22px;
+	+line-height:23px;
+	line-height:23px\9;
+	margin:0 auto;
+	overflow:hidden;
+}
+.baby-hall-follow-button a:hover{
+	background-position: 0 -22px;
+	text-decoration:none;
+}
+.baby-hall-follow-button a.already-attention{
+	background:url(bg_invite_fl.gif);
+	color:#ccc;
+	width:60px;
+	height:22px;
+	padding:0;
+	text-align:center;
+}
+.baby-hall-follow-button a.already-attention:visited{
+	color:#ccc;
+}
+.baby-hall-followall-button{
+	clear:both;
+	text-align:center;
+	padding:10px 0 0 0;
+}
+.baby-hall-followall-button a{
+	display:block;
+	width:75px;
+	height:27px;
+	background:url(btn_flw.gif) no-repeat 0 -44px;
+	color:#fff;
+	line-height:27px;
+	margin:0 auto;
+}
+.baby-hall-followall-button a:hover{
+	text-decoration:none;
+	background-position:0 -71px;
+}
+.baby-hall-followall-button a:visited{
+	color:#fff;
+}
+
+/**/
+.baby-hall-game-wrapper{
+	width:734px;
+	margin:15px 0 0 0;
+}
+.baby-hall-game-list-title{
+	height:40px;
+	background:url(bg_baby_hall_boxtitlebar.jpg) no-repeat;
+	line-height:40px;
+	overflow:hidden;
+	color:#d64160;
+	font-size:14px;
+	padding-left:15px;
+}
+.baby-hall-game-list{
+	border:#f1ca85 1px solid;
+	border-top:0;
+	overflow:hidden;
+	zoom:1;
+	padding:0 0 15px 12px;
+	margin-top:-15px;
+	width:720px;
+}
+.baby-hall-game-list li{
+	width:220px;
+	height:168px;
+	padding:5px;
+	float:left;
+	background:url(bg_baby_box.gif) no-repeat 0 -174px;
+	overflow:hidden;
+	margin: 15px 10px 0 0;
+}
+.baby-hall-game-list li .game-img{
+	border:#437d17 1px solid;
+	width:218px;
+	height:108px;
+}
+.baby-hall-game-list li .game-img img{
+	width:218px;
+	height:108px;
+}
+.baby-hall-game-list li h3{
+	font-size:14px;
+	line-height:28px;
+}
+.baby-hall-game-list li .btn{
+	text-align:right;
+}
+.baby-hall-game-list li .btn a{
+	display:inline-block;
+	width:87px;
+	height:23px;
+	line-height:23px;
+	background:url(btn_baby_hall_game.gif) no-repeat;
+	text-align:left;
+	font-weight:bold;
+	padding-left:15px;
+}
+.baby-hall-game-list li .btn a:hover{
+	text-decoration:none;
+}
+
+.baby-hall-game-list li.green{
+	color:#437d17;
+	background-position: 0 -174px;
+}
+.baby-hall-game-list li.green a{
+	color:#437d17;
+}
+.baby-hall-game-list li.red{
+	color:#ef3976;
+	background-position: 0 -353px;
+}
+.baby-hall-game-list li.red a{
+	color:#ef3976;
+}
+.baby-hall-game-list li.yellow{
+	color:#ac8e21;
+	background-position: 0 -711px;
+}
+.baby-hall-game-list li.yellow a{
+	color:#ac8e21;
+}
+.baby-hall-game-list li.blue{
+	color:#207fa9;
+	background-position: 0 -532px;
+}
+.baby-hall-game-list li.blue a{
+	color:#207fa9;
+}
+.baby-hall-game-list li.green .btn a{
+	background-position:0 0;
+}
+.baby-hall-game-list li.red .btn a{
+	background-position:0 -23px;
+}
+.baby-hall-game-list li.blue .btn a{
+	background-position:0 -46px;
+}
+.baby-hall-game-list li.yellow .btn a{
+	background-position:0 -69px;
+}
+.baby-hall-star-wrapper{
+	border:#f1ca85 1px solid;
+	border-top:0;
+	overflow:hidden;
+	zoom:1;
+	padding:0 0 15px 0px;
+	margin-top:-5px;
+	width:732px;
+}
+.baby-hall-star-wrapper ul{
+	padding:0 0 0 5px;
+}
+.baby-hall-star-wrapper ul li{
+	margin:0 14px 0 0;
+}
+/**/
+
+.data-info-list-data-item .comment-box{
+	zoom:1;
+}
+.data-info-list-data-item .data-info-list-data-item-text span.cpage,.data-info-list-data-item .data-info-list-data-item-text span.cpage span{
+	color:#E53E76;
+}
+.data-info-list-data-item{
+	overflow:hidden;
+	zoom:1;
+	height:auto;
+}
+.data-info-list-data-item .data-info-list-data-item-text p{
+	height:auto;
+	min-height:40px;
+}
+.data-info-list-data-item .data-info-list-data-item-text p a{
+	color:#EF3976;
+}
+.data-info-list-data-item .data-info-list-data-item-text p a.curt{
+	color:#999;
+}
+.public-remark .post-mini .pm-list .share-con .mod-head .username a, .feed-box .feed-item .quote-comment .post-mini .pm-list .share-con .mod-head .username a{
+	color:#EF3976;
+}
+.baby-con-tips-wrapper{
+	overflow: hidden;
+	clear:both;
+	text-align:center;
+	padding:20px 0;
+}
+.data-info-list-data .public-remark .flake-body{
+	background:#fff8db;
+	border: 1px solid #fff8db;
+}
+.data-info-list-data .public-remark .flake-top-icon{
+	background: url(icon_flake-top.gif);
+}

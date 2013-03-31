@@ -1,0 +1,270 @@
+
+.red {
+	color: #ff0000;
+}
+.split-lines {
+    clear: both;
+    font-size: 1px;
+    height: 1px;
+    line-height: 1px;
+    opacity: 0.5;
+    overflow: hidden;
+	background-color: #ece1cd;
+	border-top: 1px solid #d5bfa4;
+}
+.rel {
+	position: relative;
+}
+.abs {
+	position: absolute;
+}
+.cv-swf {
+	cursor: pointer;
+    display: block;
+    height: 28px;
+    left: 0;
+    overflow: hidden;
+    width: 368px;
+}
+.form-horizontal .alart-txt {
+	margin: 0 0 5px 160px;
+}
+.form-horizontal .alart-txt .help-block {
+	width: 410px;
+}
+.btn-large {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.header {
+	height: 145px;
+	background-color: #a80000;
+	background-image: url(img_header.jpg);
+	background-position: center top;
+	color: #acacac;
+	margin:0 auto;
+}
+.logo1,
+.logo2 {
+	position:relative;
+}
+.logo1{
+	float: left;
+	left:0px;
+	top:20px;
+	color:#e6b3b3
+}
+.logo2{
+	float: right;
+	top: 65px;
+	text-align:right;
+	color:#ecc;
+}
+.logo2 img,
+.logo1 img {
+	margin:0 5px
+}
+.logo2 img{vertical-align:middle;}
+.logo2 p{margin-bottom:15px;}
+.logo2 span{margin-left:10px;}
+.home-nav .row {
+	padding: 0 25px;
+}
+
+.navbar-inner {
+	height: 49px;
+	background-image: url(img_nav_bg.png);
+	background-color: #151515;
+	border-width: 1px 0;
+	border-color: #040001;
+	border-radius: 0;
+}
+.navbar {
+	margin: 0;
+}
+.header,
+.navbar,
+.container-wrapper,
+.cooperation-wrapper,
+.footer {
+	width: 100%;
+	overflow: hidden;
+}
+.navbar .container {
+	width: 950px;
+}
+.navbar .cutline h5 {
+	color: #747474;
+	margin-top: 14px;
+	font-size: 15px;
+	font-weight: normal;
+}
+.container-wrapper {
+	background-color: #820000;
+}
+.container-wrapper .row {
+	background-color: #ece1cd;
+}
+.cooperation-wrapper {
+	background-color: #c0000d;
+}
+.login-inner,
+.signin-inner {
+	margin: 40px 0;
+}
+.signin-inner {
+	margin: 40px 10px;
+	border-left: 1px solid #d5bfa4;
+}
+.login-inner .help-block,
+.signin-inner .help-block {
+	margin-top: 5px;
+}
+.login-title {
+	margin: 0;
+	margin-left: 165px;
+	padding: 38px 0;
+}
+.signin-inner .agree {
+	padding-right: 15px;
+}
+
+.partner {
+    margin: 0 auto;
+    padding: 25px 0 25px 130px;
+    width: 830px;
+}
+.partner .col-1, .partner .col-2 {
+    float: left;
+    width: 400px;
+}
+.partner dl,
+.partner dt,
+.partner dd {
+	font: 14px/30px "arial";
+}
+.partner dd a {
+    color: #fff;
+}
+.partner dl {
+    color: #fff;
+    margin: 0 0 20px;
+}
+.partner dt {
+    float: left;
+    padding: 5px 15px 0 0;
+    text-align: right;
+}
+.partner dt.special {
+	padding-top: 9px;
+}
+.partner dd {
+    float: left;
+	margin: 0;
+}
+.partner .col-2 dd p {
+	margin: 5px 0 10px;
+	clear:both;
+	overflow: hidden;
+}
+.partner dd img {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.footer {
+	height: 90px;
+	padding: 20px 0 0;
+	background-color: #e0e0e0;
+	color: #666;
+}
+.footer .area {
+	line-height: 180%;
+}
+.footer a:hover,
+.footer a {
+	color: #333;
+}
+
+
+.en-form {
+	padding: 30px 100px;
+}
+.en-form .split-lines {
+	margin-bottom: 20px;
+}
+.en-form .vertical h5 {
+	margin-top: 0;
+}
+.en-form .vertical .help-block {
+	margin-bottom: 10px;
+}
+.en-form .vertical .checkbox.equal {
+	margin-right: 10px;
+}
+.en-form .vertical .help-inline {
+	vertical-align: top;
+	margin-top: 2px;
+}
+.en-form .help-inline .alert {
+	margin: 0;
+	padding: 2px 10px;
+	display: inline-block;
+}
+.en-form .help-inline.btn-upload {
+	vertical-align: top;
+}
+.en-form .cv-file {
+    display: inline;
+    float: left;
+    min-height: 28px;
+    overflow: hidden;
+    position: relative;
+}
+.en-form .cv-photo {
+	display: inline-block;
+}
+.en-form .cv-photo .pic {
+	width: 280px;
+	max-height: 400px;
+	min-height: 50px;
+	_height: expression(this.scrollHeight > 400 ? "400px" : "auto");
+	display: inline-block;
+	overflow: hidden;
+}
+.en-form .cv-photo .pic img {
+	width: 280px;
+}
+.en-form select.span1 {
+	margin:0 5px 0 0;
+	float: left;
+}
+.en-form .checkbox.inline {
+	margin: 4px 0 0 0;
+}
+.en-form .group-alart {
+	width: 245px;
+	margin: -5px 0 0 5px;
+	line-height: 16px;
+}
+
+.cv-upload {
+	background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 2px 4px -2px #000;
+    left: 50%;
+    margin-left: -295px;
+    padding: 5px;
+    top: 120px;
+    width: 578px;
+    z-index: 1006;
+}
+.video-agreement label {
+	display: inline;
+}
+.video-agreement input {
+	margin: 0 5px 0 0 ;
+	width: auto;
+}

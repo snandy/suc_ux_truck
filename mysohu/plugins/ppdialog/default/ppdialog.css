@@ -1,0 +1,269 @@
+div.pp-dialog .dialog-content-container {
+	padding: 0 25px;
+	font-size: 12px;
+	color: #333;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+}
+
+div.pp-dialog .dialog-title-container {
+	height: 13px;
+	border: 0;
+	padding-top: 7px;
+	padding-right: 7px;
+	background: #fff;
+	overflow: hidden;
+}
+
+div.pp-dialog .dialog-title {
+	padding: 0;
+	height: 13px;
+	line-height: 15px;
+}
+
+div.pp-dialog .dialog-button-close {
+	margin: 0;
+}
+
+div.pp-dialog a {
+	color:#2582AA;
+	text-decoration: none;
+}
+
+div.pp-dialog a:hover {
+	color:#2582AA;
+	text-decoration: underline;
+}
+
+div.pp-dialog h2 {
+	padding-top: 2px;
+	height:20px;
+	font-size:14px;
+	font-weight:bold;
+	color:#333;
+	text-align:left;
+	border-bottom:1px dotted  #b2b2b2;
+}
+
+div.pp-dialog .error{
+	margin:10px 0;
+	height: 15px;
+}
+
+div.pp-dialog .left{
+	width: 250px;
+	border-right:1px solid #cecece;
+	display:inline;
+	float:left;
+	overflow: hidden;
+}
+
+div.pp-dialog .right{
+	display:inline;
+	float:left;
+	width: 265px;
+	margin-left: 25px;
+	overflow: hidden;
+}
+
+div.pp-dialog .loginFrom .uname,
+div.pp-dialog .loginFrom .upass{
+	float:left;
+	width: 250px;
+	margin: 0 0 15px;
+	clear: both;
+	overflow: hidden;
+}
+
+div.pp-dialog .loginFrom .uname input,
+div.pp-dialog .loginFrom .upass input{
+	border:1px solid #cecece;
+	width: 165px;
+	height: 18px;
+	line-height: 18px;
+	font-size: 12px;
+	padding: 5px;
+	float: left;
+	display: inline;
+}
+
+div.pp-dialog .loginFrom .ucookie{
+	height:26px;
+}
+
+div.pp-dialog .loginFrom .ucookie input{
+	float: left;
+	margin-left: 0;
+	margin-left: -3px \9;
+	*margin-left: -3px;
+}
+
+div.pp-dialog label {
+	height:30px;
+	line-height:19px;
+	margin-bottom: 14px;
+}
+
+div.pp-dialog .btn{
+	margin-top:10px;
+	text-align:left;
+	background: none;
+}
+
+div.pp-dialog .btn a:hover {
+	text-decoration: none;
+}
+
+div.pp-dialog .loading {
+	height:145px;
+}
+
+div.pp-dialog .loading .loadTxt{
+	background: url(loading.gif) no-repeat 0 6px;
+	padding-left: 22px;
+	float:left;
+	height:30px;
+	line-height:30px;
+	margin:50px 0 0 100px;
+	color:#666;
+	font-size:14px;
+	display:inline;
+}
+.passportc{zoom:1}
+.passportc:after{content:".";display:block;visibility:hidden;height:0;clear:both;}
+/* below used for passport selecter list*/
+div.pp-dialog .ppselecter {z-index:5000}
+div.pp-dialog .ppselecter table {position:relative;z-index:100;cursor:default;}
+div.pp-dialog .ppselecter table tr {height:0}
+div.pp-dialog .ppselecter,div.pp-dialog .ppselecter * {font-size:12px; font-family:\5B8B\4F53,'simsun','Arial','Verdana','Helvetica','sans-serif';line-height:normal}
+div.pp-dialog .ppselecter {border:1px solid #FFA700;width:166px;margin-left:1px;overflow:hidden}
+div.pp-dialog .ppselecter .ppseltit {background:#FFF6DF;color:#FF6000;height:15px;padding-top:4px;text-indent:6px}
+div.pp-dialog .ppselecter table td table td {padding:3px;cursor:pointer;}
+div.pp-dialog .ppselecter .active {background:#FDD463;color:#333;font-weight:normal}
+
+/*change*/
+.login-pass .loginFrom {
+	clear:both;
+	overflow: hidden;
+	zoom: 1;
+}
+.login-form .login-pass {
+	width: 625px;
+	font-family: 'Microsoft Yahei';
+}
+.login-form .login-pass h4 {
+	_height: 22px;
+	font-size: 16px;
+	_line-height: 22px;
+	margin-bottom: 30px;
+	font-weight: normal;
+}
+.login-form .login-pass .error {
+	position: absolute;
+	height: 15px;
+	line-height: 15px;
+	margin-top: -24px;
+	color:#ff0000;
+}
+.login-pass .cooperation a.btn-account {
+	float: left;
+	width: 78px;
+	height: 22px;
+	line-height: 22px;
+	padding: 6px 20px;
+	margin: 0 10px 10px 0;
+	background-color: #f7f7f7;
+	*background-color: #f4f4f4;
+	background-image: -moz-linear-gradient(top, #f7f7f7, #efefef);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f7f7f7), to(#efefef));
+	background-image: -webkit-linear-gradient(top, #f7f7f7, #efefef);
+	background-image: -o-linear-gradient(top, #f7f7f7, #efefef);
+	background-image: linear-gradient(top, #f7f7f7, #efefef);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7f7f7', endColorstr='#efefef', GradientType=0);
+	_filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	color: #666;
+	cursor: pointer;
+	border: 1px solid #e1e1e1;
+
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.login-pass .cooperation a.btn-account:hover,
+.login-pass .cooperation a.btn-account:focus {
+	background-color: #efefef;
+	*background-color: #f2f2f2;
+	background-image: -moz-linear-gradient(top, #efefef, #f7f7f7);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#efefef), to(#f7f7f7));
+	background-image: -webkit-linear-gradient(top, #efefef, #f7f7f7);
+	background-image: -o-linear-gradient(top, #efefef, #f7f7f7);
+	background-image: linear-gradient(top, #efefef, #f7f7f7);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f7f7f7', GradientType=0);
+	_filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	text-decoration: none;
+}
+.login-pass .cooperation a.btn-account.active,
+.login-pass .cooperation a.btn-account:active {
+	outline: none;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.login-pass .cooperation i {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	background: url(http://s3.suc.itc.cn/s/chinavoice/d/cooperation_logo.png) no-repeat;
+	_background: url(http://s3.suc.itc.cn/s/chinavoice/d/cooperation_logo_ie6.png) no-repeat;
+	vertical-align: middle;
+	margin-right: 5px;
+	margin-top: -3px;
+	margin-top: 0 \9;
+	*margin-top: 0;
+}
+.login-pass i.img-qq {
+	background-position: 0 0;
+}
+.login-pass i.img-sina {
+	background-position: 0 -20px;
+}
+.login-pass i.img-taobao {
+	background-position: 0 -40px;
+}
+.login-pass i.img-ren {
+	background-position: 0 -60px;
+}
+.login-pass i.img-sohu {
+	background-position: 0 -80px;
+}
+.login-pass .lab {
+	width: 25px;
+	height: 28px;
+	line-height: 30px;
+	margin-right: 10px;
+	float: left;
+	text-align: right;
+	display: inline;
+	overflow: hidden;
+}
+.login-pass .btns {
+	margin-top: 5px;
+}
+div.pp-dialog .btns .btn,
+.login-pass .btn {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	vertical-align: middle;
+}
+div.pp-dialog .btns .btn {
+	border: 0 none \9;
+	*border: 0 none;
+	*display: inline;
+}
+.login-pass .link-fpswd,
+.login-pass .link-register {
+	margin-left: 10px;
+}
