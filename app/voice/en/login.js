@@ -8,15 +8,39 @@
 //通用报错函数
 var errorSpan = {
 	show: function($o,text,hint){
-		var $e = $o.parent().find('span.help-block');
-		if(!$e.length) $e = $('<span class="help-block"></span>').appendTo($o.parent());
+		var $p = $o.parent(),
+			$e = $p.find('span.help-block');
+		if(!$e.length) $e = $('<span class="help-block"></span>').appendTo($p);
 		$e.show().html(text)[!hint ? 'addClass' : 'removeClass']('red');
+		$p.find('i.icon-right').hide();
 	},
 	hide: function($o){
-		$o.parent().find('span.help-block').hide();
+		$o.parent().find('span.help-block,i.icon-right').hide();
+	},
+	ok: function($o){
+		this.hide($o);
+		var $p = $o.parent();
+		if($p.find('i.icon-right').length){
+			$p.find('i.icon-right').show();
+			return;
+		}
+		if($o.next('.help-block').length){
+			$('<span class="help-inline"><i class="icon-right"></i></span>').insertBefore($o.next('.help-block'));
+		}else{
+			$('<span class="help-inline"><i class="icon-right"></i></span>').appendTo($p);
+		}
 	}
 
 }
+
+//取文本框的值
+function getVal($o){
+	if($o.val() == $o.attr('placeholder')){
+		return '';
+	}
+	return $o.val();
+}
+
 
 //初始化登陆，依赖 passport.js
 function initLogin(){
@@ -24,6 +48,8 @@ function initLogin(){
 		$email = $form.find('[name="email"]'),
 		$pwd = $form.find('[name="password"]'),
 		$rem = $form.find('[name="persistentcookie"]');
+
+	$rem.prop('checked',true);
 
 	 // 判断浏览器是否支持cookie
     function checkCookieEnabled() {
@@ -119,7 +145,7 @@ function initLogin(){
 	}
 	//登录成功
 	function loginSuccessCall(){
-		window.location.reload();
+		window.location.reload(true);
 	}
 
 	//登录
@@ -129,8 +155,8 @@ function initLogin(){
 		if (PassportSC.eInterval) return; // 必须判断一下，避免连续两次点击
 		login_status = "";
         PassportSC.intervalCount = 0;
-        var email = PassportSC.strip($email.val());
-        var password = PassportSC.strip($pwd.val());
+        var email = PassportSC.strip(getVal($email));
+        var password = PassportSC.strip(getVal($pwd));
 
         var pc = 0;
         if ($rem.prop('checked') == true) pc = 1;
@@ -154,10 +180,6 @@ function initLogin(){
 	$form.submit(function(){
 		doLogin();
 		return false;
-	});
-	$form.find('a.btn-primary').click(function(event){
-		event.preventDefault();
-		doLogin();
 	});
 }
 
@@ -243,7 +265,7 @@ function initRegister(){
 			success: function(data) {
 				// code为0用户名未被注册过，1参数错误，2验证码错误，3非法用户名，41 40 用户名存在
 				if(data.code == 0) {
-					errorSpan.hide($regEmail);
+					errorSpan.ok($regEmail);
 					//设定isLegal
 					vo.isLegal = true;
 				} else if(data.code == 41 || data.code == 40) {
@@ -293,7 +315,7 @@ function initRegister(){
 				},
 				success: function(data) {
 					if(data.code == 0) {
-						errorSpan.hide($nickname);
+						errorSpan.ok($nickname);
 						vo.isLegal = true;
 					} else if(data.code > 0) {
 						var enMsg = [
@@ -339,7 +361,7 @@ function initRegister(){
 					errorSpan.show($passwd,'Password is too simple,please input again');
 					vo.isLegal = false;
 				} else {
-					errorSpan.hide($passwd);
+					errorSpan.ok($passwd);
 					vo.isLegal = true;
 				}
 			}
@@ -365,7 +387,7 @@ function initRegister(){
 			errorSpan.show($passwdAgain,vo.errMsg);
 			vo.isLegal = false;
 		} else {
-			errorSpan.hide($passwdAgain);
+			errorSpan.ok($passwdAgain);
 			vo.isLegal = true;
 		}
 	}
@@ -385,7 +407,7 @@ function initRegister(){
 
 	//检查是否能提交
 	function checkElement($elem,ajax){
-		$elem.val($.trim($elem.val()));
+		$elem.val($.trim(getVal($elem)));
 		var name = $elem.attr('name');
 		if($elem.val() == ''){
 			errorSpan.show($elem,validObj[name].emptyMsg);
@@ -458,7 +480,7 @@ function initRegister(){
 		if(checkAll()){
 			$.post('/login/ajaxreg.do',$form.serialize(),function(results){
 				if(results.code == 0){
-					window.location.reload();
+					window.location.reload(true);
 				}else if(results.code == 1){
 					switch(results.data.field){
 						case 'user':
@@ -498,17 +520,37 @@ function initRegister(){
 		doSubmit();
 		return false;
 	});
-
-	$form.find('a.btn-primary').click(function(event){
-		event.preventDefault();
-		doSubmit();
-	});
-
 }
 
 $(function(){
 	initLogin();
 	initRegister();
+
+	var $placeholders = $('input[placeholder]:text');
+
+	if('placeholder' in document.createElement('input')){
+		//do nothing
+	}else{
+		$placeholders
+		.focus(function(){
+			var $this = $(this);
+			if($this.val() == $this.attr('placeholder')){
+				$this.val('').removeClass('gray');
+			}
+		})
+		.blur(function(){
+			var $this = $(this);
+			if($this.val() == ''){
+				$this.val($this.attr('placeholder')).addClass('gray');
+			}
+		})
+		.each(function(){
+			$this = $(this);
+			if($this.val() == ''){
+				$this.val($this.attr('placeholder')).addClass('gray');
+			}
+		});
+	}
 });
 
 

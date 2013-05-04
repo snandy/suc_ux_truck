@@ -112,7 +112,7 @@ var project = {
 		});	
 	},
 	byNick: function(){
-		var tipText = '在这里输入朋友的姓名或昵称，如：小新';
+		var tipText = '在这里输入朋友的姓名或用户名，如：小新';
 		var $form = this.$this.find('div.app-left div.search-con form');
 		var $nick = $form.find('[name=nick]').iPrompt({text: tipText,css:{'color':'#999999'}});
 		$form.submit(function(){
@@ -128,7 +128,7 @@ var project = {
 		var self = this;
 		this.schoolpop = new ms.SchoolSearch();
 
-		var tipText = '在这里输入朋友的姓名或昵称，如：小新';
+		var tipText = '在这里输入朋友的姓名或用户名，如：小新';
 		var tipText2 = '点击选择学校';
 		var $form = this.$this.find('div.app-left div.search-con form');
 		var $schoolname = $form.find('input[name=schoolname]');
@@ -200,7 +200,7 @@ var project = {
 		});
 	},
 	byArea: function(){
-		var tipText = '在这里输入朋友的姓名或昵称，如：小新';
+		var tipText = '在这里输入朋友的姓名或用户名，如：小新';
 		var $form = this.$this.find('div.app-left div.search-con form');
 		var $province = $form.find('select[name=provinceid]');
 		var $city = $form.find('select[name=cityid]');
@@ -238,7 +238,7 @@ var project = {
 		});
 	},
 	byCom: function(){
-		var tipTextCom = '在这里输入公司名称',tipTextName = '在这里输入朋友的姓名或昵称，如：小新';
+		var tipTextCom = '在这里输入公司名称',tipTextName = '在这里输入朋友的姓名或用户名，如：小新';
 		var $form = this.$this.find('div.app-left div.search-con form');
 		var $com = $form.find('input[name=employer]').iPrompt({text: tipTextCom,css:{'color':'#999999'}});
 		var $nick = $form.find('input[name=nick]').iPrompt({text: tipTextName,css:{'color':'#999999'}});

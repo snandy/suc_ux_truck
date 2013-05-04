@@ -3,25 +3,35 @@
  * @author kyriosli@sohu-inc.com
  */
 loadResource("/i/inform/d/whisper.css");
-require('core::util::jQuery', 'app::whisper', 'core::Watchdog', 'core::util[ajax,cookie,base64,channel,fx]',
-'plugins::hijacker', 'core::ui::dialog[confirm,error,success]', 'app::whisper::template', 'core::stringUtil', 'core::timeUtil',
-'core::ui::TextBox', 'plugins::at', 'core::ui::Page', function($, whisper, Watchdog, util, hijacker, $dialog, WHISPER,
-stringUtil, timeUtil, TextBox, $at, Page) {
+require(
+	'core::util::jQuery',
+	'app::whisper',
+	'core::Watchdog',
+	'core::util[ajax,cookie,base64,channel,fx]',
+	'plugins::hijacker',
+	'core::ui::dialog[confirm,error,success]',
+	'app::whisper::template',
+	'core::stringUtil',
+	'core::timeUtil',
+	'core::ui::TextBox',
+	'plugins::at',
+	'core::ui::Page',
+
+function($, whisper, Watchdog, util, hijacker, $dialog, WHISPER, stringUtil, timeUtil, TextBox, $at, Page) {
 	var defaults = {
-		productid : 'isohu',
-		prefix : 'http://' + (typeof dev === "undefined" ? 'd' : 'ndev') + '.me.sohu.com/operations?productid=isohu&magicCode='
-		+ $space_config.magic + '&',
-		pp : 'isohu|' + util.base64.decode(util.cookie.xpt),
-		me : {
-			ico : util.cookie.photo,
-			url : util.cookie.ulink,
-			title : "我",
-			xpt : util.cookie.xpt
+		productid: 'isohu',
+		prefix: 'http://' + (typeof dev === "undefined" ? 'd' : 'ndev') + '.me.sohu.com/operations?productid=isohu&magicCode=' + $space_config.magic + '&',
+		pp: 'isohu|' + util.base64.decode(util.cookie.xpt),
+		me: {
+			ico: util.cookie.photo,
+			url: util.cookie.ulink,
+			title: "我",
+			xpt: util.cookie.xpt
 		},
-		pagesize : 10,
-		chars : 200,
-		screensize : 10,
-		check_timeout : 18000
+		pagesize: 10,
+		chars: 200,
+		screensize: 10,
+		check_timeout: 18000
 	};
 	hijacker.hijackthis('.app-wraper');
 
@@ -30,8 +40,8 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 	timeUtil.setServerTime($space_config._now);
 
 	var state = {
-		general : {
-			init : function(page) {
+		general: {
+			init: function(page) {
 				$('.app-content.detail').hide();
 				location.hash = "";
 				document.title = "短消息 - 我的搜狐";
@@ -41,7 +51,7 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 					this.$list = this.$dom.find('.items-list-wrap');
 					this.$dom.find('.ui-btn').click(function() {
 						whisper({
-							onSuccess : self.onSent
+							onSuccess: self.onSent
 						});
 					});
 
@@ -55,21 +65,21 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 				state.current = "general";
 				this.loadPage(page || 0);
 			},
-			findTr : function(em) {
-				for ( var n = 6; em && n > 0; n--) {
-					if (em.nodeName == "TR")
-						return em;
+			findTr: function(em) {
+				for (var n = 6; em && n > 0; n--) {
+					if (em.nodeName == "TR") return em;
 					em = em.parentNode;
 				}
 				return null;
 			},
-			drawList : function() {
+			drawList: function() {
 				var self = this;
 				// 初始化联系人个数显示
 				this.$dom.find('.head h3').html(
 				this.total ? '已有' + this.total + '个联系人' : '没有消息，我来<a href="javascript:;" action="whisper.send">发一个</a>');
 				// 初始化分页显示
-				var pages = Math.ceil(this.total / defaults.screensize), current = 1;
+				var pages = Math.ceil(this.total / defaults.screensize),
+					current = 1;
 				if (this.$page) {
 					if (pages <= 1) {
 						this.$page.hide();
@@ -84,12 +94,10 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 				}
 				// 删除按钮
 				this.$dom.find('.head .del').html(
-				'<i class="inform-icon-del"></i>'
-				+ (this.total ? '<a href="javascript:;" action="whisper.deleteAll">全部删除</a>'
-				: '<span style="color:gray">全部删除</span>'));
+					'<i class="inform-icon-del"></i>' + (this.total ? '<a href="javascript:;" action="whisper.deleteAll">全部删除</a>' : '<span style="color:gray">全部删除</span>'));
 				var msgs = self.msgs;
 				var accounts_toLoad = [];
-				for ( var i = 0, L = msgs.length; i < L; i++) {
+				for (var i = 0, L = msgs.length; i < L; i++) {
 					var msg = msgs[i];
 					if (!msg.account) {
 						var pp = msg.friend.substr(defaults.productid.length + 1);
@@ -106,16 +114,16 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 
 				if (accounts_toLoad.length) {
 					util.ajax.postJSON('/api/accountinfo.htm', {
-						xp : accounts_toLoad.join(',')
+						xp: accounts_toLoad.join(',')
 					}, function(ret) {
-						for ( var k in ret) {
-							if (k == "null")
-								continue;
-							var pp = util.base64.decode(k), retk = accounts[pp] = ret[k];
+						for (var k in ret) {
+							if (k == "null") continue;
+							var pp = util.base64.decode(k),
+								retk = accounts[pp] = ret[k];
 							retk.xpt = k;
 							retk.pp = pp;
 						}
-						for ( var i = 0, L = msgs.length; i < L; i++) {
+						for (var i = 0, L = msgs.length; i < L; i++) {
 							var msg = msgs[i];
 							if (!msg.account) {
 								var pp = msg.friend.substr(defaults.productid.length + 1);
@@ -132,17 +140,16 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 					this.render(msgs);
 				}
 			},
-			loadPage : function(n) {
-				if (typeof n === "undefined")
-					n = this.$page ? this.$page.current - 1 : 0;
+			loadPage: function(n) {
+				if (typeof n === "undefined") n = this.$page ? this.$page.current - 1 : 0;
 				this.page = n;
 				location.hash = "page=" + n;
 				var self = this;
 				window.scrollTo(0, 0);
 				util.ajax.jsonp(defaults.prefix + util.toQueryString({
-					type : 'getGeneralMsgList',
-					offset : n * defaults.screensize,
-					limit : defaults.screensize
+					type: 'getGeneralMsgList',
+					offset: n * defaults.screensize,
+					limit: defaults.screensize
 				}), function(ret) {
 					if (!ret.status) {
 						console.log("Error retriving data", ret);
@@ -159,28 +166,28 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 					this.$page.hidePages();
 				}
 			},
-			render : function(msgs) {
+			render: function(msgs) {
 				this.$list.html('').append(WHISPER.general(msgs));
 			},
-			mmPage : function(e) {
+			mmPage: function(e) {
 				var self = state.general;
-				var elem = e.target, page = elem.getAttribute('data-page');
+				var elem = e.target,
+					page = elem.getAttribute('data-page');
 				while (elem != e.currentTarget && !page) {
 					elem = elem.parentNode;
 					page = elem.getAttribute('data-page');
 				}
 				if (page) {
 					page = self.$page.showPage(page);
-					if (typeof page == "number")
-						self.loadPage(page - 1);
+					if (typeof page == "number") self.loadPage(page - 1);
 				}
 			},
-			onSent : function(options, ackmsg) {
+			onSent: function(options, ackmsg) {
 				var self = state.general;
 				var found = false;
-				for ( var n = 0, L = self.msgs.length; n < L; n++) {
+				for (var n = 0, L = self.msgs.length; n < L; n++) {
 					var msg = self.msgs[n];
-					if (msg.nick === options.nick) {// found
+					if (msg.nick === options.nick) { // found
 						found = true;
 						msg.recv_send = 1;
 						msg.message = options.content;
@@ -198,8 +205,8 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 				}
 			}
 		},
-		detail : {
-			init : function(pp, page) {
+		detail: {
+			init: function(pp, page) {
 				$('.app-content.general').hide();
 				location.hash = "pp=" + Base64.encode(pp);
 				var self = this;
@@ -220,24 +227,24 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 					this.$tf.onSend = this.post;
 
 					this.$dom.data('EmoteHandler', {
-						getEmoteContext : function() {
+						getEmoteContext: function() {
 							return self.emoteContext;
 						},
-						onEmote : function(emote) {
+						onEmote: function(emote) {
 							emote.css('margin', "72px 0 0 26px");
 							self.$tf.focus();
 						}
 					}).addClass('emote-handler');
 					this.emoteContext = {
-						target : this.$dom.find('.emotion-list'),
-						editor : this.$tf,
-						arrowLeft : 30
+						target: this.$dom.find('.emotion-list'),
+						editor: this.$tf,
+						arrowLeft: 30
 					};
 					this.schedog = new Watchdog({
-						id : 'whisper_detail',
-						timeout : defaults.check_timeout,
-						onTimeout : this.checkNewMsg,
-						useChannel : false
+						id: 'whisper_detail',
+						timeout: defaults.check_timeout,
+						onTimeout: this.checkNewMsg,
+						useChannel: false
 					});
 					this.pp = pp;
 					this.inited = true;
@@ -250,24 +257,23 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 				var account = accounts[pp];
 				document.title = "我与" + account.title + "的对话 - 我的搜狐";
 				this.$dom.find('.head h3').html(
-				[ '我与<a target="_blank" href="', account.url, '" data-card="true" data-card-action="xpt=', account.xpt, '">',
-					account.title, '</a>的对话(共<span>0</span>条)' ].join(''));
+				['我与<a target="_blank" href="', account.url, '" data-card="true" data-card-action="xpt=', account.xpt, '">',
+				account.title, '</a>的对话(共<span>0</span>条)'].join(''));
 				this.$count = this.$dom.find('.head h3 span');
 				this.minid = 0;
 				this.loadPage(page || 0);
 			},
-			checkNewMsg : function() {
+			checkNewMsg: function() {
 				var self = state.detail;
-				if (state.current != self.pp)
-					return;
+				if (state.current != self.pp) return;
 				self.schedog.pauseAll();
 
 				util.ajax.jsonp(defaults.prefix + util.toQueryString({
-					type : 'getDetailMsgList',
-					mode : 2,
-					minid : self.minid,
-					limit : defaults.pagesize,
-					other : defaults.productid + '|' + self.pp
+					type: 'getDetailMsgList',
+					mode: 2,
+					minid: self.minid,
+					limit: defaults.pagesize,
+					other: defaults.productid + '|' + self.pp
 				}), function(ret) {
 					if (!ret.status) {
 						self.schedog.resetAll();
@@ -282,16 +288,16 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 					}
 				});
 			},
-			loadPage : function(page) {
+			loadPage: function(page) {
 				var self = state.detail;
 				location.hash = location.hash.replace(/(?:&page=\d+)?$/, "&page=" + page);
 				window.scrollTo(0, 0);
 				util.ajax.jsonp(defaults.prefix + util.toQueryString({
-					type : 'getDetailMsgList',
-					mode : 1,
-					offset : page * defaults.pagesize,
-					limit : defaults.pagesize,
-					other : defaults.productid + '|' + self.pp
+					type: 'getDetailMsgList',
+					mode: 1,
+					offset: page * defaults.pagesize,
+					limit: defaults.pagesize,
+					other: defaults.productid + '|' + self.pp
 				}), function(ret) {
 					if (!ret.status) {
 						console.log('Error retriving detailmsglist');
@@ -316,20 +322,19 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 					}
 				});
 			},
-			insert : function(msgs, tmp) {
+			insert: function(msgs, tmp) {
 				var unread = [];
 				timeUtil.setServerTime();
-				for ( var n = 0, L = msgs.length, arr = []; n < L; n++) {
+				for (var n = 0, L = msgs.length, arr = []; n < L; n++) {
 					var msg = msgs[n];
-					if (this.minid < msg.id)
-						this.minid = msg.id;
+					if (this.minid < msg.id) this.minid = msg.id;
 					arr.push({
-						mid : msg.mid,
-						from : msg.recv_send ? defaults.me : this.peer,
-						time : msg.dt ? timeUtil.get_timeago(parseInt(msg.dt) + 28800000) : "刚刚",
-						isrecv : !msg.recv_send,
-						unread : Boolean(msg.message_type & 1),
-						filtered_content : stringUtil.filter_emote(msg.message)
+						mid: msg.mid,
+						from: msg.recv_send ? defaults.me : this.peer,
+						time: msg.dt ? timeUtil.get_timeago(parseInt(msg.dt) + 28800000) : "刚刚",
+						isrecv: !msg.recv_send,
+						unread: Boolean(msg.message_type & 1),
+						filtered_content: stringUtil.filter_emote(msg.message)
 					});
 					if (msg.message_type & 1) {
 						unread.push(msg.mid);
@@ -338,32 +343,31 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 				if (unread.length) {
 					// 标记为已读
 					loadScript(defaults.prefix + util.toQueryString({
-						type : 'ackMsg',
-						mode : 1,
-						mid : unread.join('|'),
-						callback : "void",
-						_ : util.uuid()
+						type: 'ackMsg',
+						mode: 1,
+						mid: unread.join('|'),
+						callback: "void",
+						_: util.uuid()
 					}), null, true);
 				}
 				arr.tmp = tmp;
 				this.$list.prepend(WHISPER.detail(arr));
 			},
-			error : function(message, timeout) {
+			error: function(message, timeout) {
 				var $div = this.$dom.find('.txt-error');
-				if (message)
-					$div.show().html(message);
+				if (message) $div.show().html(message);
 				else if (timeout) {
 					setTimeout(function() {
 						$div.hide();
 					}, timeout);
-				} else
-					$div.hide();
+				} else $div.hide();
 				return $div;
 			},
-			post : function(e) {
-				var self = state.detail, content = self.$tf.getText(), len = stringUtil.gbLength(content);
-				if (self.posting)
-					return;
+			post: function(e) {
+				var self = state.detail,
+					content = self.$tf.getText(),
+					len = stringUtil.gbLength(content);
+				if (self.posting) return;
 				if (len == 0 || len > defaults.chars) {
 					util.fx.highlight(self.$tf, function() {
 						self.error(false);
@@ -384,12 +388,12 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 						self.error(false, 1000);
 						return;
 					}
-					self.insert([ {
-						mid : ret.msg.mid,
-						recv_send : 1,
-						message : content,
-						message_type : 0
-					} ], true);
+					self.insert([{
+						mid: ret.msg.mid,
+						recv_send: 1,
+						message: content,
+						message_type: 0
+					}], true);
 					self.$count.html(parseInt(self.$count.html()) + 1);
 					self.$tf.setText("").focus();
 				}, function() {
@@ -398,30 +402,31 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 					self.error(false, 1000);
 				});
 			},
-			mmPage : function(e) {
+			mmPage: function(e) {
 				var self = state.detail;
-				var elem = e.target, page = elem.getAttribute('data-page');
+				var elem = e.target,
+					page = elem.getAttribute('data-page');
 				while (elem != e.currentTarget && !page) {
 					elem = elem.parentNode;
 					page = elem.getAttribute('data-page');
 				}
 				if (page) {
 					page = self.$page.showPage(page);
-					if (typeof page == "number")
-						self.loadPage(page - 1);
+					if (typeof page == "number") self.loadPage(page - 1);
 				}
 			}
 
 		}
 	};
 
-	var xp = location.hash.match(/pp=([^&]*)/i), page = location.hash.match(/page=(\d+)/i);
+	var xp = location.hash.match(/pp=([^&]*)/i),
+		page = location.hash.match(/page=(\d+)/i);
 	page = page ? parseInt(page[1]) : 0;
 	if (xp) {
 		xp = xp[1];
 		var pp = Base64.decode(xp);
 		util.ajax.postJSON('/api/accountinfo.htm', {
-			xp : xp
+			xp: xp
 		}, function(ret) {
 			if (!ret[xp]) {
 				$dialog.error("未找到该用户");
@@ -439,14 +444,15 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 	define("plugins::hijacker::whisper.delete", function(e) {
 		var mid = util.getParentByClassName(e.actionTarget, "hijackdata").getAttribute("data-mid");
 		$dialog.confirm({
-			content : '您真的要删除这条消息吗？',
-			onConfirm : proceed
+			content: '您真的要删除这条消息吗？',
+			onConfirm: proceed
 		});
+
 		function proceed() {
 			util.ajax.jsonp(defaults.prefix + util.toQueryString({
-				type : 'deleteMsg',
-				mode : 1,
-				mid : mid
+				type: 'deleteMsg',
+				mode: 1,
+				mid: mid
 			}), function(ret) {
 				if (!ret.status) {
 					$dialog.error(ret.msg);
@@ -464,18 +470,16 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 	define("plugins::hijacker::whisper.deleteAll", function(e) {
 		var target = state.current == "general" ? e.actionTarget.getAttribute("data-pp") || "all" : state.detail.peer;
 		$dialog.confirm({
-			content : "真的要"
-			+ (target === "all" ? '删除与<b>所有好友</b>的消息' : "删除与<b>"
-			+ (typeof target == "string" ? e.actionTarget.title.substr(3, e.actionTarget.title.length - 8) : target.title)
-			+ "</b>的所有消息") + "吗？<br /><span style=\"color:#F69;float:left;margin-top:4px;font-size:13px\">被删除后将无法恢复！</span>",
-			onConfirm : proceed,
-			labConfirm : "删除"
+			content: "真的要" + (target === "all" ? '删除与<b>所有好友</b>的消息' : "删除与<b>" + (typeof target == "string" ? e.actionTarget.title.substr(3, e.actionTarget.title.length - 8) : target.title) + "</b>的所有消息") + "吗？<br /><span style=\"color:#F69;float:left;margin-top:4px;font-size:13px\">被删除后将无法恢复！</span>",
+			onConfirm: proceed,
+			labConfirm: "删除"
 		});
+
 		function proceed() {
 			util.ajax.jsonp(defaults.prefix + util.toQueryString({
-				type : 'deleteMsg',
-				mode : target === "all" ? 3 : 2,
-				friend : target === "all" ? "" : defaults.productid + "|" + (typeof target == "string" ? target : target.pp)
+				type: 'deleteMsg',
+				mode: target === "all" ? 3 : 2,
+				friend: target === "all" ? "" : defaults.productid + "|" + (typeof target == "string" ? target : target.pp)
 			}), function(ret) {
 				if (!ret.status) {
 					$dialog.error(ret.msg);
@@ -492,19 +496,18 @@ stringUtil, timeUtil, TextBox, $at, Page) {
 	});
 	define("plugins::hijacker::whisper.send", function(e) {
 		whisper({
-			nick : e.actionTarget.getAttribute("data-nick"),
-			onSuccess : state.general.onSent
+			nick: e.actionTarget.getAttribute("data-nick"),
+			onSuccess: state.general.onSent
 		});
 	});
 
 	function filter(msg) {
 		var content = msg.message;
 		msg.filtered_content = stringUtil.filter_emote((msg.iscuted = stringUtil.gbLength(content) > 30) ? stringUtil.safeCut(
-		content, 28)
-		+ "..." : content);
+		content, 28) + "..." : content);
 	}
 });
 
 window.jQuery && jQuery.iCard && new jQuery.iCard({
-	bindElement : '.app-wraper'
+	bindElement: '.app-wraper'
 });

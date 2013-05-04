@@ -65,7 +65,7 @@ var project = {
 		
 		this.groupPop = null;//每次更新页面，分组弹框都需要清空
 
-		var findTipText = '输入昵称或备注';
+		var findTipText = '输入用户名或备注';
 		var $form = $this.find('div.search form');
 		var $nick = $form.find('input[name=nick]');
 
@@ -684,12 +684,16 @@ var project = {
 								'friendid': friendid,
 								'desc': value
 							},function(data){
+								var $addTpl = $('<span class="visibility app-friends-remark-add" style="visibility: hidden;"> | <a href="javascript:void(0)" class="remark">设置备注</a></span>');
+								/*
 								$div.find('.app-friends-remark-edit')
 									.removeClass('app-friends-remark-edit')
 									.addClass('app-friends-remark-add')
 									.css('visibility','hidden')
 									.find('a')
 									.text('设置备注');
+								*/
+								$div.find('.app-friends-remark-edit').parent().replaceWith($addTpl);
 								self.card.clearCache();
 							});
 						}else{
@@ -701,12 +705,16 @@ var project = {
 								if($div.find('.app-friends-remark-edit').length){
 									$div.find('.app-friends-remark-edit').find('a').text(value);
 								}else if($div.find('.app-friends-remark-add').length){
+									var $editTpl = $('<div><span class="app-friends-remark-edit"><span>备注名&nbsp;</span>  <a class="remark" href="javascript:void(0)">'+data.desc.replace(/&amp;/g,'&')+'</a></span></div>');
+									/*
 									$div.find('.app-friends-remark-add')
 									.removeClass('app-friends-remark-add')
 									.addClass('app-friends-remark-edit')
 									.css('visibility','visible')
 									.find('a')
 									.html(data.desc.replace(/&amp;/g,'&'));
+									*/
+									$div.find('.app-friends-remark-add').replaceWith($editTpl);
 								}
 								self.card.clearCache();
 							});
@@ -835,22 +843,30 @@ var project = {
 			onSetDesc: function(param){
 				var $div = self.findDiv(param);
 				if(param.desc == ''){
+					var $addTpl = $('<span class="visibility app-friends-remark-add" style="visibility: hidden;"> | <a href="javascript:void(0)" class="remark">设置备注</a></span>');
+					/*
 					$div.find('.app-friends-remark-edit')
 						.removeClass('app-friends-remark-edit')
 						.addClass('app-friends-remark-add')
 						.css('visibility','hidden')
 						.find('a')
 						.text('设置备注');
+					*/
+					$div.find('.app-friends-remark-edit').parent().replaceWith($addTpl);
 				}else{
 					if($div.find('.app-friends-remark-edit').length){
 						$div.find('.app-friends-remark-edit').find('a').text(param.desc);
 					}else if($div.find('.app-friends-remark-add').length){
+						var $editTpl = $('<div><span class="app-friends-remark-edit"><span>备注名&nbsp;</span>  <a class="remark" href="javascript:void(0)">'+param.desc.replace(/&amp;/g,'&')+'</a></span></div>');
+						/*
 						$div.find('.app-friends-remark-add')
 						.removeClass('app-friends-remark-add')
 						.addClass('app-friends-remark-edit')
 						.css('visibility','visible')
 						.find('a')
 						.html(param.desc.replace(/&amp;/g,'&'));
+						*/
+						$div.find('.app-friends-remark-add').replaceWith($editTpl);
 					}
 				}
 				//end

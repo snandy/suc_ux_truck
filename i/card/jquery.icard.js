@@ -210,7 +210,7 @@
 			autoBindEvent : true,// 是否自动绑定mouseover和mouseout事件
 			getcard : '/a/usercard/getcard.do',// 按xpt返回card
 			getnickcard : '/a/usercard/getnickcard.do?_input_encode=UTF-8',// 按昵称返回card
-			getsname : '',
+			getsnamecard : '/a/usercard/getsnamecard.do',// 按sname返回card
 			follow : '/a/app/friend/friend/add.do',// 添加跟随
 			unFollow : '/a/app/friend/friend/delete.do',// 取消跟随
 			getgroups : '/a/app/friend/group/getgroups.do',// 取分组信息
@@ -553,7 +553,11 @@
 				url = this.options.getnickcard;
 			}
 			else if (param['sname']) {
-				url = this.options.getsname;
+				param['visitsname'] = param['sname'];
+				url = this.options.getsnamecard;
+			}
+			else if (param['visitsname']) {
+				url = this.options.getsnamecard;
 			}
 			else {
 				this.setHTML('<div class="data-error">抱歉，该用户无法访问</div>');

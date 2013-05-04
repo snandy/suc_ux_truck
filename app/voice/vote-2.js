@@ -89,7 +89,7 @@ require('core::util::jQuery', 'core::util::beLogin', function($, beLogin) {
                 if(isMine) {
                     s.setup = '<div class="user-vote-btn"><a class="btn" href="http://i.sohu.com/voice/user/update-info.htm" target="_blank">' + (data.isLocked ? '查看' : '管理') + '个人信息</a></div><div class="links t-center"><a href="' + personUrl + 'guestbook/index.htm" target="_blank">查看留言板</a></div>';
                 }else{
-                    s.setup = '<div class="links"><a href="javascript:;" class="leave-message">给TA留言</a></div><div class="links"><a href="' + personUrl + 'guestbook/index.htm" target="_blank">查看留言板>></a></div>';
+                    s.setup = '<div class="user-vote-btn"><a class="btn" href="' + personUrl + 'profile/index.htm" target="_blank">查看详细资料</a></div><div class="links"><a href="javascript:;" class="leave-message">给TA留言</a> <a href="' + personUrl + 'guestbook/index.htm" target="_blank">查看留言板</a></div>';
                 }
                 var id1 = data.noAccompanimentVoiceId,
                     id2 = data.withAccompanimentVoiceId,

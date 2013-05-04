@@ -1,7 +1,16 @@
 loadResource('/mysohu/forward/d/forward.css');
-require('core::util[cookie,ajax,fx,beLogin,channel]', 'core::stringUtil', 'core::util::jQuery', 'core::ui::TextBox',
-'app::widgets::template', 'app::feed::common', 'core::ui::dialog[success,error]', 'plugins::at', 'plugins::hijacker', function(
-util, stringUtil, $, TextBox, PLUGINS, COMMON, $dialog, $at, hijacker) {
+require(
+	'core::util[cookie,ajax,fx,beLogin,channel]', 
+	'core::stringUtil', 
+	'core::util::jQuery', 
+	'core::ui::TextBox',
+	'app::widgets::template', 
+	'app::feed::common', 
+	'core::ui::dialog[success,error]', 
+	'plugins::at', 
+	'plugins::hijacker', 
+	function(util, stringUtil, $, TextBox, PLUGINS, COMMON, $dialog, $at, hijacker) {
+
 	var defaults = {
 		dialogTitle : '转发到我的搜狐', // 对话框标题
 		chars : 300, // 可输入中文字数
@@ -64,7 +73,7 @@ util, stringUtil, $, TextBox, PLUGINS, COMMON, $dialog, $at, hijacker) {
 				self.numLen.html((len > options.chars ? '<span style="color:#AA0000">' + len + '</span>' : len) + " / "
 				+ options.chars);
 			};
-			this.tf.setText(options.origin.title ? ' //@' + options.origin.unick + '：' + options.origin.title : '').moveTo(0);// TODO
+			this.tf.setText(stringUtil.filter_sname(options.origin.title ? ' //@' + options.origin.usname + '：' + options.origin.title : '')).moveTo(0);// TODO
 			this.tf.onSend = send;
 			hijacker.hijackthis(this);
 		},
@@ -178,7 +187,8 @@ util, stringUtil, $, TextBox, PLUGINS, COMMON, $dialog, $at, hijacker) {
 			operatortype : 3,
 			xpt : $data.attr('data-xpt'),
 			origin : {
-				unick : $data.attr('data-oriunick')
+				unick : $data.attr('data-oriunick'),
+				usname : $data.attr('data-oriusname')
 			},
 			data : {
 				appId : $data.attr('data-oriappid'),
@@ -211,7 +221,8 @@ util, stringUtil, $, TextBox, PLUGINS, COMMON, $dialog, $at, hijacker) {
 			from : $data.attr('data-from'),
 			xpt : $data.attr('data-xpt'),
 			origin : {
-				unick : $data.attr('data-unick')
+				unick : $data.attr('data-unick'),
+				usname : $data.attr('data-usname')
 			}
 		};
 		if (options.from === "forward") {// 对转发进行转发
@@ -231,7 +242,8 @@ util, stringUtil, $, TextBox, PLUGINS, COMMON, $dialog, $at, hijacker) {
 				tblog : $data.attr('data-oriappid') == "tblog"
 			};
 			options.data.appId !== 'qingsohu' && (options.origin.fwd = {
-				unick : $data.attr('data-oriunick')
+				unick : $data.attr('data-oriunick'),
+				usname : $data.attr('data-oriusname')
 			});
 			setType(options, $data.attr('data-orifrom'), options.data.tblog);
 		} else {

@@ -70,6 +70,9 @@ require('app::emote', function(Emote) {
 			// 未终结的@昵称，丢弃
 			if (/@[-_a-zA-Z0-9\u4e00-\u9fa5]+$/.test(str))
 				return str.substr(0, str.lastIndexOf('@'));
+			// 未终结的@用户数据，丢弃
+			if (/@\{[^}]+$/.test(str))
+				return str.substr(0, str.lastIndexOf('@'));
 			return str.substr(0, str.length - 1);
 		},
 		filter_html : function(str) {
@@ -150,7 +153,7 @@ require('app::emote', function(Emote) {
 					html = [
 						'<a target="_blank" href="http://i.sohu.com/u/',
 						encodeURIComponent(sname),
-						'" data-card="true" data-card-action="sname=' + sname + '">',
+						'" data-card="true" data-card-action="visitsname=' + sname + '">',
 						'@' + snick,
 						'</a>'
 					]
@@ -159,6 +162,21 @@ require('app::emote', function(Emote) {
 			}) : content;
 		
 			return content;
+		},
+
+		filter_sname: function(content){
+			return typeof content === 'string'? content.replace(reg_sname, function(match, json){
+				acc_obj = JSON.parse(json)
+				sname = acc_obj.sname
+				snick = acc_obj.snick
+				if(sname == ''){
+					html = ['@' + snick]
+				}
+				else{
+					html = ['@' + sname]
+				}
+				return html.join('')
+			}): content;
 		},
 
 		filter_topic : function(content) {

@@ -1,4 +1,6 @@
-
+.gray {
+	color: #999;
+}
 .red {
 	color: #ff0000;
 }
@@ -7,7 +9,6 @@
     font-size: 1px;
     height: 1px;
     line-height: 1px;
-    opacity: 0.5;
     overflow: hidden;
 	background-color: #ece1cd;
 	border-top: 1px solid #d5bfa4;
@@ -63,7 +64,8 @@
 }
 .logo2 img,
 .logo1 img {
-	margin:0 5px
+	margin:0 5px;
+	max-width: none;
 }
 .logo2 img{vertical-align:middle;}
 .logo2 p{margin-bottom:15px;}
@@ -121,6 +123,13 @@
 .signin-inner .help-block {
 	margin-top: 5px;
 }
+.login-inner .controls label.checkbox,
+.signin-inner .controls label.checkbox {
+	margin-top: 10px;
+}
+.signin-inner .help-inline img {
+	max-width: none;
+}
 .login-title {
 	margin: 0;
 	margin-left: 165px;
@@ -144,6 +153,7 @@
 .partner dd {
 	font: 14px/30px "arial";
 }
+.partner dd a:hover,
 .partner dd a {
     color: #fff;
 }
@@ -171,6 +181,7 @@
 .partner dd img {
     margin-right: 5px;
     vertical-align: middle;
+	max-width: none;
 }
 
 .footer {
@@ -194,6 +205,21 @@
 .en-form .split-lines {
 	margin-bottom: 20px;
 }
+.en-form .point {
+	position: absolute;
+	color: #C09C7C;
+	font: normal 30px/22px ''; 
+	font-family: simsun;
+	height: 20px;
+	width: 20px;
+	margin: -12px 0 0 750px;
+	margin-top: -10px \9;
+	overflow: hidden;
+}
+.en-form textarea.disabled,
+.en-form input.disabled {
+	border: 1px solid #ccc;
+}
 .en-form .vertical h5 {
 	margin-top: 0;
 }
@@ -214,16 +240,25 @@
 }
 .en-form .help-inline.btn-upload {
 	vertical-align: top;
+	*padding-bottom: 1px;
 }
 .en-form .cv-file {
-    display: inline;
     float: left;
+	display: inline;
+	margin-right: 5px;
     min-height: 28px;
     overflow: hidden;
     position: relative;
 }
+.controls .cv-video,
 .en-form .cv-photo {
 	display: inline-block;
+}
+.en-form .cv-photo .pic,
+.controls .cv-video {
+	margin:0;
+	*margin-right: 5px;
+	_margin: 0;
 }
 .en-form .cv-photo .pic {
 	width: 280px;
@@ -237,21 +272,29 @@
 	width: 280px;
 }
 .en-form select.span1 {
-	margin:0 5px 0 0;
+	margin:-3px 5px 0 0;
 	float: left;
+	display: inline;
+	font-family: 'Microsoft Yahei';
 }
 .en-form .checkbox.inline {
-	margin: 4px 0 0 0;
+	margin: 0;
+	padding-top: 4px;
 }
 .en-form .group-alart {
 	width: 245px;
 	margin: -5px 0 0 5px;
 	line-height: 16px;
 }
+.en-form .controls .cv-video.hide,
+.en-form .cv-photo.hide,
+.en-form .help-inline .alert.hide {
+	display: none;
+}
 
 .cv-upload {
-	background-color: #FFFFFF;
-    border: 1px solid #DDDDDD;
+	background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0 2px 4px -2px #000;
     left: 50%;
@@ -259,7 +302,7 @@
     padding: 5px;
     top: 120px;
     width: 578px;
-    z-index: 1006;
+    z-index: 1056;
 }
 .video-agreement label {
 	display: inline;
@@ -267,4 +310,64 @@
 .video-agreement input {
 	margin: 0 5px 0 0 ;
 	width: auto;
+}
+.cv-upload .video-upload-btn-wrapper {
+	padding: 10px 0;
+}
+.controls .cv-video .upload-pic,
+.controls .cv-video .upload-video,
+.controls .cv-video .cv-video-inner,
+.controls .cv-video img,
+.controls .cv-video {
+	width: 320px;
+	height: 240px;
+	overflow: hidden;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.controls .cv-video {
+	background-color: #fff;
+	padding: 3px;
+	border: 1px solid #fff;
+	-webkit-box-shadow: 0 2px 4px -2px #999;
+	-moz-box-shadow: 0 2px 4px -2px #999;
+	box-shadow: 0 2px 4px -2px #999;
+}
+.controls .cv-video .cv-video-inner {
+	background-color: #c9caca;
+	margin: 0 auto;
+	text-align: center;
+	display: block;
+}
+.controls .cv-video i.img-video {
+	width: 95px;
+	height: 95px;
+	margin-top: 60px;
+	background:url(img_video_bg.png) no-repeat center center;
+	display: inline-block;
+}
+.controls .cv-video .cv-video-inner h3 {
+	font-family:"Microsoft YaHei";
+	font-size: 18px;
+	line-height: 18px;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+}
+
+.cv-upload .upload-video-default .upload-video-btn,
+.cv-upload .video-post-box .post-upload-form .input-file-btn {
+	background-image:url(btn_repeat.gif);
+}
+.cv-upload .video-upload-over {
+	background: url(bg_upload_over.gif) no-repeat center 20px #f8f8f8;
+}
+
+.signin-inner i.icon-right,
+.en-form i.icon-right {
+	width: 20px;
+	height: 20px;
+	background:url(img_alart_right.png) no-repeat center center;
+	display: inline-block;
 }

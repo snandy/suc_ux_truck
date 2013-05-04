@@ -206,64 +206,99 @@ voiceofchina.vote = {
     },
     _doVote: function(uid,callback){
         var self = this;
-        /*
-        this.postVote(uid,function(json){
-        	//奇葩接口
-        	//读取是否有资格投票时，要根据返回的408错误码
-        	//在分析message节点
-        	//呵呵
-            if(json.status == '408'){
-                if(/^601/.test(json.message)){
-                    self.postVote(uid,function(json){
-                        if(json.status == '200'){
-                            callback(json);
-                        }
-                    }, true);
-                }else{
-                    $.inform({
-                        icon: 'icon-error',
-                        delay: 3000,
-                        easyClose: true,
-                        content: '很抱歉，您今天已经投了3票，明天再来继续支持喜欢的选手',
-                        onClose: function(){}
-                    }); 
-                }
-            }else{
-                //error
-            }
-        });
-		*/
-		//新接口
-		$.ajax({
-            type: 'GET',
-            url: 'http://voice.tv.sohu.com/vote/add.jsonp?callback=?',
-            data: {
-            	itemId: uid
-            },
-            dataType: 'jsonp',
-            scriptCharset: 'UTF-8',
-            success: function(json){
-            	if(json.status == 200){
-            		callback(json);
-            	}
-            	else {
-            		var errorMsg = '';
-            		if(json.status == 408){
-            			errorMsg = '很抱歉，您今天已经投了3票，明天再来继续支持喜欢的选手';
-            		}
-            		else{
-            			errorMsg = '投票失败，请稍后再试（' + json.status + '）';
-            		}
+       	//弹出验证码弹框
+       	// create a dialog
+		var $dialog = $.dialog({
+			title: false,
+			content: '<div title="关闭" class="dialog-button-close" tabindex="0"></div><div class="login-from"></div>',
+			contentWidth: 300,
+			contentHeight: 200
+		});
 
-            		$.inform({
-                        icon: 'icon-error',
-                        delay: 3000,
-                        easyClose: true,
-                        content: errorMsg
-                    });
-            	}
-            }
-        });
+       	var codeHTML = [
+       	'<h4 class="c-title">请输入验证码</h4>',
+		'<div class="error"></div>',
+		'<div class="cell">',
+			'<label class="lab" for="verification">验证码</label><span class="border"><input type="text" class="verification"></span>',
+		'</div>',
+		'<div class="cell">',
+			'<label class="lab"> </label><span class="verification-code"><img class="code-image" width="100" src="http://voice.tv.sohu.com/vote/verify.jpg?t='+(+new Date())+'">',
+			'看不清，<a href="#" class="action-change-code">换一张</a></span>',
+		'</div>',
+		'<div class="cell">',
+			'<label class="lab"></label>',
+			'<input class="submit" type="button" value="提交" />',
+		'</div>'
+       	].join('');
+
+       	var $loginForm = $dialog.find('div.login-from');
+		$loginForm.html(codeHTML);
+		$("input.submit", $dialog).iButton();
+
+		var $code = $loginForm.find('input.verification');
+
+		//检验
+		function errorMsg(text,noicon){
+			$loginForm.find('div.error').html(text ? ((!noicon ? '<i class="img-error"></i> ' : '') + text) : '');
+		}
+
+		function changeVcode(){
+			$loginForm.find('.code-image').attr('src','http://voice.tv.sohu.com/vote/verify.jpg?t=' + (+new Date()));
+		}
+
+		$loginForm.find('.code-image,.action-change-code').click(function(event){
+			event.preventDefault();
+			changeVcode();
+		});
+
+		$loginForm.find('.submit').click(function(event){
+			//调用投票接口
+			if($.trim($code.val()) == ''){
+				errorMsg('请输入验证码');
+				$code.focus();
+				return;
+			}
+
+			//新接口
+			$.ajax({
+	            type: 'GET',
+	            url: 'http://voice.tv.sohu.com/vote/add.jsonp?callback=?',
+	            data: {
+	            	itemId: uid,
+	            	vcode: $.trim($code.val())
+	            },
+	            dataType: 'jsonp',
+	            scriptCharset: 'UTF-8',
+	            success: function(json){
+	            	if(json.status == 200){
+	            		callback(json);
+	            		$dialog.close();
+	            	}
+	            	else if(json.status == 411){
+	            		errorMsg('您输入的验证码有误');
+	            		changeVcode();
+						$code.focus();
+	            	}
+	            	else {
+	            		var err = '';
+	            		if(json.status == 408){
+	            			err = '很抱歉，您今天已经投了3票，明天再来继续支持喜欢的选手';
+	            		}
+	            		else{
+	            			err = '投票失败，请稍后再试（' + json.status + '）';
+	            		}
+	            		$dialog.close();
+	            		$.inform({
+	                        icon: 'icon-error',
+	                        delay: 3000,
+	                        easyClose: true,
+	                        content: err
+	                    });
+	            	}
+	            }
+	        });
+		});
+		$code.focus();
     },
     doVote: function(uid,callback){
     	var self = this;

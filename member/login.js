@@ -15,6 +15,7 @@ if(ieBug){
 
 var project = {
 	nobody: 'http://r1.suc.itc.cn/itoolbar/default/nobody.v.110708.gif',
+	changePassport : "http://i.sohu.com/login/sname.do?cb=?",
 	lastPP: '',//上次登录帐号
 	init: function(){
 		var self = this;
@@ -27,7 +28,26 @@ var project = {
 			oldFillEmailSelect.call(this);
 			this.dsElement.style.backgroundColor = "#000";
 		};
-		
+		var oldParseLast = PassportSC.parseLastDomain;
+		PassportSC.parseLastDomain =  function (list) {
+			oldParseLast.call(this,list);
+			var selectList = this.emailPostfix;
+			// console.log(this.emailPostfix)
+			var j = 0;
+			for(var i = 0 ; i <selectList.length ; i++){
+				var dValue  = selectList[i];
+				var iValue = this.emailInput.value;
+				if(dValue.indexOf("@")>0){
+					 j++;
+				}
+			}
+			if(j>0){
+				var a = this.emailPostfix.splice(0,j+1).reverse();
+				var b = this.emailPostfix;
+				this.emailPostfix = a.concat(b);
+			}
+			// console.log(this.emailPostfix)
+        };
 		PassportSC.showMsg = function(msg){
 			if (!this.loginMsg){
 				return;
@@ -38,18 +58,97 @@ var project = {
 			}else{
 				$msg.hide();
 			}
-		}
+		};
+		//如果用户输入帐号系统的sname，那么像帐号系统提交替换passport
+		PassportSC.doLogin = function () {
+            if (this.eInterval) return; // 必须判断一下，避免连续两次点击
+            if (arguments[0]) {
+                PassportCardList[index].doLogin();
+            }
+            login_status = "";
+            this.intervalCount = 0;
+            this.sElement.innerHTML = "";
 
+            this.email = this.strip(this.emailInput.value);
+            var email = this.email;
+            var password = this.strip(this.passwdInput.value);
+
+            var pc = 0;
+            if (this.pcInput.checked == true) pc = 1;
+
+            if (email == "") {
+                this.reportMsg('1');
+                this.emailInput.focus();
+                return false;
+            }
+            /*
+             * if (email.lastIndexOf('@') == -1) { this.reportMsg('2');
+             * this.emailInput.focus(); return false; }
+             */
+            // 如果autopad不为空，则限制只能输入本域的用户
+            if (this.autopad != "") {
+                var dpostfix = email.substr(email.lastIndexOf('@') + 1);
+                if (this.autopad.lastIndexOf(dpostfix) < 0) {
+                    this.reportMsg('3', this.autopad);
+                    this.emailInput.focus();
+                    this.passwdInput.value = "";
+                    return false;
+                }
+            }
+            if (password == "") {
+                this.reportMsg('4');
+                this.passwdInput.value = "";
+                this.passwdInput.focus();
+                return false;
+            }
+            if (this.usePost == 1) {
+                return this.doPost();
+            }
+            var tempThis = this;
+            var returnValue = true ; 
+
+            if(email.indexOf("@")<0 && !/([\u4e00-\u9fa5 ])+/.test(email)){
+            	$.ajax({
+					url: self.changePassport,
+					data:{sname:email,_input_encode:"UTF-8"},
+					dataType: 'jsonp', 
+					async: false
+            	}).done(function(result){
+					if(result.code == '0'){
+						email = result.msg;	
+					            // 显示Passport等待状态框，执行后将破坏 document.forms
+        				tempThis.drawPassportWait('正在登录搜狐通行证，请稍候...');
+         				returnValue = tempThis.loginHandle(email, password, pc, tempThis.sElement, tempThis.loginFailCall.bindFunc(tempThis), tempThis.loginSuccessCall.bindFunc(tempThis));
+            		}else{
+            			returnValue = tempThis.loginHandle(email, password, pc, tempThis.sElement, tempThis.loginFailCall.bindFunc(tempThis), tempThis.loginSuccessCall.bindFunc(tempThis));
+            		}
+            	});
+            	return false;
+            }else{
+    	        this.drawPassportWait('正在登录搜狐通行证，请稍候...');
+            	return this.loginHandle(email, password, pc, this.sElement, this.loginFailCall.bindFunc(this), this.loginSuccessCall.bindFunc(this));
+            }
+            
+
+
+        };
 		PassportSC._drawLoginForm = function() {
-			var defaultValue = "昵称/邮箱/手机号";
+			var defaultValue = "帐号/邮箱/手机号";
 			if (PassportSC.emailPostfix != null && PassportSC.emailPostfix.length > 0) {
-				var postfix = PassportSC.emailPostfix[0];
+				
+				var j = 1;
+				for(var i = 0 ; i< PassportSC.emailPostfix.length ; i++){
+					if(PassportSC.emailPostfix[i].lastIndexOf("@")>=0){
+						j = i ;
+						break;
+					}
+				}
+				var postfix = PassportSC.emailPostfix[j];
 				if (typeof(postfix) == "string" && postfix.indexOf("@") > -1) {
 					defaultValue = postfix;
 					self.lastPP = postfix;
 				}
 			}
-
 			this.cElement.innerHTML =
 			'<fieldset><legend class="login-form-title" >我的搜狐登录</legend>' + 
 				'<div class="login-form-itemwrapper">' +
@@ -106,6 +205,9 @@ var project = {
 		$('#email')
 		.focus(function(){
 			$(this).parent().attr('class','login-form-input-onfocus');
+			if($(this).val() == "帐号/邮箱/手机号"){
+				$(this).val("");
+			}
 			self.setUserInfo(this.value);
 		}).blur(function(){
 			$(this).parent().attr('class','login-form-input');
@@ -113,6 +215,7 @@ var project = {
 		});
 		$('#password')
 		.focus(function(){
+
 			$(this).parent().attr('class','login-form-input-onfocus');
 		}).blur(function(){
 			$(this).parent().attr('class','login-form-input');
@@ -155,6 +258,7 @@ var project = {
 				}
 			});
 			$name.html(cache[pp].nick);
+
 		}else{
 			$img.attr('src',this.nobody);
 			$name.html('');

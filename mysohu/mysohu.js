@@ -373,7 +373,7 @@ void function(window, undefined) {
 
 // 点击统计
 mysohu.put_log = function(msg) {
-	console.log(msg + ' clicked');
+	// console.log(msg + ' clicked');
 	var img = new Image();
 	img.src = 'http://cc.i.sohu.com/pv.gif?' + msg + '&ts=' + +new Date;
 };

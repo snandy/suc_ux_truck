@@ -341,7 +341,6 @@ suggest.prototype = {
 				data: param,
 				ajaxRequestId: ++requestId,
 				success: function(data){
-					
 					if(!this.ajaxRequestId == requestId){
 						return false;
 					};
@@ -395,7 +394,9 @@ suggest.prototype = {
 			this.position();
 		}
 		
-		if(this.options.width > 0){
+		if(this.options.width == 'auto'){
+			this.dom.$results.css('width', 'auto');
+		}else if(this.options.width > 0){
 			this.dom.$results.width(this.options.width);
 		}else{
 			extraWidth = this.dom.$results.outerWidth() - this.dom.$results.width();

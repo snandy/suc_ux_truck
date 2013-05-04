@@ -26,7 +26,7 @@ var project = {
 		如suggest初始化
 		*/
 		
-		var findTipText = '请输入昵称';
+		var findTipText = '请输入用户名';
 		var $form = $this.find('div.search form');
 		var $nick = $form.find('input[name=nick]');
 		

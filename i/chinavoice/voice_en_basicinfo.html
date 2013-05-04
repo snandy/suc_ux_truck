@@ -65,6 +65,7 @@
 							<label for="realName" class="control-label"><span class="red">*</span> Real Name：</label>
 							<div class="controls">
 								<input type="text" id="realName"/>
+								<span class="help-inline"><i class="icon-right"></i></span>
 								<span class="help-inline"><span class="alert alert-info">Please input the real name for conveniently contact </span></span>
 							</div>
 						</div>
@@ -78,19 +79,7 @@
 									<a href="javascript:;" class="abs cv-swf">
 										<object width="265" height="28" id="SWFUpload_0" type="application/x-shockwave-flash" data="http://i.sohu.com/asset/swfupload.swf?1358821477389&amp;preventswfcaching=1358821477389" class="swfupload"><param name="wmode" value="transparent"><param name="movie" value="http://i.sohu.com/asset/swfupload.swf?1358821477389&amp;preventswfcaching=1358821477389"><param name="quality" value="high"><param name="menu" value="false"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=http%3A%2F%2Fupload.pp.sohu.com%2FsentenceUpload.do&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=0&amp;params=&amp;filePostName=Filedata&amp;fileTypes=*.jpg%3B*.jpeg%3B*.gif%3B*.png%3B*.bmp%3B*.tiff&amp;fileTypesDescription=%E5%9B%BE%E7%89%87%E6%96%87%E4%BB%B6&amp;fileSizeLimit=10%20MB&amp;fileUploadLimit=0&amp;fileQueueLimit=0&amp;debugEnabled=false&amp;buttonImageURL=http%3A%2F%2Fs3.suc.itc.cn%2Fd%2Fnil.gif&amp;buttonWidth=265&amp;buttonHeight=28&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=&amp;buttonAction=-100&amp;buttonDisabled=false&amp;buttonCursor=-2"><param value="true" name="allowFullScreen"><param value="all" name="AllowNetworking"></object>
 									</a>
-									<input type="text" />
-									<span class="help-inline"><a class="btn btn-small btn-primary">Upload</a></span>
-								</div>
-								<span class="help-inline">
-									<span class="alert alert-error"> error </span>
-								</span>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label"><span class="red">*</span> Photo：</label>
-							<div class="controls">
-								<div class="cv-file">
-									<input type="text" style="display: none" />
+									<input type="text" class="hide" />
 									<span class="cv-photo" >
 										<span class="pic">
 											<img src="http://sucimg.itc.cn/mybucketbjcnc/73ee7f5667504e5ba853d73d7b79615f_w280">
@@ -98,6 +87,7 @@
 									</span>
 									<span class="help-inline btn-upload"><a class="btn btn-small btn-primary">Upload</a></span>
 								</div>
+								<span class="help-inline"><i class="icon-right"></i></span>
 								<span class="help-inline">
 									<span class="alert alert-error"> error </span>
 								</span>
@@ -107,8 +97,17 @@
 							<label class="control-label"><span class="red">*</span> Video：</label>
 							<div class="controls">
 								<div class="cv-file">
-									<input type="text" />
-									<span class="help-inline"><a class="btn btn-small btn-primary">Upload</a></span>
+									<input type="text" class=" hide" />
+									<span class="cv-video">
+										<span class="cv-video-inner">
+											<img class="hide" src="http://img.itc.cn/photo/jCJzMFwfbb2_w283">
+											<span>
+												<i class="img-video"></i>
+												<h3>Video</h3>
+											</span>
+										</span>
+									</span>
+									<span class="help-inline btn-upload"><a class="btn btn-small btn-primary">Upload</a></span>
 								</div>
 								<span class="help-inline">
 									<span class="alert alert-error"> error </span>
@@ -170,6 +169,7 @@
 										<option>4</option>
 										<option>5</option>
 									</select>
+									<span class="help-inline"><i class="icon-right"></i></span>
 								</div>
 							</div>
 						</div>
@@ -177,6 +177,7 @@
 							<label for="nationality" class="control-label"><span class="red">*</span> Nationality：</label>
 							<div class="controls">
 									<input type="text" id="nationality">
+									<span class="help-inline"><i class="icon-right"></i></span>
 							</div>
 						</div>
 						<div class="control-group">
@@ -266,12 +267,14 @@
 							<div class="controls">
 								<span class="help-block">3. What is your dream by far? (Please describe it in detail.)</span>
 								<textarea class="span5" rows="3"></textarea>
+								<span class="help-inline"><i class="icon-right"></i></span>
 							</div>
 						</div>
 						<div class="control-group vertical">
 							<div class="controls">
 								<span class="help-block">4. Who or what affects you most by far? (Family, love, job or others. please describe it in detail.)</span>
 								<textarea class="span5" rows="3"></textarea>
+								<span class="help-inline"><i class="icon-right"></i></span>
 								<span class="help-inline"><span class="alert alert-info">Please input the real name for conveniently contact </span></span>
 							</div>
 						</div>
@@ -328,24 +331,6 @@
 		</div>
 	</div>
 </div><!-- Footer end -->
-
-<div >
-	<link type="text/css" rel="stylesheet" href="http://s.suc.itc.cn/combo.action?v.20120523&r=/i/video/d/video.css&t=css&c=gbk&p=mysohu" />
-
-							<div class="abs cv-upload">
-								<div class="video-post-box"><div class="video-post-title-box"><a href="javascript:void(0);" class="close"></a><div class="post-upload-form"><div class="input-file init-mode">请选择你要上传的视频</div><div style="display:none" class="video-upload-title uploading-mode">正在上传：阿达阿达阿达</div><div style="display:none" class="video-upload-progress-wrapper uploading-mode"><p class="video-upload-progress" style="width:0%"></p><p class="text">0%</p></div><div class="input-file-btn"><div class="flash-btn"><object width="106" height="32" id="sohuHDUploader_ob" name="sohuHDUploader_ob" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0"><param name="allowScriptAccess" value="always"><param name="movie" value="http://tv.sohu.com/upload/20110516space/skin/swf/FileUpload.swf?skinNum=2&amp;mouseOver=sohuHD.flMouseOver&amp;mouseOut=sohuHD.flMouseOut&amp;_=20120308"><param name="quality" value="high"><param name="allowFullScreen" value="true"><param name="wmode" value="transparent"><param name="flashvars" value=""><embed width="106" height="32" id="sohuHDUploader_em" name="sohuHDUploader_em" src="http://tv.sohu.com/upload/20110516space/skin/swf/FileUpload.swf?skinNum=2&amp;mouseOver=sohuHD.flMouseOver&amp;mouseOut=sohuHD.flMouseOut&amp;_=20120308" flashvars="" quality="high" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" allownetworking="all"><param name="AllowNetworking" value="all"></object></div></div><div class="tips">上传视频须小于500M，格式支持：<span title="avi/mpeg/rmvb/wmv/asf/divx/flv/m4v/fli/flc/mp4/3gp/mkv/3g2">avi /mpeg /rmvb /wmv /flv /mp4...</span></div></div><div class="video-agreement"><label><input type="checkbox" checked="checked"><span>我已阅读并同意<a target="_blank" href="http://tv.sohu.com/upload/hdfeedback/index.jsp?46">《视频上传协议》</a></span></label></div></div><div style="display:none" class="video-upload-btn-wrapper resume-mode"><span class="ui-btn btn-blue-h32"><span>继续上传</span></span></div></div>
-							</div><!-- cv-upload end -->
-
-							<!--<div class="popup cv-upload" style="top:260px;">
-								<div class="video-post-box"><div class="video-post-title-box"><a href="javascript:void(0);" class="close"></a><div class="post-upload-form"><div class="input-file init-mode" style="display: none;">请选择你要上传的视频</div><div style="" class="video-upload-title uploading-mode">正在上传：arrow.s01e04.mp4</div><div style="" class="video-upload-progress-wrapper uploading-mode"><p class="video-upload-progress" style="width: 12%;"></p><p class="text">12%</p></div><div class="input-file-btn cancel"><div class="flash-btn"><object width="106" height="32" id="sohuHDUploader_ob" name="sohuHDUploader_ob" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0"><param name="allowScriptAccess" value="always"><param name="movie" value="http://tv.sohu.com/upload/20110516space/skin/swf/FileUpload.swf?skinNum=2&amp;mouseOver=sohuHD.flMouseOver&amp;mouseOut=sohuHD.flMouseOut&amp;_=20120308"><param name="quality" value="high"><param name="allowFullScreen" value="true"><param name="wmode" value="transparent"><param name="flashvars" value=""><embed width="106" height="32" id="sohuHDUploader_em" name="sohuHDUploader_em" src="http://tv.sohu.com/upload/20110516space/skin/swf/FileUpload.swf?skinNum=2&amp;mouseOver=sohuHD.flMouseOver&amp;mouseOut=sohuHD.flMouseOut&amp;_=20120308" flashvars="" quality="high" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" allownetworking="all"><param name="AllowNetworking" value="all"></object></div></div><div class="tips">速度：<span class="orange">11272KB/S </span> 已上传：<span class="orange">32M/266M  </span> 剩余时间：<span class="orange">00分22秒</span></div></div><div class="video-agreement" style="display: none;"><label><input type="checkbox" checked="checked"><span>我已阅读并同意<a target="_blank" href="http://tv.sohu.com/upload/hdfeedback/index.jsp?46">《视频上传协议》</a></span></label></div></div><div class="video-upload-info"><h3 class="title">请填写视频信息</h3><div class="video-upload-info-form"><label><span class="red">*</span>标题<input type="text" value="arrow.s01e04" class="video-title"></label><label><span class="red">*</span>分类<div class="video-type-wrapper">原创</div></label><div style="display:none;" class="video-upload-info-tips-wrapper"><div class="video-upload-info-tips" style="left:50px;"><div class="arrow"></div></div></div></div><div class="video-upload-btn-wrapper"><span class="ui-btn"><span>保存</span></span></div></div><div style="display:none" class="video-upload-btn-wrapper resume-mode"><span class="ui-btn btn-blue-h32"><span>继续上传</span></span></div></div>
-							</div> cv-upload end -->
-
-							<!--<div class="popup cv-upload" style="top:600px;">
-								<div class="video-post-box"><div class="video-post-title-box"><a href="javascript:void(0);" class="close"></a><div class="video-upload-over">视频正在转码和审核中，稍等片刻就能观看了！</div></div><div class="video-upload-info"><h3 class="title">请填写视频信息</h3><div class="video-upload-info-form"><label><span class="red">*</span>标题<input type="text" value="莫文蔚《倾国倾城》" class="video-title"></label><label><span class="red">*</span>分类<div class="video-type-wrapper">原创</div></label><div style="display:none;" class="video-upload-info-tips-wrapper"><div class="video-upload-info-tips" style="left:50px;"><div class="arrow"></div></div></div></div><div class="video-upload-btn-wrapper"><span class="ui-btn"><span>保存</span></span></div></div><div style="display:none" class="video-upload-btn-wrapper resume-mode"><span class="ui-btn btn-blue-h32"><span>继续上传</span></span></div></div>
-							</div> cv-upload end -->
-</div>
-<!--<div class="modal-backdrop fade in"></div>-->
-
 
 </body>
 </html>

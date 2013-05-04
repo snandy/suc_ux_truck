@@ -302,7 +302,7 @@ var BlogRecommendDlg = function(opts){
 		.focus(function(){
 			suggestSubmit = false;
 		})
-		.iPrompt({text: '输入昵称或备注',css:{'color':'#999999'}})
+		.iPrompt({text: '请输入用户名或备注',css:{'color':'#999999'}})
 		.ajaxSuggest({
 			appendTo: 'div.f-add-commend-wrapper',
 			url: '/a/search/user/friend/sug.do?cb=?&_input_encode=UTF-8',

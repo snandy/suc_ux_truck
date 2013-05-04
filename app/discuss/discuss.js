@@ -82,7 +82,7 @@ require('core::util::jQuery', 'core::timeUtil', 'core::util[ajax,beLogin,cookie,
 			};
 			this.options && this.options.reply && (this.options.reply = null);
 			options = this.options = util.probe(this.options, options);
-			(options.reply || options.autoFocus) && this.tf.setText(options.reply ? '回复@' + options.reply.unick + '：' : '').moveTo(-1);
+			(options.reply || options.autoFocus) && this.tf.setText(options.reply ? '回复@' + options.reply.usname + '：' : '').moveTo(-1);
 			this.params = {
 				page : options.page || 1,
 				sz : options.pagesize || 10,
@@ -158,6 +158,7 @@ require('core::util::jQuery', 'core::timeUtil', 'core::util[ajax,beLogin,cookie,
 							id : replyn.replyId,
 							createtime : replyn.createTime,
 							unick : unescape(replyn.nickname),
+							usname : unescape(replyn.sname || replyn.nickname),
 							uavatar : unescape(replyn.authorimg),
 							ulink : unescape(replyn.mylinks)
 						};
@@ -304,6 +305,7 @@ require('core::util::jQuery', 'core::timeUtil', 'core::util[ajax,beLogin,cookie,
 				self.options.noPush || self.push({
 					content : content,
 					unick : util.cookie.unick,
+					usname : util.cookie.usname,
 					ulink : util.cookie.ulink,
 					uavatar : util.cookie.photo,
 					createtime : timeUtil.setServerTime()
@@ -348,7 +350,7 @@ require('core::util::jQuery', 'core::timeUtil', 'core::util[ajax,beLogin,cookie,
 		replyto : function(reply) {
 			this.options.reply = reply;
 			var text = this.tf.getText();
-			text = text.replace(/^((?:回复@.*?：)*)/, "回复@" + reply.unick + "：");
+			text = text.replace(/^((?:回复@.*?：)*)/, "回复@" + reply.usname + "：");
 			this.tf.setText(text).moveTo(text.length);
 			var pos = this.position().top;
 			util.wndTop() - pos > -24 && window.scrollTo(0, pos - 24);
@@ -423,6 +425,7 @@ require("core::util[beLogin]", "app::discuss", 'core::util::jQuery', function(ut
 		util.getParentByClassName(dom, 'comment-box').wrapped.replyto({
 			xpt : $data.attr('data-xpt'),
 			unick : $data.attr('data-nick'),
+			usname : $data.attr('data-sname'),
 			id : $data.attr('data-replytodiscussid')
 		});
 	});
@@ -475,7 +478,8 @@ require("core::util[beLogin]", "app::discuss", 'core::util::jQuery', function(ut
 					tblog : $data.attr('data-oriappid') == 'tblog',
 					xpt : $data.attr('data-orixpt'),
 					ulink : $data.attr('data-oriulink'),
-					unick : $data.attr('data-oriunick')
+					unick : $data.attr('data-oriunick'),
+					usname : $data.attr('data-oriusname')
 				}
 			});
 			options.originalid = $data.attr('data-oriid');

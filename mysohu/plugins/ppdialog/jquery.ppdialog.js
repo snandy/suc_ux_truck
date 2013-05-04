@@ -99,6 +99,7 @@ $.ppDialog = function(settings) {
 		PSCInstance.appid = opts.appId;
 		PSCInstance.loginRedirectUrl = "";
 		PSCInstance.autoredirecturl = "";
+		PassportSC.defaultInput = "帐号/邮箱/手机号";
 		PSCInstance._drawLoginForm = function() {
 			$(this.cElement).html([
 			'<form class="login-form" method="post" name="loginform">',
@@ -107,7 +108,7 @@ $.ppDialog = function(settings) {
 						'<h4>请输入您的搜狐通行证信息</h4>',
 						'<div class="error"></div>',
 						'<div class="loginFrom">',
-							'<label class="uname" for="passport-id"><span class="lab">帐号</span><input id="passport-id" type="text" name="email" placeholder="昵称/邮箱/手机号" autocomplete="off" disableautocomplete /></label>',
+							'<label class="uname" for="passport-id"><span class="lab">帐号</span><input id="passport-id" type="text" name="email" placeholder="'+this.defaultInput+'" autocomplete="off" disableautocomplete /></label>',
 							'<label class="upass" for="passport-pwd"><span class="lab">密码</span><input id="passport-pwd" type="password" name="password" /></label>',
 							'<label class="ucookie" for="passport-cookie"><span class="lab"></span><input id="passport-cookie" type="checkbox" name="persistentcookie" value="1" ' + PSCInstance.defualtRemPwd + ' />记住登录状态</label>',
 							'<a class="link-fpswd" href="' + this.recoverUrl + '" target="_blank">忘记密码？</a>',

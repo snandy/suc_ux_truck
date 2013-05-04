@@ -32,7 +32,7 @@
 			//帐号验证
 			esname.bind('focus', function(e) {
 				$(this).removeClass('profile-input-error');
-				etp.html('<span class="profile-input-clew"><em>请填写4-20位的中英文和数字组合,支持"-"及"_"</em></span>');
+				etp.html('<span class="profile-input-clew"><em>请填写4-20位的英文和数字组合及"-"</em></span>');
 			}).bind('blur', function(e) {
 				var elv = esname.attr('value');
 				if($.trim(elv).length == 0) {
@@ -40,10 +40,11 @@
 					etp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>请填写帐号</em></span>');
 					return false;
 				}
-				//去掉对 _和- 的支持
-				if(!(/^(([a-zA-Z0-9_-])|([\u4e00-\u9fa5]))+$/.test(elv))) {
+				//去掉对 _和- 的支持   这是之前的表达式/^(([a-zA-Z0-9_-])|([\u4e00-\u9fa5]))+$/.
+				    
+				if(!(/^[a-zA-Z0-9\-]+$/.test(elv))) {
 					$(this).addClass('profile-input-error');
-					etp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>仅英文和数字组合,支持"-"及"_"</em></span>');
+					etp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>仅英文和数字组合及"-"</em></span>');
 					return false;
 				}
 				/*
@@ -51,7 +52,7 @@
 				*/
 				if(elv.length > 20) {
 					$(this).addClass('profile-input-error');
-					etp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>昵称长度不对，请填写4-20位以内的汉字、字母、数字</em></span>');
+					etp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>帐号长度不对，请填写4-20位以内的汉字、字母、数字</em></span>');
 					return false;
 				}
 				/*
@@ -59,7 +60,7 @@
 				*/
 				if(elv.length < 4) {
 					$(this).addClass('profile-input-error');
-					etp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>昵称长度不对，请填写4-20位以内的汉字、字母、数字</em></span>');
+					etp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>帐号长度不对，请填写4-20位以内的汉字、字母、数字</em></span>');
 					return false;
 				}
 				// 如果昵称已被占用（这个判断走ajax接口）
@@ -91,18 +92,19 @@
 
 			el.bind('focus', function(e) {
 				$(this).removeClass('profile-input-error');
-				tp.html('<span class="profile-input-clew"><em>请填写1-20位以内的中英文字符和数字</em></span>');
+															  
+				tp.html('<span class="profile-input-clew"><em>请填写1-20位的中英文字符或数字，支持"_"及"-"</em></span>');
 			}).bind('blur', function(e) {
 				var elv = el.attr('value');
 				if($.trim(elv).length == 0) {
 					$(this).addClass('profile-input-error');
-					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>请填写1-20位的英文和数字组合,支持"-"及"_"</em></span>');
+					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>请填写1-20位的中英文或数字,支持"-"及"_"</em></span>');
 					return false;
 				}
 				//去掉对 _和- 的支持
 				if(!(/^(([a-zA-Z0-9_-])|([\u4e00-\u9fa5]))+$/.test(elv))) {
 					$(this).addClass('profile-input-error');
-					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>仅英文和数字组合,支持"-"及"_"</em></span>');
+					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>仅中英文或数字组合,支持"-"及"_"</em></span>');
 					return false;
 				}
 				/*
@@ -110,7 +112,7 @@
 				*/
 				if(elv.length > 20) {
 					$(this).addClass('profile-input-error');
-					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>昵称长度不对，请填写1-20位以内的汉字、字母、数字</em></span>');
+					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>昵称长度不对，请填写1-20位的中英文字符或数字，支持"_"及"-"</em></span>');
 					return false;
 				}
 				/*
@@ -118,7 +120,7 @@
 				*/
 				if(elv.length < 1) {
 					$(this).addClass('profile-input-error');
-					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>昵称长度不对，请填写1-20位以内的汉字、字母、数字</em></span>');
+					tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>昵称长度不对，请填写1-20位的中英文字符或数字，支持"_"及"-"</em></span>');
 					return false;
 				}
 				// 如果昵称已被占用（这个判断走ajax接口）
@@ -135,11 +137,12 @@
 				tp.html('<span class="profile-icon"><span class="profile-icon-loading"></span></span>');
 				var url = '/a/profile/service/nick.htm?n=' + encodeURIComponent(elv) + '&vn=nickisright&_input_encode=UTF-8';
 				$.getScript(url, function() {
-					if(window['nickisright'] == 1) {
+					// -1 未登录 0 验证成功 1 昵称已存在 2 昵称无效（禁词等） 3 验证失败 2013/04/04
+					if(window['nickisright'] == 0) {
 						tp.html('<i class="global-icon-right-12">正确</i>');
 						$(_self).removeClass('profile-input-error');
 					} else {
-						tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>昵称不符合规则</em></span>');
+						tp.html('<span class="profile-input-error-clew"><em><i class="global-icon-error-12">错误</i>用户名不符合规则</em></span>');
 						$(_self).addClass('profile-input-error');
 					}
 				});

@@ -99,7 +99,8 @@ require('core::util[ajax,cookie]', 'core::util::jQuery', 'plugins::hijacker', 'c
 			reply : {
 				id : $data.attr('data-replytocommentid'),
 				xpt : $data.attr('data-replytopassport'),
-				unick : $data.attr('data-unick')
+				unick : $data.attr('data-unick'),
+				usname : $data.attr('data-usname')
 			}
 		};
 		options.isSComment = options.appId == 'scomment' || $data.attr('data-from') === 'comment';
@@ -110,7 +111,8 @@ require('core::util[ajax,cookie]', 'core::util::jQuery', 'plugins::hijacker', 'c
 					tblog : $data.attr('data-oriappid') == 'tblog',
 					xpt : $data.attr('data-orixpt'),
 					ulink : $data.attr('data-oriulink'),
-					unick : $data.attr('data-oriunick')
+					unick : $data.attr('data-oriunick'),
+					usname : $data.attr('data-oriusname')
 				}
 			});
 			options.originalid = $data.attr('data-oriid');

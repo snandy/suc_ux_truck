@@ -578,7 +578,8 @@ function($, util, WIDGETS, SWFUpload) {
 			t09002 : "暗影星际"
 		},
 		"中国好声音" : {
-			t10001 : "中国好声音"
+			t10001 : "中国好声音",
+			t10002 : "三星Galaxy S4"
 		}
 	});
 	define("app::widgets::theme", theme);

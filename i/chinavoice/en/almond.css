@@ -128,6 +128,11 @@ input.submit {
   -webkit-appearance: button;
 }
 
+input.btn {
+	width: auto;
+	height: auto;
+}
+
 label,
 select,
 button,
@@ -164,6 +169,7 @@ a:focus {
 .row {
   margin-left: -10px;
   *zoom: 1;
+  _position: relative;
 }
 .row:before,
 .row:after {
@@ -605,6 +611,7 @@ input,
   line-height: 16px;
   color: #555;
   vertical-align: middle;
+  font-family: arial;
 }
 
 input,
@@ -704,21 +711,27 @@ textarea::-webkit-input-placeholder {
 .radio,
 .checkbox {
   min-height: 20px;
+  min-height: auto \9;
 }
-
 input.radio,
 .radio input.radio,
 .checkbox input.checkbox {
   float: left;
+  padding: 0;
   margin-right: 5px;
   border: 0 none;
   height: auto;
   background-color: transparent;
   display: inline;
+  outline: 0;
 }
 input.radio {
 	*margin-left: -5px;
 	_margin-right: 2px;
+}
+input.checkbox {
+	border: 0 none;
+	_margin-left: -5px;
 }
 
 .radio.inline,
@@ -983,6 +996,7 @@ select:focus:invalid:focus {
   margin-bottom: 0;
   vertical-align: middle;
   *zoom: 1;
+  outline: 0;
 }
 
 .form-search .hide,
@@ -1516,6 +1530,11 @@ button.close {
           border-radius: 6px;
 }
 
+input.btn-large {
+	*padding: 8px 19px;
+	_padding: 11px 19px;
+}
+
 .btn-large [class^="icon-"],
 .btn-large [class*=" icon-"] {
   margin-top: 4px;
@@ -1528,6 +1547,7 @@ button.close {
      -moz-border-radius: 3px;
           border-radius: 3px;
 }
+
 
 .btn-small [class^="icon-"],
 .btn-small [class*=" icon-"] {
@@ -1577,36 +1597,49 @@ input[type="button"].btn-block {
 }
 
 .btn-primary {
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #006dcc;
-  *background-color: #0044cc;
-  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
-  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-color: #04afe0;
+  background-image: -moz-linear-gradient(top, #4bc6e9, #04afe0);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4bc6e9), to(#04afe0));
+  background-image: -webkit-linear-gradient(top, #4bc6e9, #04afe0);
+  background-image: -o-linear-gradient(top, #4bc6e9, #04afe0);
+  background-image: linear-gradient(top bottom, #4bc6e9, #04afe0);
   background-repeat: repeat-x;
-  border-color: #0044cc #0044cc #002a80;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  border-color: #01a7ea;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4bc6e9', endColorstr='#04afe0', GradientType=0);
+  _filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  border-width: 1px;
+  *filter:chroma(color=#000000);
+  outline:none;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
-.btn-primary.disabled,
-.btn-primary[disabled] {
-  color: #ffffff;
-  background-color: #0044cc;
-  *background-color: #003bb3;
+.btn-primary.disabled {
+  color: #fff;
+  background-color: #4bc6e9;
+  background-image: -moz-linear-gradient(top, #04afe0, #4bc6e9);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#04afe0), to(#4bc6e9));
+  background-image: -webkit-linear-gradient(top, #04afe0, #4bc6e9);
+  background-image: -o-linear-gradient(top, #04afe0, #4bc6e9);
+  background-image: linear-gradient(top bottom, #04afe0, #4bc6e9);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#04afe0', endColorstr='#4bc6e9', GradientType=0);
+  _filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  border-color: #01a7ea;
+  outline:none;
+}
+input.btn-primary:focus,
+input.btn-primary:active,
+input.btn-primary:hover {
+	*filter:chroma(color=#000000);
 }
 
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #003399 \9;
+  background-color: #07a7d5 \9;
 }
 
 .btn-warning {
@@ -2123,9 +2156,9 @@ input.submit.btn.btn-mini {
 
 .alert-danger,
 .alert-error {
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
+  color: #f00;
+  background-color: #f4dede;
+  border-color: #f0d3d7;
 }
 
 .alert-danger h4,
@@ -2134,7 +2167,7 @@ input.submit.btn.btn-mini {
 }
 
 .alert-info {
-  color: #3a87ad;
+  color: #0062ac;
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
@@ -2155,6 +2188,13 @@ input.submit.btn.btn-mini {
 
 .alert-block p + p {
   margin-top: 5px;
+}
+
+.no-wall {
+	padding-left: 0;
+	background: transparent;
+	border: 0 none;
+	font-weight: normal;
 }
 
 .nav {
@@ -3375,7 +3415,10 @@ input.submit.btn.btn-mini {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: #000000;
+  background-color: #000;
+  _position: absolute;
+  _width: 100%;
+  _height: expression((document.getElementById('header')?document.getElementById('header').offsetHeight:0)+(document.getElementById('navbar')?document.getElementById('navbar').offsetHeight:0)+(document.getElementById('container')?document.getElementById('container').offsetHeight:0)+(document.getElementById('cooperation')?document.getElementById('cooperation').offsetHeight:0)+(document.getElementById('footer')?document.getElementById('footer').offsetHeight:0)+"px");
 }
 
 .modal-backdrop.fade {

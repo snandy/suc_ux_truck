@@ -467,6 +467,7 @@ var sohuHD = {
 						,self.flashVer,'&userId=',PassportSC.cookieHandle()].join('') );
 
 					self.getFlash().deleteUpload();
+					self.uploadMode();//重新初始化
 					self.removePageLeaveConfirm();
 					if($.isFunction(callback)) callback();
 				}
@@ -498,7 +499,7 @@ var sohuHD = {
 							'<p class="text">0%</p>',
 						'</div>',
 						'<div class="input-file-btn"></div>',
-						'<div class="tips">上传视频须小于'+FILE_SIZE_LIMIT+'M，格式支持：<span title="avi/mpeg/rmvb/wmv/asf/divx/flv/m4v/fli/flc/mp4/3gp/mkv/3g2">avi /mpeg /rmvb /wmv /flv /mp4...</span></div>',
+						'<div class="tips">上传视频须小于'+FILE_SIZE_LIMIT+'M，格式支持：<span title="avi/mpeg/rmvb/wmv/asf/divx/flv/m4v/fli/flc/mp4/3gp/mkv/3g2/mp3/wma">avi /mpeg /rmvb /wmv /flv /mp4 /mp3 /wma...</span></div>',
 					'</div>',
 					'<div class="video-agreement">',
 						'<label><input type="checkbox" checked="checked"></label>',

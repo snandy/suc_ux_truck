@@ -355,10 +355,11 @@ require('core::util::jQuery', function($) {
 							} else {
 								var html = [];
 								html.push('<div class="title">最近@的好友</div><ul>');
-								$.each(data.refer, function(i, user) {
+								$.each(data.refer.slice(0, 10), function(i, user) {
 									html.push(
 										'<li data-nick="' + user.nick + '" data-sname="' + user.sname + '">', '<img src="' + user.uavatar + '" />',
-										cutCjkString(user.nick, 14),
+										//cutCjkString(user.nick, 14),
+										user.nick,
 										'(' + user.sname + ')',
 										'</li>');
 								});
@@ -407,15 +408,17 @@ require('core::util::jQuery', function($) {
 								var html = [];
 								html.push('<div class="title">想用@提到谁？</div><ul>');
 								$.each(data.accounts, function(i, user) {
-									var cutNick = cutCjkString(user.nick, 14);
+									var cut_nick = user.nick; // cutCjkString(user.nick, 14);
+									var cut_sname = user.sname;
 									if (keyword) {
-										user.newnick = cutNick.replace(keyword, '<strong>' + keyword + '</strong>');
+										user.newnick = cut_nick.replace(keyword, '<strong>' + keyword + '</strong>');
+										user.newsname = cut_sname.replace(keyword, '<strong>' + keyword + '</strong>');
 									}
 									html.push(
 										'<li data-nick="' + user.nick + '" data-sname="' + user.sname + '">', 
 										'<img src="' + user.uavatar + '" />',
 										user.newnick,
-										'(' + user.sname + ')',
+										'(' + user.newsname + ')',
 										'</li>'
 									);
 								});

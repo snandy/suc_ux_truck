@@ -85,6 +85,7 @@ require(
 				time : datai.time,
 				ulink : datai.ulink,
 				unick : datai.unick,
+				usname : datai.usname,
 				isauth : datai.isauth,
 				xpt : datai.xpt,
 				item_type : types[datai.type],

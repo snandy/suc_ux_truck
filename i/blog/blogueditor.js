@@ -387,7 +387,7 @@
 		showCodeDialog: function(params, callback) {
 			var changeVcode = function() {
 				$.ajax({
-					url: '/a/blog/home/vcode/get.htm',
+					url: '/a/blog/home/vcode/get.htm?v='+(new Date).getTime(),
 					type:"POST",
 					success:function(data) {
 						$("#vcodeEn").val(data)

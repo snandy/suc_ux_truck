@@ -14,7 +14,7 @@
 			$nick.html('我的博客')
 			$('.hide').removeClass('hide')
 		} else {
-			$nick.html($space_config._sucNick + '的博客')
+			$nick.html(window._sucNick + '的博客')
 		}
 		blog.init();
 	});
@@ -904,7 +904,7 @@
 			upUrl = preUrl + 'updesc.htm' + charset,
 			elAd = $('.blog-article-ad-wrapper'), $title, $show, $edit, $input
 			
-		$blog_config = $blog_config || {}
+		var $blog_config = window.$blog_config || {}
 		
 		if (!$blog_config.showAd) return
 		

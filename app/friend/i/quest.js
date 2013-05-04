@@ -32,7 +32,7 @@ var project = {
 			$inviteInside = $('#invite_inside'),
 			$insideNick = $inviteInside.find('div.invite-search input:text'),
 			$insideBtn = $inviteInside.find('div.invite-search button'),
-			defText = '输入昵称';
+			defText = '请输入用户名';
 
 		$inviteInside
 		.delegate('a.invite-user-btn','click',function(event){

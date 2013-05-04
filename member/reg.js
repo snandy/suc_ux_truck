@@ -44,11 +44,11 @@ function deleteCookie(name,path,domain) {
 var selEmailInput = "user";
 var validObj = {
 	user:{
-		msg:'4-20位的英文和数字组合,支持"-"及"_"',
-		errMsg:'帐号为4-20位的英文和数字组合,支持"-"及"_"',
+		msg:'4-20位的英文和数字组合及"-"',
+		errMsg:'帐号为4-20位的英文和数字组合及"-"',
 		emptyMsg: '请输入常用邮箱',
 		isExis:false,
-		regStr:/^([a-z0-9_-]+){4,20}$/,
+		regStr:/^([a-z0-9\-]+){4,20}$/,
 		isLegal:false
 	},
 	passwd:{
@@ -63,8 +63,9 @@ var validObj = {
 		errMsg:'仅支持1-20位中英文字符',
 		emptyMsg: '请输入昵称',
 		isExis:false,
-		regStr:/^([a-z0-9_-]+)@([\da-z\.-]+)\.([a-z\.]{1,20})$/,
-		isLegal:false
+		// regStr:/^([a-z0-9_-]+)@([\da-z\.-]+)\.([a-z\.]{1,20})$/,
+		regStr:/^[a-zA-Z0-9_\-\u4e00-\u9fa5]+$/,
+		isLegal:true
 	},
 	vcode:{
 		msg:'请正确输入图片中的字母或数字',
@@ -122,8 +123,8 @@ function regpageBind(){
 			checkMyState($(this));
 		});
 	});
-
-	$('#passwd').bind('keyup',function(){
+	//取消输入时候检验密码强度，改为鼠标离开时检测
+	$('#passwd').bind('blur',function(){
 		chkPasswordStrong($(this).val());
 	});
 
@@ -164,9 +165,15 @@ function createMsgWar(obj){
 
 /* 检查状态 （空，合法，非法） */
 function checkMyState(obj){
+
 	if($.trim(obj.val()).length == 0 || $.trim(obj.val())==""){
+		
 		showMyTip(obj,"","",false);
 		validObj[obj.attr('id')].isLegal = false;
+		//非必输项不输入，验证为true
+		if(obj.attr('id')=='nickname'){
+			validObj[obj.attr('id')].isLegal = true;
+		}
 		if(obj.attr('id')=='user'){
 			hideMyEmail("user");
 		}
@@ -278,8 +285,9 @@ function checkMailAjax(obj,isSohu){
 	var banMark=false;
 	var banArray = ["admin","sohujia","super","fuck","bitch","sohujia","sohu","sohuadmin","sohujiaadmin"];
 	$.each(banArray,function(i,n){
-		if(n == userName){
-			showMyTip(obj,'','此帐号不允许使用',true);
+		if( userName == n || userName.indexOf("sohu")>-1){
+		// if( userName == n ){
+			showMyTip(obj,'error','此帐号包含敏感词汇',true);
 			hideMyEmail("user");
 			//设定isLegal
 			validObj[obj.attr("id")].isLegal = false;
@@ -312,16 +320,18 @@ function checkMailAjax(obj,isSohu){
 		},
 		success: function(data){
 			// code为0用户名未被注册过，1参数错误，2验证码错误，3非法用户名，41 40 用户名存在
+			 // code 0 : success 1: failure  date：2013/4/1  by： liuwp and zhanggz
 			if(data.code == 0){
 				showMyTip(obj,'ok','',true);
 				hideMyEmail("user");
 				//设定isLegal
 				validObj[obj.attr("id")].isLegal = true;
 				setCookie('regInfosave',tmpEmail);
-			}else if(data.code == 41 || data.code == 40){
-				showMyTip(obj,'','此帐号太受欢迎，已有人抢注了',true);
-				showMyEmail("user");
-				//设定isLegal
+			// }else if(data.code == 41 || data.code == 40){
+			}else if(data.code == 1){
+				showMyTip(obj,'error','此帐号太受欢迎，已有人抢注了',true);
+				// showMyEmail("user");
+				// //设定isLegal
 				validObj[obj.attr("id")].isLegal = false;
 			}else{
 				showMyTip(obj,'error',data.msg,true);
@@ -347,7 +357,7 @@ function checkRegEmail(obj){
 		checkMailAjax(obj,true);
 	}
 }
-/* 校验密码 */
+ /*校验密码 */
 function checkPass(obj){
 	if($.trim(obj.val()).length<6||$.trim(obj.val()).length>16){
 		showMyTip(obj,'error',validObj[obj.attr("id")].errMsg,true);
@@ -400,13 +410,17 @@ function cjkLength(value) {
 /* 校验昵称 */
 function checkNickName(obj){
 	var tmpStr = $.trim(obj.val());
+	var reg_nickName = validObj[obj.attr("id")].regStr;
 	/*
 	if(cjkLength($.trim(obj.val())) < 4|| cjkLength($.trim(obj.val())) > 16){
 	*/
 	
 	//console.log('tmpStr::'+tmpStr);
 	
-	if(tmpStr.length < 1 || tmpStr.length > 20){
+	if( tmpStr.length > 20){
+		showMyTip(obj,'error',validObj[obj.attr("id")].errMsg,true);
+		validObj[obj.attr("id")].isLegal = false;
+	}else if(!reg_nickName.test(tmpStr)){
 		showMyTip(obj,'error',validObj[obj.attr("id")].errMsg,true);
 		validObj[obj.attr("id")].isLegal = false;
 	}else{
@@ -420,6 +434,7 @@ function checkNickName(obj){
 				d: tmpStr
 			},
 			success: function(data) {
+				//正常 0  空 1 长度 2 非法字符 3 禁词 4 保留字 5
 				if (data.code == 0) {
 					showMyTip(obj,'ok','',true);
 					validObj[obj.attr("id")].isLegal = true;
@@ -440,9 +455,11 @@ function checkNickName(obj){
 
 /* 校验验证码 */
 function checkCode(obj){
-	if((getCookieByName('msg')!="none")&&(getCookieByName('msg')!="")){
+	if((getCookieByName('errorcode')!="none")&&(getCookieByName('errorcode')!="")){
+
 		showMyTip(obj,'error',validObj['vcode'].errMsg,true);
-		setCookie('msg','none',"","/",".i.sohu.com");
+		validObj['vcode'].isLegal = false ;
+		setCookie('errorcode','none',"","/",".i.sohu.com");
 	}
 	else if ($.trim(obj.val())) {
 		validObj['vcode'].isLegal = true;
@@ -452,9 +469,9 @@ function checkCode(obj){
 
 /* 校验密码cookie */
 function checkpassCode(obj){
-	if((getCookieByName('password')!="none")&&(getCookieByName('password')!="")){
+	if((getCookieByName('errorcode')!="none")&&(getCookieByName('errorcode')!="")){
 		showMyTip(obj,'error',"密码过于简单，请修改",true);
-		setCookie('password','none',"","/",".i.sohu.com");
+		setCookie('errorcode','none',"","/",".i.sohu.com");
 	}else{
 		showMyTip(obj,'','',false);
 	}
@@ -489,20 +506,22 @@ function showMyEmail(str){
 
 /* 检验所有输入信息是否合法，如合法把按钮设成可以提交状态，如有不合法的，保持禁提交状态*/
 function checkLegals(){
+		//var arr= ['user','nickname','passwd','vcode','agree'];
 	if(selEmailInput == 'user'){
-		checkEmptyOnSubmit(['user','passwd','passwdAgain','nickname','vcode']);
-		return validObj['user'].isLegal && validObj['passwd'].isLegal && validObj['passwdAgain'].isLegal &&
-				validObj['nickname'].isLegal && validObj['vcode'].isLegal && validObj['agree'].isLegal;
+		checkEmptyOnSubmit(['user','nickname','passwd','vcode','agree']);
+		return validObj['user'].isLegal && validObj['nickname'].isLegal &&validObj['passwd'].isLegal  && validObj['vcode'].isLegal && validObj['agree'].isLegal;
 	}else{
-		checkEmptyOnSubmit(['regEmail','passwd','passwdAgain','nickname','vcode']);
-		return validObj['regEmail'].isLegal && validObj['passwd'].isLegal && validObj['passwdAgain'].isLegal &&
-				validObj['nickname'].isLegal && validObj['vcode'].isLegal && validObj['agree'].isLegal;
-	}
+		checkEmptyOnSubmit(['user','nickname','passwd','vcode','agree']);
+		return  validObj['user'].isLegal && validObj['nickname'].isLegal &&validObj['passwd'].isLegal && validObj['vcode'].isLegal && validObj['agree'].isLegal;	}
 }
 
 // 进入页面执行的方法
 function initPageSet(){
-	$('#user').focus();
+	if((getCookieByName('errorcode')!="none")&&(getCookieByName('errorcode')!="")){
+		$('#passwd').focus();
+	}else{
+		$('#user').focus();
+	}
 	$('#user').removeAttr('disabled');
 	// hack for browser password autocomplete options.
 	window.setTimeout(function() {

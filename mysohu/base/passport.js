@@ -1964,7 +1964,7 @@ hex_md5 = (function () {
                     }, 50);
                 }
             } else {
-                if (this.isSetFocus && this.emailInput.value != "昵称/邮箱/手机号") {
+                if (this.isSetFocus && this.emailInput.value != "用户名/邮箱/手机号") {
                     setTimeout(function () {
                         self.passwdInput.focus();
                     }, 50);
@@ -2017,7 +2017,7 @@ hex_md5 = (function () {
         },
 
         checkMousedown: function () {
-            if (this.emailInput.value == "昵称/邮箱/手机号") {
+            if (this.emailInput.value == "用户名/邮箱/手机号") {
                 this.emailInput.value = "";
                 this.emailInput.style.color = "black";
                 this.emailInput.focus();

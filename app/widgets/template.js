@@ -12,6 +12,25 @@ function(T) {
 		"page" : '<div class="ui-pagination"><a class="null" href="javascript:;" data-page="1" action="page">首页</a> <a class="null" href="javascript:;" data-page="prev" action="page">上一页</a> <span class="page-num"><p style="display: none;"></p> <span class=""><span class="cpage">第<span>1</span>页</span><span class="btn-arrow"></span></span></span> <a class="txt" data-page="next" href="javascript:;" action="page">下一页</a> <a class="null" href="javascript:;" data-page="tail" action="page">末页</a></div>',
 		"atTa" : '<div class="post-wrapper-inner emote-handler sentence-box" style="width: 388px"><div class="post-area" id="sentence_post_area"><div class="post-state-wrapper"><div style="display: none;" class="post-state success" id="post_state"></div></div><div class="textarea-wrapper post-state-success"><textarea rows="1" cols="60" id="onesentencetext" name="" style="height: 54px; display: inline; color: rgb(153, 153, 153);"></textarea></div></div><div class="post-action"><div class="post-options"><div><div class="emotion-list"></div></div><div class="pub-faces"><div class="clearfix"><a href="javascript:;" action="emote"><span class="btn-emot"></span></a></div></div></div><div class="post-btns"><div class="btn-submit"><a id="sentence_submit" href="javascript:void(0);"><span class="submit">发布</span></a></div><div class="txt-number"><span class="txt-number-now">0 / 300</span></div><div class="txt-error">请输入内容</div></div><div class="clear"></div></div></div>',
 		"albumview" : '<div class="albumview"><!--[if IE 6]><div class="albumview-bg"></div><![endif]--><div class="albumview-wrapper origin"><a href="" target="_blank"></a></div><div class="albumview-wrapper pic"><a href="" target="_blank" title="查看原始图片"></a></div><div class="albumview-wrapper func"><a href="javascript:;" class="roleft clickHandler" action="roleft"><i></i><span class="tit">向左转图片</span></a> <a href="javascript:;" class="roright clickHandler" action="roright"><i></i><span class="tit">向右转图片</span></a> <a href="javascript:;" class="fwd clickHandler" action="forward"><span class="func-float"></span><i></i><span class="tit">转发此图片<span class="num"></span></span></a> <a href="javascript:;" class="cmt clickHandler" action="discuss"><span class="func-float"></span><i></i> <span class="tit">评论此图片<span class="num"></span></span></a></div><div class="albumview-wrapper desc"><div class="albumview-desc"><span></span></div></div><div class="albumview-body"><a href="javascript:;" class="albumview-close" title="关闭视图并返回到新鲜事列表"></a><div style="clear: both; height: 1px;"></div><div class="albumview-nav"><a href="javascript:;" title="下一张" class="albumview-next clickHandler" action="show" data-index="next"></a> <a href="javascript:;" title="上一张" class="albumview-prev clickHandler" action="show" data-index="prev"></a></div><div class="albumview-discuss"><textarea>说说你的看法</textarea><a href="javascript:;" class="discuss-post clickHandler" action="discuss.post"></a><span class="discuss-count"></span><span class="discuss-more"><label><input type="checkbox" />同时转发</label><a href="" target="_blank">查看评论(<span></span>条)</span></a></div><div class="albumview-count"><span></span></div></div><div class="albumview-bottombar"><div class="albumview-preview"></div></div></div>',
-		"whisper" : '<div class="whisper-wrapper">{{^nick}}<div style="width: 0; height: 0; overflow: visible"><div class="nicks"><div class="nicks-head"><i></i></div><ul></ul></div></div><label for="whisper_nick">收件人</label><input id="whisper_nick" type="text" /> <br class="clear" /><div class="contact"></div>{{/nick}} <label for="whisper_content">内&nbsp;&nbsp;容</label><textarea id="whisper_content">{{content}}</textarea><span class="hint"><span>{{{chars}}}</span> / {{{chars}}} </span> <a href="javascript:;" class="emote"><span class="btn-emot"></span>表情</a></div><br class="clear" /><div class="emotion-list"></div><style type="text/css">.jquery-dialog.dialog-whisper .dialog-button-container { padding: 9px 0 7px; text-align: right; }</style>'
+		"whisper" : [
+			'<div class="whisper-wrapper">',
+			'  {{^nick}}',
+			'  <div style="width: 0; height: 0; overflow: visible">',
+			'    <div class="nicks">',
+			'      <div class="nicks-head"><i></i></div>',
+			'      <ul></ul>',
+			'    </div>',
+			'  </div>',
+			'  <label for="whisper_nick">收件人</label><input id="whisper_nick" type="text" /> <br class="clear" />',
+			'  <div class="contact"></div>',
+			'  {{/nick}}',
+			'  <label for="whisper_content">内&nbsp;&nbsp;容</label>',
+			'  <textarea id="whisper_content">{{content}}</textarea><span class="hint"><span>{{{chars}}}</span> / {{{chars}}} </span>',
+			'  <a href="javascript:;" class="emote"><span class="btn-emot"></span>表情</a>',
+			'</div>',
+			'<br class="clear" />',
+			'<div class="emotion-list"></div>',
+			'<style type="text/css">.jquery-dialog.dialog-whisper .dialog-button-container { padding: 9px 0 7px; text-align: right; }</style>'
+		].join('')
 	}));
 });

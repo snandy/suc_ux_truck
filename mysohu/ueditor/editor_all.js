@@ -1,4 +1,4 @@
-(function(){
+(function(window, undefined){
 
 UEDITOR_CONFIG = window.UEDITOR_CONFIG || {};
 
@@ -2012,7 +2012,7 @@ function mergSibling(node,dir) {
 		 * @param {Boolean} toStart 是否在选区开始位置闭合选区，true在开始位置闭合，false反之
 		 * @return {Range}  range对象
 		 */
-		collapse : function( toStart ) {
+		collapse : function(toStart) {
 			var me = this;
 			if ( toStart ) {
 				me.endContainer = me.startContainer;
@@ -2031,7 +2031,7 @@ function mergSibling(node,dir) {
 		 * @name	baidu.editor.dom.Range.shrinkBoundary
 		 * @param	{Boolean}	 ignoreEnd	  是否考虑前面的元素
 		 */
-		shrinkBoundary : function( ignoreEnd ) {
+		shrinkBoundary : function(ignoreEnd) {
 			var me = this,child,
 				collapsed = me.collapsed;
 			while ( me.startContainer.nodeType == 1 //是element
@@ -2063,7 +2063,7 @@ function mergSibling(node,dir) {
 		 * @param {Boolean} ignoreTextNode 是否忽略文本节点
 		 * @return   {Node}   祖先节点
 		 */
-		getCommonAncestor : function( includeSelf, ignoreTextNode ) {
+		getCommonAncestor : function(includeSelf, ignoreTextNode) {
 			var start = this.startContainer,
 				end = this.endContainer;
 			if ( start === end ) {
@@ -2092,7 +2092,7 @@ function mergSibling(node,dir) {
 		 * 执行后
 		 * startContainer = <b>; startOffset = 1  因为将xxx切割成2个节点了
 		 */
-		trimBoundary : function( ignoreEnd ) {
+		trimBoundary : function(ignoreEnd) {
 			this.txtToElmBoundary();
 			var start = this.startContainer,
 				offset = this.startOffset,
@@ -2184,7 +2184,7 @@ function mergSibling(node,dir) {
 		 * @param {Node/DocumentFragment}	node	要插入的节点或fragment
 		 * @return  {Range}	返回range对象
 		 */
-		insertNode : function( node ) {
+		insertNode : function(node) {
 			var first = node,length = 1;
 			if ( node.nodeType == 11 ) {
 				first = node.firstChild;
@@ -2218,7 +2218,7 @@ function mergSibling(node,dir) {
 		 * @param {Boolean}   toEnd   true为闭合到选区的结束位置后，false为闭合到选区的开始位置前
 		 * @return  {Range}	返回range对象
 		 */
-		setCursor : function( toEnd ,notFillData) {
+		setCursor : function(toEnd ,notFillData) {
 			return this.collapse( toEnd ? false : true ).select(notFillData);
 		},
 		/**
@@ -2230,7 +2230,7 @@ function mergSibling(node,dir) {
 		 * @param  {Boolean}   same		true：是否采用唯一的id，false将会为每一个标签产生一个唯一的id
 		 * @returns {Object} bookmark对象
 		 */
-		createBookmark : function( serialize, same ) {
+		createBookmark : function(serialize, same) {
 			var endNode,
 				startNode = this.document.createElement( 'span' );
 			startNode.style.cssText = 'display:none;line-height:0px;';
@@ -2263,7 +2263,7 @@ function mergSibling(node,dir) {
 		 *  @params {Object} bookmark对象
 		 *  @returns {Range}	Range对象
 		 */
-		moveToBookmark : function( bookmark ) {
+		moveToBookmark : function(bookmark) {
 			var start = bookmark.id ? this.document.getElementById( bookmark.start ) : bookmark.start,
 				end = bookmark.end && bookmark.id ? this.document.getElementById( bookmark.end ) : bookmark.end;
 			this.setStartBefore( start );
@@ -2285,7 +2285,7 @@ function mergSibling(node,dir) {
 		 * @params {Function} stopFn	  停止函数，若返回true，则不再扩展
 		 * @return   {Range}	Range对象
 		 */
-		enlarge : function( toBlock, stopFn ) {
+		enlarge : function(toBlock, stopFn) {
 			var isBody = domUtils.isBody,
 				pre,node,tmp = this.document.createTextNode( '' );
 			if ( toBlock ) {
@@ -2397,24 +2397,23 @@ function mergSibling(node,dir) {
 		 * @param {Object} attrObj 属性
 		 * @return   {Range}	Range对象
 		 */
-		applyInlineStyle: function( tagName, attrs ,list) {
-			if(this.collapsed)return this;
-			this.trimBoundary().enlarge( false,
-				function( node ) {
-					return node.nodeType == 1 && domUtils.isBlockElm( node )
-				} ).adjustmentBoundary();
+		applyInlineStyle: function(tagName, attrs ,list) {
+			if (this.collapsed) return this;
+			this.trimBoundary().enlarge(false, function(node) {
+					return node.nodeType == 1 && domUtils.isBlockElm(node)
+				}).adjustmentBoundary();
 
 			var bookmark = this.createBookmark(),
 				end = bookmark.end,
-				filterFn = function( node ) {
-					return node.nodeType == 1 ? node.tagName.toLowerCase() != 'br' : !domUtils.isWhitespace( node )
+				filterFn = function(node) {
+					return node.nodeType == 1 ? node.tagName.toLowerCase() != 'br' : !domUtils.isWhitespace(node)
 				},
 				current = domUtils.getNextDomNode( bookmark.start, false, filterFn ),
 				node,
 				pre,
 				range = this.cloneRange();
 
-			while ( current && (domUtils.getPosition( current, end ) & domUtils.POSITION_PRECEDING) ) {
+			while ( current && (domUtils.getPosition(current, end) & domUtils.POSITION_PRECEDING) ) {
 
 				if ( current.nodeType == 3 || dtd[tagName][current.tagName] ) {
 					range.setStartBefore( current );
@@ -2440,10 +2439,10 @@ function mergSibling(node,dir) {
 					}
 					
 					if ( attrs ) {
-						domUtils.setAttributes( elm, attrs )
+						domUtils.setAttributes(elm, attrs)
 					}
 					elm.appendChild( frag );
-					range.insertNode( list ?  top : elm );
+					range.insertNode(list ?  top : elm);
 					//处理下滑线在a上的情况
 					var aNode;
 					if (tagName == 'span' && attrs.style && /text\-decoration/.test(attrs.style) && (aNode = domUtils.findParentByTagName(elm,'a',true)) ){
@@ -2474,7 +2473,7 @@ function mergSibling(node,dir) {
 		 * @param  {String/Array}	tagName	要去掉的标签名
 		 * @return   {Range}	Range对象
 		 */
-		removeInlineStyle : function( tagName ) {
+		removeInlineStyle : function(tagName) {
 			if(this.collapsed)return this;
 			tagName = utils.isArray( tagName ) ? tagName : [tagName];
 
@@ -4594,8 +4593,22 @@ UE.commands['insertimage'] = {
 		// 	a.innerHTML = opt.title || opt.href;
 		// 	range.insertNode(a).selectNode(a);
 		// } else {
-		// 	range.applyInlineStyle('a', opt);
+		// 	// console.log(selection.getText())
+		// 	// var node = selection.getStart(),
+		// 	// 	link = domUtils.findParentByTagName(node, 'a', true),
+		// 	// 	rangeLink = domUtils.findParentByTagName(range.getCommonAncestor(), 'a', true),
+		// 	// 	orgText = rangeLink[browser.ie ? 'innerText' : 'textContent'];
+
+		// 	// if(orgText && opt.title != orgText){
+		// 	// 	link[browser.ie ? 'innerText' : 'textContent'] = opt.title;
+		// 	// 	range.selectNode(link).select();
+		// 	// } 		
+		// 	// range.applyInlineStyle('a', opt);
+		// 	var node = range.getCommonAncestor(),
+		// 		link = node && node.getElementsByTagName('a');
+		// 	console.log(link);
 		// }
+		
 		if (!range.collapsed) {
 			range.deleteContents();
 		}
@@ -4622,7 +4635,8 @@ UE.commands['insertimage'] = {
 				range.selectNodeContents(tds[0]).select();
 			   
 			}else{
-				doLink(range=this.selection.getRange(),opt);
+				range = this.selection.getRange();
+				doLink(range, opt);
 				range.collapse().select(browser.gecko ? true : false);
 			}
 		},
@@ -9462,7 +9476,6 @@ UE.plugins['formatmatch'] = function(){
 
 	me.commands['formatmatch'] = {
 		execCommand : function( cmdName ) {
-		  
 			if(flag){
 				flag = 0;
 				list = [];
@@ -9472,25 +9485,23 @@ UE.plugins['formatmatch'] = function(){
 
 			var range = me.selection.getRange();
 			img = range.getClosedNode();
-			if(!img || img.tagName != 'IMG'){
+			if (!img || img.tagName != 'IMG') {
 			   range.collapse(true).shrinkBoundary();
 			   var start = range.startContainer;
 			   list = domUtils.findParents(start,true,function(node){
 				   return !domUtils.isBlockElm(node) && node.nodeType == 1
 			   });
 			   //a不能加入格式刷, 并且克隆节点
-			   for(var i=0,ci;ci=list[i];i++){
+			   for (var i=0,ci;ci=list[i];i++) {
 				   if(ci.tagName == 'A'){
 					   list.splice(i,1);
 					   break;
 				   }
 			   }
-
 			}
 
 			me.addListener('mouseup',addList);
 			flag = 1;
-
 
 		},
 		queryCommandState : function() {
@@ -10252,8 +10263,7 @@ baidu.editor.ui = {};
 
 	Popup.postHide = closeAllPopup;
 
-	var ANCHOR_CLASSES = ['edui-anchor-topleft','edui-anchor-topright',
-		'edui-anchor-bottomleft','edui-anchor-bottomright'];
+	var ANCHOR_CLASSES = ['edui-anchor-topleft', 'edui-anchor-topright', 'edui-anchor-bottomleft', 'edui-anchor-bottomright'];
 	Popup.prototype = {
 		SHADOW_RADIUS: 5,
 		content: null,
@@ -10362,9 +10372,6 @@ baidu.editor.ui = {};
 				var box = this.getDom();
 				box.style.display = '';
 				this._hidden = false;
-//				if (box.setActive) {
-//					box.setActive();
-//				}
 				this.fireEvent('show');
 			}
 		},
@@ -13562,18 +13569,18 @@ baidu.editor.ui = {};
 			el.style.marginLeft = '5px';   
 		}
 	}
-	baidu.editor.ui.Editor = function ( options ) {
-		var editor = new baidu.editor.Editor( options );
+	UE.ui.Editor = function (options) {
+		var editor = new UE.Editor(options);
 		editor.options.editor = editor;
-		editor.editorui = new EditorUI( editor.options );
+		editor.editorui = new EditorUI(editor.options);
 		var oldRender = editor.render;
-		editor.render = function ( holder ) {
-			if ( holder ) {
+		editor.render = function (holder) {
+			if (holder) {
 				if ( holder.constructor === String ) {
-					holder = document.getElementById( holder );
+					holder = document.getElementById(holder);
 				}
-				holder && holder.getAttribute( 'name' ) && ( editor.options.textarea = holder.getAttribute( 'name' ));
-				if ( holder && /script|textarea/ig.test( holder.tagName ) ) {
+				holder && holder.getAttribute( 'name' ) && ( editor.options.textarea = holder.getAttribute('name'));
+				if ( holder && /script|textarea/ig.test(holder.tagName) ) {
 					var newDiv = document.createElement( 'div' );
 					holder.parentNode.insertBefore( newDiv, holder );
 					editor.options.initialContent = holder.value || holder.innerHTML;
@@ -13591,7 +13598,7 @@ baidu.editor.ui = {};
 			//给实例添加一个编辑器的容器引用
 			editor.container = editor.ui.getDom();
 			editor.container.style.zIndex = editor.options.zIndex;
-			oldRender.call( editor, iframeholder );
+			oldRender.call(editor, iframeholder);
 		};
 		return editor;
 	};
@@ -13632,4 +13639,4 @@ baidu.editor.ui = {};
 	utils.inherits(MultiMenuPop, SplitButton);
 })();
 
-})();
+})(this);
