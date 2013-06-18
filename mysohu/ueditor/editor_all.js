@@ -173,16 +173,41 @@ var utils = UE.utils = {
 		}
 		return obj;
 	},
-	unhtml: function(str) {
-	   return str ? str.replace(/[&<">]/g, function(m){
-		   return {
-			   '<': '&lt;',
-			   '&': '&amp',
-			   '"': '&quot;',
-			   '>': '&gt;'
-		   }[m]
-	   }) : '';
-	},
+    /**
+     * 将str中的html符号转义,默认将转义''&<">''四个字符，可自定义reg来确定需要转义的字符
+     * @name unhtml
+     * @grammar UE.utils.unhtml(str);  => String
+     * @grammar UE.utils.unhtml(str,reg)  => String
+     * @example
+     * var html = '<body>You say:"你好！Baidu & UEditor!"</body>';
+     * UE.utils.unhtml(html);   ==>  &lt;body&gt;You say:&quot;你好！Baidu &amp; UEditor!&quot;&lt;/body&gt;
+     * UE.utils.unhtml(html,/[<>]/g)  ==>  &lt;body&gt;You say:"你好！Baidu & UEditor!"&lt;/body&gt;
+     */
+    unhtml:function (str, reg) {
+        return str ? str.replace(reg || /[&<">]/g, function (m) {
+            return {
+                '<':'&lt;',
+                '&':'&amp;',
+                '"':'&quot;',
+                '>':'&gt;'
+            }[m]
+        }) : '';
+    },
+    /**
+     * 将str中的转义字符还原成html字符
+     * @name html
+     * @grammar UE.utils.html(str)  => String   //详细参见<code><a href = '#unhtml'>unhtml</a></code>
+     */
+    html:function (str) {
+        return str ? str.replace(/&((g|l|quo)t|amp);/g, function (m) {
+            return {
+                '&lt;':'<',
+                '&amp;':'&',
+                '&quot;':'"',
+                '&gt;':'>'
+            }[m]
+        }) : '';
+    },	
 	delhtml: function(str) {
 		return str.replace(/<\/?.+?>/g,'')
 	},
@@ -1665,6 +1690,22 @@ var domUtils = dom.domUtils = {
 			} else {
 				return node.innerText
 			}
+		},
+		isInNodeEndBoundary : function (rng,node){
+			var start = rng.startContainer;
+			if(start.nodeType == 3 && rng.startOffset != start.nodeValue.length){
+				return 0;
+			}
+			if(start.nodeType == 1 && rng.startOffset != start.childNodes.length){
+				return 0;
+			}
+			while(start !== node){
+				if(start.nextSibling){
+					return 0
+				};
+				start = start.parentNode;
+			}
+			return 1;
 		}
 
 	};
@@ -3316,7 +3357,6 @@ Editor.prototype = /**@lends baidu.editor.Editor.prototype*/{
 		var serialize = this.serialize;
 		if (serialize) {
 			var node = serialize.parseHTML(html);
-			//console.log(node)
 			node = serialize.transformInput(node);
 			node = serialize.filter(node);
 			html = serialize.toHTML(node);
@@ -4534,151 +4574,126 @@ UE.commands['insertimage'] = {
  * @author zhanyi
  */
 (function() {
-	function optimize(range) {
+	function optimize( range ) {
 		var start = range.startContainer,end = range.endContainer;
-		if ( start = domUtils.findParentByTagName(start, 'a', true) ) {
-			range.setStartBefore(start)
+
+		if ( start = domUtils.findParentByTagName( start, 'a', true ) ) {
+			range.setStartBefore( start );
 		}
-		if ( end = domUtils.findParentByTagName(end, 'a', true) ) {
-			range.setEndAfter(end)
+		if ( end = domUtils.findParentByTagName( end, 'a', true ) ) {
+			range.setEndAfter( end );
 		}
 	}
 
 	UE.commands['unlink'] = {
 		execCommand : function() {
-			var as,
-				range = new dom.Range(this.document),
-				tds = this.currentSelectedArr,
+			var range = this.selection.getRange(),
 				bookmark;
-			if (tds && tds.length >0) {
-				for (var i=0,ti;ti=tds[i++];) {
-					as = domUtils.getElementsByTagName(ti,'a');
-					for (var j=0,aj;aj=as[j++];) {
-						domUtils.remove(aj,true);
-					}
-				}
-				if(domUtils.isEmptyNode(tds[0])){
-					range.setStart(tds[0],0).setCursor();
-				}else{
-					range.selectNodeContents(tds[0]).select()
-				}
-			}else{
-				range = this.selection.getRange();
-				if(range.collapsed && !domUtils.findParentByTagName( range.startContainer, 'a', true )){
-					return;
-				}
-				bookmark = range.createBookmark();
-				optimize( range );
-				range.removeInlineStyle( 'a' ).moveToBookmark( bookmark ).select();
+			if(range.collapsed && !domUtils.findParentByTagName( range.startContainer, 'a', true )){
+				return;
 			}
+			bookmark = range.createBookmark();
+			optimize( range );
+			range.removeInlineStyle( 'a' ).moveToBookmark( bookmark ).select();
 		},
 		queryCommandState : function(){
 			return !this.highlight && this.queryCommandValue('link') ?  0 : -1;
 		}
-
 	};
-	function doLink(range, opt) {
+	function doLink(range,opt,me){
+		var rngClone = range.cloneRange(),
+			link = me.queryCommandValue('link');
 		optimize( range = range.adjustmentBoundary() );
 		var start = range.startContainer;
-		if (start.nodeType == 1) {
+		if(start.nodeType == 1 && link){
 			start = start.childNodes[range.startOffset];
-			if (start && start.nodeType == 1 && start.tagName == 'A' && /^(?:https?|ftp|file)\s*:\s*\/\//.test(start[browser.ie? 'innerText' : 'textContent'])) {
-				start.innerHTML = opt.title || opt.href;
+			if(start && start.nodeType == 1 && start.tagName == 'A' && /^(?:https?|ftp|file)\s*:\s*\/\//.test(start[browser.ie?'innerText':'textContent'])){
+				start[browser.ie ? 'innerText' : 'textContent'] =  utils.html(opt.textValue||opt.href);
 			}
 		}
-		range.removeInlineStyle('a');
-		// if (range.collapsed) {
-		// 	var a = range.document.createElement( 'a' );
-		// 	domUtils.setAttributes(a, opt);
-		// 	a.innerHTML = opt.title || opt.href;
-		// 	range.insertNode(a).selectNode(a);
-		// } else {
-		// 	// console.log(selection.getText())
-		// 	// var node = selection.getStart(),
-		// 	// 	link = domUtils.findParentByTagName(node, 'a', true),
-		// 	// 	rangeLink = domUtils.findParentByTagName(range.getCommonAncestor(), 'a', true),
-		// 	// 	orgText = rangeLink[browser.ie ? 'innerText' : 'textContent'];
-
-		// 	// if(orgText && opt.title != orgText){
-		// 	// 	link[browser.ie ? 'innerText' : 'textContent'] = opt.title;
-		// 	// 	range.selectNode(link).select();
-		// 	// } 		
-		// 	// range.applyInlineStyle('a', opt);
-		// 	var node = range.getCommonAncestor(),
-		// 		link = node && node.getElementsByTagName('a');
-		// 	console.log(link);
-		// }
-		
-		if (!range.collapsed) {
-			range.deleteContents();
+		if( !rngClone.collapsed || link){
+			range.removeInlineStyle( 'a' );
+			rngClone = range.cloneRange();
 		}
-		var a = range.document.createElement( 'a' );
-		domUtils.setAttributes(a, opt);
-		a.innerHTML = opt.title || opt.href;
-		range.insertNode(a).selectNode(a);
+
+		if ( rngClone.collapsed ) {
+			var a = range.document.createElement( 'a'),
+				text = '';
+			if(opt.textValue){
+
+				text =   utils.html(opt.textValue);
+				delete opt.textValue;
+			}else{
+				text =   utils.html(opt.href);
+
+			}
+			domUtils.setAttributes( a, opt );
+			start =  domUtils.findParentByTagName( rngClone.startContainer, 'a', true );
+			if(start && domUtils.isInNodeEndBoundary(rngClone,start)){
+				range.setStartAfter(start).collapse(true);
+
+			}
+			a[browser.ie ? 'innerText' : 'textContent'] = text;
+			range.insertNode(a).selectNode( a );
+		} else {
+			range.applyInlineStyle( 'a', opt );
+
+		}
 	}
 	UE.commands['link'] = {
 		queryCommandState : function() {
-			return this.highlight ? -1 : 0;
+			//判断如果是视频的话连接不可用
+			//fix 853
+			var img = this.selection.getRange().getClosedNode(),
+				flag = img && (img.className == "edui-faked-video");
+			return flag ? -1 : 0;
 		},
 		execCommand : function( cmdName, opt ) {
-			var range = new dom.Range(this.document),
-				tds = this.currentSelectedArr;
-			
-			if (tds && tds.length) {
-				for (var i=0,ti;ti=tds[i++];) {
-					if (domUtils.isEmptyNode(ti)) {
-						ti.innerHTML = opt.title || opt.href;
-					}
-					doLink(range.selectNodeContents(ti), opt);
-				}
-				range.selectNodeContents(tds[0]).select();
-			   
-			}else{
-				range = this.selection.getRange();
-				doLink(range, opt);
-				range.collapse().select(browser.gecko ? true : false);
-			}
+			var range;
+			opt.data_ue_src && (opt.data_ue_src = utils.unhtml(opt.data_ue_src,/[<">]/g));
+			opt.href && (opt.href = utils.unhtml(opt.href,/[<">]/g));
+			opt.textValue && (opt.textValue = utils.unhtml(opt.textValue,/[<">]/g));
+			doLink(range=this.selection.getRange(),opt,this);
+			//闭合都不加占位符，如果加了会在a后边多个占位符节点，导致a是图片背景组成的列表，出现空白问题
+			range.collapse().select(true);
 		},
 		queryCommandValue : function() {
-			var range = new dom.Range(this.document),
-				tds = this.currentSelectedArr, as, node;
-			if(tds && tds.length){
-				for(var i=0,ti;ti=tds[i++];){
-					as = ti.getElementsByTagName('a');
-					if(as[0])
-						return as[0]
-				}
-			}else{
-				range = this.selection.getRange();
-				if ( range.collapsed ) {
-					node = this.selection.getStart();
-					if ( node && (node = domUtils.findParentByTagName( node, 'a', true )) ) {
-						return node;
-					}
-				} else {
-					//trace:1111  如果是<p><a>xx</a></p> startContainer是p就会找不到a
-					range.shrinkBoundary();
-					var start = range.startContainer.nodeType  == 3 || !range.startContainer.childNodes[range.startOffset] ? range.startContainer : range.startContainer.childNodes[range.startOffset],
-						end =  range.endContainer.nodeType == 3 || range.endOffset == 0 ? range.endContainer : range.endContainer.childNodes[range.endOffset-1],
-						common = range.getCommonAncestor();
+			var range = this.selection.getRange(),
+				node;
+			if ( range.collapsed ) {
+//					node = this.selection.getStart();
+				//在ie下getstart()取值偏上了
+				node = range.startContainer;
+				node = node.nodeType == 1 ? node : node.parentNode;
 
-					node = domUtils.findParentByTagName( common, 'a', true );
-					if ( !node && common.nodeType == 1){
-						var as = common.getElementsByTagName( 'a' ), ps, pe;
-						for ( var i = 0,ci; ci = as[i++]; ) {
-							ps = domUtils.getPosition( ci, start ),pe = domUtils.getPosition( ci,end);
-							if ( (ps & domUtils.POSITION_FOLLOWING || ps & domUtils.POSITION_CONTAINS)
-								&&
-								(pe & domUtils.POSITION_PRECEDING || pe & domUtils.POSITION_CONTAINS)
-								) {
-								node = ci;
-								break;
-							}
-						}
-					}
+				if ( node && (node = domUtils.findParentByTagName( node, 'a', true )) && ! domUtils.isInNodeEndBoundary(range,node)) {
+
 					return node;
 				}
+			} else {
+				//trace:1111  如果是<p><a>xx</a></p> startContainer是p就会找不到a
+				range.shrinkBoundary();
+				var start = range.startContainer.nodeType  == 3 || !range.startContainer.childNodes[range.startOffset] ? range.startContainer : range.startContainer.childNodes[range.startOffset],
+					end =  range.endContainer.nodeType == 3 || range.endOffset == 0 ? range.endContainer : range.endContainer.childNodes[range.endOffset-1],
+					common = range.getCommonAncestor();
+				node = domUtils.findParentByTagName( common, 'a', true );
+				if ( !node && common.nodeType == 1){
+
+					var as = common.getElementsByTagName( 'a' ),
+						ps,pe;
+
+					for ( var i = 0,ci; ci = as[i++]; ) {
+						ps = domUtils.getPosition( ci, start ),pe = domUtils.getPosition( ci,end);
+						if ( (ps & domUtils.POSITION_FOLLOWING || ps & domUtils.POSITION_CONTAINS)
+							&&
+							(pe & domUtils.POSITION_PRECEDING || pe & domUtils.POSITION_CONTAINS)
+							) {
+							node = ci;
+							break;
+						}
+					}
+				}
+				return node;
 			}
 
 		}
@@ -6815,43 +6830,42 @@ UE.plugins['undo'] = function() {
 				this.newline();
 			}
 		},
-		indent: function (){
+		indent: function () {
 			this.buff.push(this.indents);
 			this.indenting = 0;
 		},
-		newline: function (){
+		newline: function () {
 			this.buff.push(this.breakChar);
 			this.indenting = 1;
 		},
-		visitEndTag: function (tag){
-			
-			this.indents = this.indents.slice(0, -this.indentChar.length);
+		visitEndTag: function (tag) {
+			this.indents = this.indents.slice(0, -this.indentChar.length)
 			if (this.indenting) {
-				this.indent();
+				this.indent()
 			} else if (!inline[tag]) {
-				this.newline();
-				this.indent();
+				this.newline()
+				this.indent()
 			}
-			this.buff.push('</', tag, '>');
+			this.buff.push('</', tag, '>')
 		},
-		visitText: function (text,notTrans){
+		visitText: function (text,notTrans) {
 			if (this.indenting) {
-				this.indent();
+				this.indent()
 			}
 			text = text.replace(/&nbsp;/g, ' ')
-			this.buff.push(text);
+			this.buff.push(text)
 
 		},
-		visitComment: function (text){
+		visitComment: function (text) {
 			if (this.indenting) {
-				this.indent();
+				this.indent()
 			}
-			this.buff.push('<!--', text, '-->');
+			this.buff.push('<!--', text, '-->')
 		}
 	};
 
 	var sourceEditors = {
-		textarea: function (editor, holder){
+		textarea: function (editor, holder) {
 			var textarea = holder.ownerDocument.createElement('textarea');
 			textarea.style.cssText = 'position:absolute;resize:none;width:100%;height:100%;border:0;padding:0;margin:0;overflow-y:auto;';
 			// todo: IE下只有onresize属性可用... 很纠结
@@ -6923,86 +6937,89 @@ UE.plugins['undo'] = function() {
 		}
 	};
 
-	UE.plugins['source'] = function (){
-		var me = this;
-		var opt = this.options;
-		var formatter = new SourceFormater(opt.source);
-		var sourceMode = false;
-		var sourceEditor;
+	UE.plugins['source'] = function () {
+		var sourceEditor
+		var me = this
+		var opt = me.options
+		var sourceMode = false
+		var formatter = new SourceFormater(opt.source)
 
-		function createSourceEditor(holder){
+		function createSourceEditor(holder) {
 			var useCodeMirror = opt.sourceEditor == 'codemirror' && window.CodeMirror;
-			return sourceEditors[useCodeMirror ? 'codemirror' : 'textarea'](me, holder);
+			return sourceEditors[useCodeMirror ? 'codemirror' : 'textarea'](me, holder)
 		}
+		function format() {
+			me.undoManger && me.undoManger.save();
+			me.currentSelectedArr && domUtils.clearSelectedArr(me.currentSelectedArr);
+			if (browser.gecko) {
+				me.body.contentEditable = false
+			}
+			bakCssText = me.iframe.style.cssText;
+			me.iframe.style.cssText += 'position:absolute;left:-32768px;top:-32768px;';
+			var content = formatter.format(me.hasContents() ? me.getContent() : '');
+			sourceEditor = createSourceEditor(me.iframe.parentNode);
+			sourceEditor.setContent(content);
+			setTimeout(function() {
+				sourceEditor.select()
+			})
+		}
+		function sourceTrim() {
+			me.iframe.style.cssText = bakCssText;
+			var cont = sourceEditor.getContent() || '<p>' + (browser.ie ? '' : '<br/>')+'</p>';
+			cont = cont.replace(/>[\n\r\t]+([ ]{4})+/g,'>').replace(/[\n\r\t]+([ ]{4})+</g,'<').replace(/>[\n\r\t]+</g,'><');
+			me.setContent(cont);
+			sourceEditor.dispose();
+			sourceEditor = null;
+			setTimeout(function() {
+				var first = me.body.firstChild;
+				//trace:1106 都删除空了，下边会报错，所以补充一个p占位
+				if (!first) {
+					me.body.innerHTML = '<p>'+(browser.ie?'':'<br/>')+'</p>';
+					first = me.body.firstChild;
+				}
+				//要在ifm为显示时ff才能取到selection,否则报错
+				me.undoManger && me.undoManger.save();
 
-		var bakCssText;
+				while (first && first.firstChild) {
+					first = first.firstChild;
+				}
+				var range = me.selection.getRange();
+				if (first.nodeType == 3 || dtd.$empty[first.tagName]) {
+					range.setStartBefore(first)
+				} else {
+					range.setStart(first,0);
+				}
+				if (browser.gecko) {
+					var input = document.createElement('input');
+					input.style.cssText = 'position:absolute;left:0;top:-32768px';
+					document.body.appendChild(input);
+					me.body.contentEditable = false;
+					setTimeout(function(){
+						domUtils.setViewportOffset(input, { left: -32768, top: 0 });
+						input.focus();
+						setTimeout(function(){
+							me.body.contentEditable = true;
+							range.setCursor(false,true);
+							domUtils.remove(input)
+						})
+					})
+				} else {
+					range.setCursor(false,true);
+				}
+			})
+		}
+		var bakCssText
 		me.commands['source'] = {
-			execCommand: function (){
+			execCommand: function () {
 				sourceMode = !sourceMode;
 				if (sourceMode) {
-					me.undoManger && me.undoManger.save();
-					this.currentSelectedArr && domUtils.clearSelectedArr(this.currentSelectedArr);
-					if(browser.gecko)
-						me.body.contentEditable = false;
-					
-					bakCssText = me.iframe.style.cssText;
-					me.iframe.style.cssText += 'position:absolute;left:-32768px;top:-32768px;';
-					var content = formatter.format(me.hasContents() ? me.getContent() : '');
-					sourceEditor = createSourceEditor(me.iframe.parentNode);
-					sourceEditor.setContent(content);
-					setTimeout(function (){
-						sourceEditor.select();
-					});
+					format()
 				} else {
-					me.iframe.style.cssText = bakCssText;
-					var cont = sourceEditor.getContent() || '<p>' + (browser.ie ? '' : '<br/>')+'</p>';
-					cont = cont.replace(/>[\n\r\t]+([ ]{4})+/g,'>').replace(/[\n\r\t]+([ ]{4})+</g,'<').replace(/>[\n\r\t]+</g,'><');
-					// console.log(cont)
-					me.setContent(cont);
-					sourceEditor.dispose();
-					sourceEditor = null;
-					setTimeout(function(){
-						
-						var first = me.body.firstChild;
-						//trace:1106 都删除空了，下边会报错，所以补充一个p占位
-						if(!first){
-							me.body.innerHTML = '<p>'+(browser.ie?'':'<br/>')+'</p>';
-							first = me.body.firstChild;
-						}
-						//要在ifm为显示时ff才能取到selection,否则报错
-						me.undoManger && me.undoManger.save();
-
-						while(first && first.firstChild){
-							first = first.firstChild;
-						}
-						var range = me.selection.getRange();
-						if(first.nodeType == 3 || dtd.$empty[first.tagName]){
-							range.setStartBefore(first)
-						}else{
-							range.setStart(first,0);
-						}
-						if(browser.gecko){
-							var input = document.createElement('input');
-							input.style.cssText = 'position:absolute;left:0;top:-32768px';
-							document.body.appendChild(input);
-							me.body.contentEditable = false;
-							setTimeout(function(){
-								domUtils.setViewportOffset(input, { left: -32768, top: 0 });
-								input.focus();
-								setTimeout(function(){
-									me.body.contentEditable = true;
-									range.setCursor(false,true);
-									domUtils.remove(input)
-								})
-							})
-						}else{
-							range.setCursor(false,true);
-						}
-					})
+					sourceTrim()
 				}
-				this.fireEvent('sourcemodechanged', sourceMode);
+				this.fireEvent('sourcemodechanged', sourceMode)
 			},
-			queryCommandState: function (){
+			queryCommandState: function () {
 				return sourceMode|0;
 			}
 		};
@@ -7016,19 +7033,24 @@ UE.plugins['undo'] = function() {
 		};
 		//解决在源码模式下getContent不能得到最新的内容问题
 		var oldGetContent = me.getContent;
-		me.getContent = function (){
-			if(sourceMode && sourceEditor ){
-				var html = sourceEditor.getContent();
+		me.getContent = function () {
+			if (sourceMode && sourceEditor ) {
+				var html = sourceEditor.getContent()
 				if (this.serialize) {
-					var node = this.serialize.parseHTML(html);
+					var node = this.serialize.parseHTML(html)
 					node = this.serialize.filter(node);
 					html = this.serialize.toHTML(node);
 				}
-				return html;
+				return html
 			}else{
 				return oldGetContent.apply(this, arguments)
 			}
 		};
+		// exports 提交前恢复非格式化状态，避免多余字符数 "\n" 等
+		me.getSourceMode = function() {
+			return sourceMode
+		}
+		me.sourceTrim = sourceTrim
 	};
 
 })();
@@ -8437,133 +8459,133 @@ var transformWordHtml = function () {
 		return v;
 	}
 	function filterPasteWord( str ) {
-        str = str.replace( /<!--\s*EndFragment\s*-->[\s\S]*$/, '' )
-            //remove link break
-            .replace( /^(\r\n|\n|\r)|(\r\n|\n|\r)$/ig, "" )
-            //remove &nbsp; entities at the start of contents
-            .replace( /^\s*(&nbsp;)+/ig, "" )
-            //remove &nbsp; entities at the end of contents
-            .replace( /(&nbsp;|<br[^>]*>)+\s*$/ig, "" )
-            // Word comments like conditional comments etc
-            .replace( /<!--[\s\S]*?-->/ig, "" )
-            //转换图片
-            .replace(/<v:shape [^>]*>[\s\S]*?.<\/v:shape>/gi,function(str){
-                try{
-                    var width = str.match(/width:([ \d.]*p[tx])/i)[1],
-                        height = str.match(/height:([ \d.]*p[tx])/i)[1],
-                        src =  str.match(/src=\s*"([^"]*)"/i)[1];
-                    return '<img width="'+ptToPx(width)+'" height="'+ptToPx(height)+'" src="' + src + '" />'
-                } catch(e){
-                    return '';
-                }
+		str = str.replace( /<!--\s*EndFragment\s*-->[\s\S]*$/, '' )
+			//remove link break
+			.replace( /^(\r\n|\n|\r)|(\r\n|\n|\r)$/ig, "" )
+			//remove &nbsp; entities at the start of contents
+			.replace( /^\s*(&nbsp;)+/ig, "" )
+			//remove &nbsp; entities at the end of contents
+			.replace( /(&nbsp;|<br[^>]*>)+\s*$/ig, "" )
+			// Word comments like conditional comments etc
+			.replace( /<!--[\s\S]*?-->/ig, "" )
+			//转换图片
+			.replace(/<v:shape [^>]*>[\s\S]*?.<\/v:shape>/gi,function(str){
+				try{
+					var width = str.match(/width:([ \d.]*p[tx])/i)[1],
+						height = str.match(/height:([ \d.]*p[tx])/i)[1],
+						src =  str.match(/src=\s*"([^"]*)"/i)[1];
+					return '<img width="'+ptToPx(width)+'" height="'+ptToPx(height)+'" src="' + src + '" />'
+				} catch(e){
+					return '';
+				}
 
-            })
-            //去掉多余的属性
-            .replace( /v:\w+=["']?[^'"]+["']?/g, '' )
-            // Remove comments, scripts (e.g., msoShowComment), XML tag, VML content, MS Office namespaced tags, and a few other tags
-            .replace( /<(!|script[^>]*>.*?<\/script(?=[>\s])|\/?(\?xml(:\w+)?|xml|meta|link|style|\w+:\w+)(?=[\s\/>]))[^>]*>/gi, "" )
-            //convert word headers to strong
-            .replace( /<p [^>]*class="?MsoHeading"?[^>]*>(.*?)<\/p>/gi, "<p><strong>$1</strong></p>" )
-            //remove lang attribute
-            .replace( /(lang)\s*=\s*([\'\"]?)[\w-]+\2/ig, "" )
-            //清除多余的font不能匹配&nbsp;有可能是空格
-            .replace( /<font[^>]*>\s*<\/font>/gi, '' )
-            //清除多余的class
-            .replace( /class\s*=\s*["']?(?:(?:MsoTableGrid)|(?:MsoListParagraph)|(?:MsoNormal(Table)?))\s*["']?/gi, '' );
+			})
+			//去掉多余的属性
+			.replace( /v:\w+=["']?[^'"]+["']?/g, '' )
+			// Remove comments, scripts (e.g., msoShowComment), XML tag, VML content, MS Office namespaced tags, and a few other tags
+			.replace( /<(!|script[^>]*>.*?<\/script(?=[>\s])|\/?(\?xml(:\w+)?|xml|meta|link|style|\w+:\w+)(?=[\s\/>]))[^>]*>/gi, "" )
+			//convert word headers to strong
+			.replace( /<p [^>]*class="?MsoHeading"?[^>]*>(.*?)<\/p>/gi, "<p><strong>$1</strong></p>" )
+			//remove lang attribute
+			.replace( /(lang)\s*=\s*([\'\"]?)[\w-]+\2/ig, "" )
+			//清除多余的font不能匹配&nbsp;有可能是空格
+			.replace( /<font[^>]*>\s*<\/font>/gi, '' )
+			//清除多余的class
+			.replace( /class\s*=\s*["']?(?:(?:MsoTableGrid)|(?:MsoListParagraph)|(?:MsoNormal(Table)?))\s*["']?/gi, '' );
 
-        // Examine all styles: delete junk, transform some, and keep the rest
-        //修复了原有的问题, 比如style='fontsize:"宋体"'原来的匹配失效了
-        str = str.replace( /(<[a-z][^>]*)\sstyle=(["'])([^\2]*?)\2/gi, function( str, tag, tmp, style ) {
+		// Examine all styles: delete junk, transform some, and keep the rest
+		//修复了原有的问题, 比如style='fontsize:"宋体"'原来的匹配失效了
+		str = str.replace( /(<[a-z][^>]*)\sstyle=(["'])([^\2]*?)\2/gi, function( str, tag, tmp, style ) {
 
-            var n = [],
-                    i = 0,
-                    s = style.replace( /^\s+|\s+$/, '' ).replace( /&quot;/gi, "'" ).split( /;\s*/g );
-            // Examine each style definition within the tag's style attribute
-            for ( var i = 0; i < s.length; i++ ) {
-                var v = s[i];
-                var name, value,
-                        parts = v.split( ":" );
+			var n = [],
+					i = 0,
+					s = style.replace( /^\s+|\s+$/, '' ).replace( /&quot;/gi, "'" ).split( /;\s*/g );
+			// Examine each style definition within the tag's style attribute
+			for ( var i = 0; i < s.length; i++ ) {
+				var v = s[i];
+				var name, value,
+						parts = v.split( ":" );
 
-                if ( parts.length == 2 ) {
-                    name = parts[0].toLowerCase();
-                    value = parts[1].toLowerCase();
-                    // Translate certain MS Office styles into their CSS equivalents
-                    switch ( name ) {
-                        case "mso-padding-alt":
-                        case "mso-padding-top-alt":
-                        case "mso-padding-right-alt":
-                        case "mso-padding-bottom-alt":
-                        case "mso-padding-left-alt":
-                        case "mso-margin-alt":
-                        case "mso-margin-top-alt":
-                        case "mso-margin-right-alt":
-                        case "mso-margin-bottom-alt":
-                        case "mso-margin-left-alt":
-                        //ie下会出现挤到一起的情况
-//                            case "mso-table-layout-alt":
-                        case "mso-height":
-                        case "mso-width":
-                        case "mso-vertical-align-alt":
-                            //trace:1819 ff下会解析出padding在table上
-                            if(!/<table/.test(tag))
-                                n[i] = name.replace( /^mso-|-alt$/g, "" ) + ":" + ensureUnits( value );
-                            continue;
-                        case "horiz-align":
-                            n[i] = "text-align:" + value;
-                            continue;
-                        case "vert-align":
-                            n[i] = "vertical-align:" + value;
-                            continue;
-                        case "font-color":
-                        case "mso-foreground":
-                            n[i] = "color:" + value;
-                            continue;
-                        case "mso-background":
-                        case "mso-highlight":
-                            n[i] = "background:" + value;
-                            continue;
-                        case "mso-default-height":
-                            n[i] = "min-height:" + ensureUnits( value );
-                            continue;
-                        case "mso-default-width":
-                            n[i] = "min-width:" + ensureUnits( value );
-                            continue;
-                        case "mso-padding-between-alt":
-                            n[i] = "border-collapse:separate;border-spacing:" + ensureUnits( value );
-                            continue;
-                        case "text-line-through":
-                            if ( (value == "single") || (value == "double") ) {
-                                n[i] = "text-decoration:line-through";
-                            }
-                            continue;
-                        case "mso-zero-height":
-                            if ( value == "yes" ) {
-                                n[i] = "display:none";
-                            }
-                            continue;
-                        case 'margin':
-                            if ( !/[1-9]/.test( parts[1] ) ) {
-                                continue;
-                            }
-                    }
+				if ( parts.length == 2 ) {
+					name = parts[0].toLowerCase();
+					value = parts[1].toLowerCase();
+					// Translate certain MS Office styles into their CSS equivalents
+					switch ( name ) {
+						case "mso-padding-alt":
+						case "mso-padding-top-alt":
+						case "mso-padding-right-alt":
+						case "mso-padding-bottom-alt":
+						case "mso-padding-left-alt":
+						case "mso-margin-alt":
+						case "mso-margin-top-alt":
+						case "mso-margin-right-alt":
+						case "mso-margin-bottom-alt":
+						case "mso-margin-left-alt":
+						//ie下会出现挤到一起的情况
+//							case "mso-table-layout-alt":
+						case "mso-height":
+						case "mso-width":
+						case "mso-vertical-align-alt":
+							//trace:1819 ff下会解析出padding在table上
+							if(!/<table/.test(tag))
+								n[i] = name.replace( /^mso-|-alt$/g, "" ) + ":" + ensureUnits( value );
+							continue;
+						case "horiz-align":
+							n[i] = "text-align:" + value;
+							continue;
+						case "vert-align":
+							n[i] = "vertical-align:" + value;
+							continue;
+						case "font-color":
+						case "mso-foreground":
+							n[i] = "color:" + value;
+							continue;
+						case "mso-background":
+						case "mso-highlight":
+							n[i] = "background:" + value;
+							continue;
+						case "mso-default-height":
+							n[i] = "min-height:" + ensureUnits( value );
+							continue;
+						case "mso-default-width":
+							n[i] = "min-width:" + ensureUnits( value );
+							continue;
+						case "mso-padding-between-alt":
+							n[i] = "border-collapse:separate;border-spacing:" + ensureUnits( value );
+							continue;
+						case "text-line-through":
+							if ( (value == "single") || (value == "double") ) {
+								n[i] = "text-decoration:line-through";
+							}
+							continue;
+						case "mso-zero-height":
+							if ( value == "yes" ) {
+								n[i] = "display:none";
+							}
+							continue;
+						case 'margin':
+							if ( !/[1-9]/.test( parts[1] ) ) {
+								continue;
+							}
+					}
 
-                    if ( /^(mso|column|font-emph|lang|layout|line-break|list-image|nav|panose|punct|row|ruby|sep|size|src|tab-|table-border|text-(?:decor|trans)|top-bar|version|vnd|word-break)/.test( name ) ) {
-                        continue;
-                    }
-                    n[i] = name + ":" + parts[1];        // Lower-case name, but keep value case
-                }
-            }
-            // If style attribute contained any valid styles the re-write it; otherwise delete style attribute.
-            if ( i > 0 ) {
-                return tag + ' style="' + n.join( ';' ) + '"';
-            } else {
-                return tag;
-            }
-        } );
-        str = str.replace( /([ ]+)<\/span>/ig, function ( m, p ) {
-            return new Array( p.length + 1 ).join( '&nbsp;' ) + '</span>';
-        } );
-        return str;
+					if ( /^(mso|column|font-emph|lang|layout|line-break|list-image|nav|panose|punct|row|ruby|sep|size|src|tab-|table-border|text-(?:decor|trans)|top-bar|version|vnd|word-break)/.test( name ) ) {
+						continue;
+					}
+					n[i] = name + ":" + parts[1];		// Lower-case name, but keep value case
+				}
+			}
+			// If style attribute contained any valid styles the re-write it; otherwise delete style attribute.
+			if ( i > 0 ) {
+				return tag + ' style="' + n.join( ';' ) + '"';
+			} else {
+				return tag;
+			}
+		} );
+		str = str.replace( /([ ]+)<\/span>/ig, function ( m, p ) {
+			return new Array( p.length + 1 ).join( '&nbsp;' ) + '</span>';
+		} );
+		return str;
 	}
 
 	return function ( html ) {
@@ -9966,8 +9988,6 @@ baidu.editor.ui = {};
 		},
 		setGlobal: function (id, obj){
 			root[id] = obj;
-			
-			//console.log('dodolook12649  [id= '+id+' ] ');
 			return magic + '["' + id  + '"]';
 		},
 		unsetGlobal: function (id){
@@ -11476,30 +11496,29 @@ baidu.editor.ui = {};
 		};
 	Toolbar.prototype = {
 		items: null,
-		initToolbar: function (){
+		initToolbar: function () {
 			this.items = this.items || [];
 			this.initUIBase();
 		},
-		add: function (item){
-			this.items.push(item);
+		add: function (item) {
+			this.items.push(item)
 		},
-		getHtmlTpl: function (){
-			var buff = [];
+		getHtmlTpl: function () {
+			var buff = []
 			for (var i=0; i<this.items.length; i++) {
-				buff[i] = this.items[i].renderHtml();
+				buff[i] = this.items[i].renderHtml()
 			}
 			return '<div id="##" class="edui-toolbar %%" onselectstart="return false;" onmousedown="return $$._onMouseDown(event, this);">' +
-				buff.join('') +
-				'</div>'
+				buff.join('') + '</div>'
 		},
-		postRender: function (){
+		postRender: function () {
 			var box = this.getDom();
 			for (var i=0; i<this.items.length; i++) {
 				this.items[i].postRender();
 			}
 			uiUtils.makeUnselectable(box);
 		},
-		_onMouseDown: function (){
+		_onMouseDown: function () {
 			return false;
 		},
 		setdisabled: function(disabled) {
@@ -12101,8 +12120,6 @@ baidu.editor.ui = {};
 				className: me.className,
 				editor:me.editor
 			});
-		
-		//console.log('dodolook14385 '+me.className);
 			this.popup.addListener('show', function (){
 				var list = this;
 				for (var i=0; i<list.items.length; i++) {
@@ -12528,16 +12545,16 @@ baidu.editor.ui = {};
 		var items = [];
 	  
 		for (var i=0; i<list.length; i++) {
-		    var size = list[i] + 'px';
-		    var label = '';
-		    switch(i){
+			var size = list[i] + 'px';
+			var label = '';
+			switch(i){
 				case 0: label = '小';break;
 				case 1: label = '中';break;
 				case 2: label = '大';break;
 				case 3: label = '较大';break;
 				case 4: label = '特大';break;
 				case 5: label = '超大';break;
-		    }
+			}
 			items.push({
 				label: label,
 				value: size,
@@ -13358,9 +13375,9 @@ baidu.editor.ui = {};
 			} );
 		},
 		_initToolbar: function () {
-			var editor = this.editor,
-				items  = this.toolbarItems || [], i,
-				toolbarUi = new baidu.editor.ui.Toolbar()
+			var editor = this.editor
+			var	items  = this.toolbarItems || [], i
+			var	toolbarUi = new baidu.editor.ui.Toolbar()
 			for (var i = 0; i < items.length; i++) {
 				var toolbarItemUi, toolbarItem = items[i]
 				if ( toolbarItem === '|' ) {

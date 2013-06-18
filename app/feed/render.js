@@ -14,9 +14,49 @@ require(
 		/**
 		 * @constant feed类型的可读名字
 		 */
-		var types = [ 'sentence', 'blog', 'add_friend', 'upload_photo', 'upload_video', 'change_template', 'add_moudle', 'create_group', 'group_thread', 'add_page', 'ground_thread', 'add_group', 'edit_profile', 'pub_dynamic_album', 'favorite_album',
-			'create_subject', 'create_moudle', 'update_moudle', 'share_url', 'share_blog', 'share_video', 'share_programme', 'share_album', 'share_photo', 'share_album_dynamic', 'share_blog_friend', 'share_group_thread', 'share_group', 'event_news',
-			'mblog', 'poke', 'poke_adv', 'create_programme', 'weibo', 'delete_feed', 'forward', 'wenda', 'addapp', 'talk', 'gold', 'theme', 'group' ];
+		var types = [ 
+      'sentence', 
+      'blog', 
+      'add_friend', 
+      'upload_photo', 
+      'upload_video', 
+      'change_template', 
+      'add_moudle', 
+      'create_group', 
+      'group_thread', 
+      'add_page', 
+      'ground_thread', 
+      'add_group', 
+      'edit_profile', 
+      'pub_dynamic_album', 
+      'favorite_album',
+      'create_subject', 
+      'create_moudle', 
+      'update_moudle', 
+      'share_url', 
+      'share_blog', 
+      'share_video', 
+      'share_programme', 
+      'share_album', 
+      'share_photo', 
+      'share_album_dynamic', 
+      'share_blog_friend', 
+      'share_group_thread', 
+      'share_group', 
+      'event_news',
+			'mblog', 
+      'poke', 
+      'poke_adv', 
+      'create_programme', 
+      'weibo', 
+      'delete_feed', 
+      'forward', 'wenda', 
+      'addapp', 
+      'talk', 
+      'gold', 
+      'theme', 
+      'group'
+    ];
 
 			// 20120129 屏蔽upload_video
 			// , 'upload_video'

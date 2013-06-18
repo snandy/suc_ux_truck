@@ -18,7 +18,7 @@ function(Template, $, cookie) {
 	var tophoto = {
 
 		templates : {
-			item : '{{#data}}<li><div><p><a href="{{{url}}}" title="{{name}}" target="_blank">{{#is_video}}<i class="iMask"><b></b></i>{{/is_video}}</a></p><span><a href="{{{url}}}" target="_blank" ><img src="{{originUrl}}"></a></span></div></li>{{/data}}',
+			item : '{{#data}}<li><div><p><a href="{{{url}}}" title="{{name}}" target="_blank">{{#is_video}}<i class="iMask"><b></b></i>{{/is_video}}</a></p><span><a href="{{{url}}}" target="_blank" ><img src="{{originUrl}}"{{#is_video}} width="150" height="150"{{/is_video}}></a></span></div></li>{{/data}}',
 			upload : '<li class="exhibition-add"><div><p><a href="http://i.sohu.com/album/home/photoset/list/"></a></p><span></span></div></li>',
 			blank : '<li><div><p><a href="javascript:void(0);"></a></p><span></span></div></li>'
 		},

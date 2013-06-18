@@ -87,8 +87,7 @@ $(function(){
 					codeDlg.setInfo('验证码错误');
 					return;
 				}
-				if (!json.status) { 
-				
+				if (!json.status) {
 					var targetURL = "http://i.sohu.com"+json.data; 
 					var isContributeOK = false;//是否投稿成功
 					

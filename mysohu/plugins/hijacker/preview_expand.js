@@ -1,4 +1,16 @@
-require('core::util::jQuery', 'core::util[transform,fx]', 'core::ui::dialog::error', 'core::stringUtil', 'app::feed::common', function($, util, $error, stringUtil, COMMON) {
+require(
+	'core::util::jQuery', 
+	'core::util[transform,fx]', 
+	'core::ui::dialog::error', 
+	'core::stringUtil', 
+	'app::feed::common', 
+function(
+	$, 
+	util, 
+	$error, 
+	stringUtil, 
+	COMMON
+) {
 	define('plugins::hijacker::preview_expand', function(e) {
 		var preview = e.actionTarget;
 		if (preview.mutex)

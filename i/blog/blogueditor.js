@@ -5,11 +5,8 @@
 	var CONSTANT_PLACEHOLDER = '在此输入博客标题';
 	
 	var blogEditor = {
-
 		isAllowQuit: false,
-
 		autoSaveInterval: null,
-
 		create: function(opt) {
 			var self = this;
 			this.draft = opt.draft;
@@ -17,7 +14,7 @@
 			this.cancel = opt.cancel;
 			this.isAutoSave = opt.isAutoSave;
 			
-			if(this.created){
+			if(this.created) {
 				this.editor.focus();
 				return;
 			}
@@ -39,11 +36,10 @@
 			this.created = true;
 			this.editor.focus();
 			
-			
 			//粘贴，复制，剪切，只有IE浏览器会有，其他浏览器关闭掉
 			if($.browser.msie){
 				//开发保存功能插件 Save plugin
-				baidu.editor.commands['paste']={
+				baidu.editor.commands['paste'] = {
 					execCommand : function(){
 						var text = window.clipboardData.getData("Text");
 						this.execCommand('insertHtml',text);
@@ -51,8 +47,7 @@
 					},
 					queryCommandState : function(){ }
 				};
-					
-				baidu.editor.commands['cut']={
+				baidu.editor.commands['cut'] = {
 					execCommand : function(){
 						var range = ueHandler.selection.getRange();
 						range.select();
@@ -227,11 +222,16 @@
 		},
 
 		getContent: function() {
-			var editor      = this.editor;
-			var blogcontent = editor.getContent();
-			var blogtext    = editor.getContentTxt();
-			
-			if(blogcontent.length < 3){
+			var editor      = this.editor
+			// 防止格式化后的HTML提交
+			if (editor.getSourceMode()) {
+				editor.sourceTrim()
+			}
+
+			var blogcontent = editor.getContent()
+			var blogtext    = editor.getContentTxt()
+
+			if (blogcontent.length < 3) {
 				$.inform({
 					icon: 'icon-error',
 					delay: 2000,
@@ -239,61 +239,71 @@
 					content: '内容太少了吧。'
 				});
 				editor.focus();
-			}else if(blogcontent.length > 100000){
+			} else if(blogcontent.length > 100000) {
 				$.inform({
 					icon: 'icon-error',
 					delay: 2000,
 					easyClose: true,
 					content: '内容不能超过10万个字符。'
 				});
-				editor.focus();
-			}else{
-				return blogcontent;
+				editor.focus()
+			} else {
+				return blogcontent
 			}
 		},
 
 		//取得投稿一级分类（父类）的频道ID
 		getParentCategory: function(){
-			return $('#ParentBlogCategory option:selected').val();
+			return $('#ParentBlogCategory option:selected').val()
 		},
 
 		//取得投稿子分类的频道ID
 		getChildCategory: function(){
-			return $('#ChildBlogCategory option:selected').val();
+			return $('#ChildBlogCategory option:selected').val()
 		},
 
 		isEmpty: function() {
-			var title = this.elTitle.val();
-			var content = this.editor.getContentTxt();
+			var title = this.elTitle.val()
+			var content = this.editor.getContentTxt()
 			if (content.length > 0 || title != CONSTANT_PLACEHOLDER) {
-				return false;
+				return false
 			}
-			return true;
+			return true
 		},
 
 		//获取参数列表 var params  getParams
 		getParams: function() {
 			//返回的参数对象列表
-			var params={};
+			var params={}
 			//perm : 0 公开 1 私有  allowcomment: 0 所有人可评论 1 禁止评论 2只允许登陆用户评论
-			var title, content, keywords, category, perm, comment;
+			var title, content, keywords, category, perm, comment
 			
-			var ParentID = this.getParentCategory();//投稿的父分类
-			var ChildID = this.getChildCategory();//投稿的子分类
+			var ParentID = this.getParentCategory() //投稿的父分类
+			var ChildID = this.getChildCategory() //投稿的子分类
 			
-			//*//博客标题
-			title = this.getTitle();//博客标题
-			category = this.getCategory();//博客分类
-			keywords = this.getKeywords();//博客关键字
-			perm = this.getReadAccess();//博客阅读权限
-			comment = this.getCommentAccess();//博客评论权限
+			title = this.getTitle(); //博客标题
+			category = this.getCategory(); //博客分类
+			keywords = this.getKeywords(); //博客关键字
+			perm = this.getReadAccess(); //博客阅读权限
+			comment = this.getCommentAccess(); //博客评论权限
 			
 			if (title) {
-				content = this.getContent();//博客内容
+				content = this.getContent() //博客内容
 			}
 			
-			if(title && content){
-				params={'title':title,'content':content,'keywords':keywords,'category':category,'oper':'art_ok','perm':perm,'comment':comment,'parent':ParentID,'child':ChildID,'autosave':0};
+			if (title && content) {
+				params = {
+					'title':title,
+					'content':content,
+					'keywords':keywords,
+					'category':category,
+					'oper':'art_ok',
+					'perm':perm,
+					'comment':comment,
+					'parent':ParentID,
+					'child':ChildID,
+					'autosave':0
+				};
 				return params;
 			}else{
 				return false;

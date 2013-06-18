@@ -158,7 +158,7 @@ function insertBatch() {
 		tmpObj.title = ci.title
 		tmpObj.floatStyle = align
 		//修正显示时候的地址数据,如果后台返回的是图片的绝对地址，那么此处无需修正
-		tmpObj.data_ue_src = tmpObj.src = ci.origin_url; //ci.data.image[1]
+		tmpObj.data_ue_src = tmpObj.src = ci.big_url; // origin_url改为big_url
 		imgObjs.push( tmpObj )
 	}
 	editor.execCommand('insertImage', imgObjs)
